@@ -1,0 +1,34 @@
+//
+// Mixin to provide short-hand positioning syntax
+//  https://gist.github.com/branneman/9248961
+//
+//  Usage:
+//   @include position(absolute, 0 false 0 20rem);
+//
+@mixin position ($position: relative, $coordinates: 0 0 0 0) {
+
+    @if type-of($position) == list {
+        $coordinates: $position;
+        $position: relative;
+    }
+
+    $top:    nth($coordinates, 1);
+    $right:  nth($coordinates, 2);
+    $bottom: nth($coordinates, 3);
+    $left:   nth($coordinates, 4);
+
+    position: $position;
+
+    @if $top != false {
+        top: $top;
+    }
+    @if $right != false {
+        right: $right;
+    }
+    @if $bottom != false {
+        bottom: $bottom;
+    }
+    @if $left != false {
+        left: $left;
+    }
+}
