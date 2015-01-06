@@ -7,9 +7,9 @@ var prefixer = require('autoprefixer-core')({ browsers: ['last 4 versions'] });
 
 // Define paths
 var dirSrc  = global.paths.src + '/static/scss';
-var dirDest = global.paths.dest + '/static/css';
+var dirDist = global.paths.dist + '/static/css';
 var srcGlob = dirSrc + '/**/!(_)*.scss';
-var dest    = dirDest + '/css';
+var dist    = dirDist + '/css';
 
 // Embed sourcemaps as data uri?
 var sourceMap = true;
@@ -20,7 +20,7 @@ module.exports.compile = function() {
 
         // Build final filename
         var basename = path.relative(dirSrc, file).replace(/\.scss$/, '');
-        var outFile  = dest + '/' + basename + '.css';
+        var outFile  = dist + '/' + basename + '.css';
 
         // Compile Sass to CSS with embedded sourcemap
         sass.render({
