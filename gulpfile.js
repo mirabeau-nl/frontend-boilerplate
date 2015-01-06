@@ -1,22 +1,20 @@
-var gulp = require('gulp');
+var gulp  = require('gulp');
 
 global.paths = {
     src:  __dirname + '/src',
     dist: __dirname + '/dist'
 };
 
-// Localhost webserver
+// Serve static files from dist/ folder
 gulp.task('connect', require('./tasks/connect'));
 
-// Sass/Autoprefixer compiler
-var sassTasks = require('./tasks/sass');
-gulp.task('sass-compile', sassTasks.compile);
-gulp.task('sass-watch', ['sass-compile'], sassTasks.watch);
+// Swig to HTML compiler
+gulp.task('html-compile',                 require('./tasks/html').compile);
+gulp.task('html-watch', ['html-compile'], require('./tasks/html').watch);
 
-// JavaScript
-/*var jsTasks = require('./tasks/js');
-gulp.task('js-compile', jsTasks.compile);
-gulp.task('js-watch', ['js-compile'], jsTasks.watch);*/
+// Sass & Autoprefixer to CSS compiler
+gulp.task('css-compile',                require('./tasks/css').compile);
+gulp.task('css-watch', ['css-compile'], require('./tasks/css').watch);
 
 // Group-task
-gulp.task('dev', ['connect', 'sass-watch']);
+gulp.task('dev', ['connect', 'html-watch', 'css-watch']);

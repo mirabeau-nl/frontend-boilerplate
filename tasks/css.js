@@ -6,7 +6,7 @@ var sass     = require('node-sass');
 var prefixer = require('autoprefixer-core')({ browsers: ['last 4 versions'] });
 
 // Define paths
-var dirSrc  = global.paths.src + '/static/scss';
+var dirSrc  = global.paths.src  + '/static/scss';
 var dirDist = global.paths.dist + '/static/css';
 var srcGlob = dirSrc + '/**/!(_)*.scss';
 var dist    = dirDist + '/css';

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Front-End Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ baseUrl }}static/css/all.css"><!--<![endif]-->
+    <!--[if lt IE 9]><link rel="stylesheet" href="{{ baseUrl }}static/css/all-oldie.css"><![endif]-->
+
+    {# Shortest and fastest shim for ie-old html5 elements, add only the elements you need, or replace this with Modernizr #}
+    <!--[if lt IE 9]><script>'article main footer'.replace(/\w+/g,function(n){document.createElement(n)})</script><![endif]-->
+</head>
+<body>
+
+    {%- block body %}{% endblock -%}
+
+    <!--[if gt IE 8]><!--> {# IE8 NoJS! #}
+    <script data-main="{{ baseUrl }}static/js/main" src="{{ baseUrl }}static/js/vendor/requirejs/require.js"></script>
+    <!--<![endif]-->
+</body>
+</html>
