@@ -12,5 +12,5 @@ module.exports.compile = function() {
 };
 
 module.exports.watch = function() {
-    return gulp.watch(srcGlob, ['html-compile']);
+    gulp.watch(srcGlob, ['html-compile']);
 };
