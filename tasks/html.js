@@ -11,6 +11,7 @@ module.exports.compile = function() {
         .pipe(gulp.dest(dirDist));
 };
 
+// @todo watch for changes in `modules/html/*` and `layout/*` as well
 module.exports.watch = function() {
     gulp.watch(srcGlob, ['html-compile']);
 };
