@@ -1,4 +1,4 @@
-.nav {
-    transform: translate(-50%);
-    @include position(absolute, 0 10px 20px 30px);
+nav {
+    transform: translate(50%);
+    background: red;
 }
