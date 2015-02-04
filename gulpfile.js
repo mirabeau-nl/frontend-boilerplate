@@ -2,8 +2,8 @@ var gulp = require('gulp');
 
 // Define paths
 global.paths = {
-    src:  __dirname + '/src',
-    dist: __dirname + '/dist'
+    src:  'src',
+    dist: 'dist'
 };
 
 // Load tasks

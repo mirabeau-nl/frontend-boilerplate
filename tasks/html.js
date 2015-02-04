@@ -2,16 +2,23 @@ var gulp = require('gulp');
 var swig = require('gulp-swig');
 
 // Define paths
-var srcGlob = global.paths.src  + '/pages/**/*.html';
-var dirDist = global.paths.dist + '/pages';
+var globPages   = global.paths.src + '/pages/**/*.html';
+var globLayout  = global.paths.src + '/layout/*.html';
+var globModules = global.paths.src + '/modules/**/html/*.html';
+var dirDist     = global.paths.dist + '/pages';
 
+/**
+ * Task: HTML Compile
+ */
 module.exports.compile = function() {
-    gulp.src(srcGlob)
-        .pipe(swig())
+    gulp.src(globPages)
+        .pipe(swig({ defaults: { cache: false } }))
         .pipe(gulp.dest(dirDist));
 };
 
-// @todo watch for changes in `modules/html/*` and `layout/*` as well
+/**
+ * Task: HTML Watch
+ */
 module.exports.watch = function() {
-    gulp.watch(srcGlob, ['html-compile']);
+    gulp.watch([globPages, globLayout, globModules], ['html-compile']);
 };
