@@ -10,6 +10,7 @@ global.paths = {
 var taskBrowsersync = require('./tasks/browsersync');
 var tasksHTML       = require('./tasks/html');
 var tasksCSS        = require('./tasks/css');
+var tasksJS         = require('./tasks/js');
 
 // Serve files from dist/ folder
 gulp.task('browsersync', taskBrowsersync);
@@ -22,5 +23,10 @@ gulp.task('html-watch', ['html-compile'], tasksHTML.watch);
 gulp.task('css-compile', tasksCSS.compile);
 gulp.task('css-watch', ['css-compile'], tasksCSS.watch);
 
-// Group-task
-gulp.task('dev', ['browsersync', 'html-watch', 'css-watch']);
+// JavaScript transpiler
+gulp.task('js-transpile', tasksJS.transpile);
+gulp.task('js-watch', ['js-transpile'], tasksJS.watch);
+
+// Group-tasks
+gulp.task('dev', ['browsersync', 'html-watch', 'css-watch', 'js-watch']);
+gulp.task('dist', [/*'clean', */'html-compile', 'css-compile', 'js-transpile']);
