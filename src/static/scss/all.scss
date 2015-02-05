@@ -6,6 +6,8 @@
 
 // Common
 @import 'common/typography';
+@import 'common/colors';
+@import 'common/grid';
 
 // Modules
-@import '../../modules/nav/scss/nav';
+@import '../../components/nav/scss/nav';

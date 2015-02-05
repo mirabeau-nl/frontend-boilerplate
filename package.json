@@ -2,8 +2,8 @@
   "name": "frontend-library",
   "version": "2.0.0",
   "description": "",
-  "main": "gulpfile.js",
   "scripts": {
+    "start": "node_modules/gulp/bin/gulp.js dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
