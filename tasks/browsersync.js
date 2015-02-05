@@ -6,8 +6,8 @@ var browsersync = require('browser-sync');
 module.exports = function() {
     browsersync({
         server: {
-            baseDir: global.paths.dist,
-            files: global.paths.dist + '/**'
-        }
+            baseDir: global.paths.dist
+        },
+        open: false
     });
 };
