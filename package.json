@@ -1,17 +1,28 @@
 {
   "name": "frontend-library",
+  "description": "An opinionated blueprint environment to quick start new front-end codebases",
   "version": "2.0.0",
-  "description": "",
-  "scripts": {
-    "start": "node_modules/gulp/bin/gulp.js dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mirabeau-nl/frontend-library.git"
   },
-  "author": "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
+  "scripts": {
+    "start": "node_modules/gulp/bin/gulp.js dev"
+  },
+  "contributors": [
+    "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
+    "Rik Schennink <rikschennink@gmail.com> (http://rikschennink.nl/)",
+    "Niek Bosch <nbosch@mirabeau.nl> (http://rikschennink.nl/)",
+    "Eric Weerstra <eweerstra@mirabeau.nl> (http://www.mirabeau.nl/)",
+    "Arno Wolkers <awolkers@mirabeau.nl> (http://www.mirabeau.nl/)",
+    "Leendert Ullersma <lullersma@mirabeau.nl> (http://www.mirabeau.nl/)"
+  ],
   "license": "MIT",
   "devDependencies": {
+    "browser-sync": "^2.0.0-rc6",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
-    "gulp-connect": "^2.2.0",
+    "gulp-filter": "^2.0.0",
     "gulp-sass": "^1.3.2",
     "gulp-sourcemaps": "^1.3.0",
     "gulp-swig": "^0.7.4"
