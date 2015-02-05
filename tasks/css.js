@@ -1,6 +1,6 @@
-var gulp  = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
+var gulp         = require('gulp');
+var sass         = require('gulp-sass');
+var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
 // Define paths
@@ -8,6 +8,9 @@ var dirSrc  = global.paths.src  + '/static/scss';
 var dirDist = global.paths.dist + '/static/css';
 var srcGlob = dirSrc + '/**/!(_)*.scss';
 
+/**
+ * Task: CSS Compile
+ */
 module.exports.compile = function() {
     gulp.src(srcGlob)
         .pipe(sourcemaps.init())
@@ -19,6 +22,9 @@ module.exports.compile = function() {
         .pipe(gulp.dest(dirDist));
 };
 
+/**
+ * Task: CSS Watch
+ */
 module.exports.watch = function() {
     gulp.watch(srcGlob, ['css-compile']);
 };
