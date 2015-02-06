@@ -1,4 +1,5 @@
 var gulp        = require('gulp');
+var watch       = require('gulp-watch');
 var swig        = require('gulp-swig');
 var browsersync = require('browser-sync');
 
@@ -22,5 +23,7 @@ module.exports.compile = function() {
  * Task: HTML Watch
  */
 module.exports.watch = function() {
-    gulp.watch([globTemplates, globLayout, globComponents], ['html-compile']);
+    watch([globTemplates, globLayout, globComponents], function() {
+        gulp.start(['html-compile']);
+    });
 };

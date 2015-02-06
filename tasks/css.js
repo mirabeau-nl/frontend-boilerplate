@@ -1,4 +1,5 @@
 var gulp         = require('gulp');
+var watch        = require('gulp-watch');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
@@ -7,6 +8,7 @@ var browsersync  = require('browser-sync');
 
 // Define paths
 var globStatic     = global.paths.src + '/static/scss/**/!(_)*.scss';
+var globStaticAll  = global.paths.src + '/static/scss/**/*.scss';
 var globComponents = global.paths.src + '/components/**/*.scss';
 var dirDist        = global.paths.dist + '/static/css';
 
@@ -30,5 +32,7 @@ module.exports.compile = function() {
  * Task: CSS Watch
  */
 module.exports.watch = function() {
-    gulp.watch([globStatic, globComponents], ['css-compile']);
+    watch([globStaticAll, globComponents], function() {
+        gulp.start(['css-compile']);
+    });
 };

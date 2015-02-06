@@ -1,4 +1,5 @@
 var gulp     = require('gulp');
+var watch    = require('gulp-watch');
 var imagemin = require('gulp-imagemin');
 
 // Define paths
@@ -18,5 +19,7 @@ module.exports.optimize = function() {
  * Task: Image Watch
  */
 module.exports.watch = function() {
-    gulp.watch([globImages], ['img-optimize']);
+    watch([globImages], function() {
+        gulp.start(['img-optimize']);
+    });
 };

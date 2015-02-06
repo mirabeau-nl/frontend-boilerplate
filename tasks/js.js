@@ -1,4 +1,5 @@
 var gulp        = require('gulp');
+var watch       = require('gulp-watch');
 var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
 var browsersync = require('browser-sync');
@@ -24,5 +25,7 @@ module.exports.transpile = function() {
  * Task: JS Watch
  */
 module.exports.watch = function() {
-    gulp.watch([globStatic, globComponents], ['js-transpile']);
+    watch([globStatic, globComponents], function() {
+        gulp.start(['js-transpile']);
+    });
 };
