@@ -16,7 +16,7 @@ var dirDist        = global.paths.dist + '/static/css';
 module.exports.compile = function() {
     gulp.src(globStatic)
         .pipe(sourcemaps.init())
-        .pipe(sass({ errLogToConsole: true }))
+        .pipe(sass({ outputStyle: 'compressed', errLogToConsole: true }))
         .pipe(sourcemaps.write({ sourceRoot: '.' }))
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(autoprefixer('last 1 version', '> 5%'))
