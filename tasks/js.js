@@ -1,5 +1,7 @@
 var gulp        = require('gulp');
 var watch       = require('gulp-watch');
+var gulpif      = require('gulp-if');
+var babel       = require('gulp-babel');
 var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
 var browsersync = require('browser-sync');
@@ -13,8 +15,12 @@ var dirDist        = global.paths.dist + '/static/js';
  * Task: JS Transpile
  */
 module.exports.transpile = function() {
+    var vendorFilter = function(file) {
+        return !/vendor/.test(file.path);
+    };
     gulp.src([globStatic, globComponents])
         .pipe(sourcemaps.init())
+        .pipe(gulpif(vendorFilter, babel()))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(dirDist))

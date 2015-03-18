@@ -20,7 +20,7 @@ define(function() {
      * Construct module
      */
     Nav.prototype.load = function() {
-        this.element.innerHTML += '!';
+        this.element.innerHTML += [2, 4, 6, 8, 10].map(v => v + 1);
     };
 
     /**
