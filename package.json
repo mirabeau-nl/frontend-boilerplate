@@ -17,6 +17,7 @@
     "Arno Wolkers <awolkers@mirabeau.nl> (http://www.mirabeau.nl/)",
     "Leendert Ullersma <lullersma@mirabeau.nl> (http://www.mirabeau.nl/)"
   ],
+  "readmeFilename": "readme.md",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.3.1",
