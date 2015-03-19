@@ -1,10 +1,10 @@
 {
-  "name": "frontend-library",
+  "name": "frontend-bootstrap",
   "description": "An opinionated blueprint environment to quick start new front-end codebases",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mirabeau-nl/frontend-library.git"
+    "url": "https://github.com/mirabeau-nl/frontend-bootstrap.git"
   },
   "scripts": {
     "start": "node_modules/gulp/bin/gulp.js dev"
