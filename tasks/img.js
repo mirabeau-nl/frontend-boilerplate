@@ -1,5 +1,6 @@
 var gulp     = require('gulp');
 var watch    = require('gulp-watch');
+var changed  = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 
 // Define paths
@@ -11,6 +12,7 @@ var dirDist    = global.paths.dist + '/static/img';
  */
 module.exports.optimize = function() {
     gulp.src(globImages)
+        .pipe(changed(dirDist))
         .pipe(imagemin())
         .pipe(gulp.dest(dirDist));
 };

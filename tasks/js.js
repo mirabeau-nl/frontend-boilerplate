@@ -1,6 +1,7 @@
 var gulp        = require('gulp');
 var watch       = require('gulp-watch');
 var gulpif      = require('gulp-if');
+var changed     = require('gulp-changed');
 var babel       = require('gulp-babel');
 var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
@@ -19,6 +20,7 @@ module.exports.transpile = function() {
         return !/vendor/.test(file.path);
     };
     gulp.src([globStatic, globComponents])
+        .pipe(changed(dirDist))
         .pipe(sourcemaps.init())
         .pipe(gulpif(vendorFilter, babel()))
         .pipe(uglify())
