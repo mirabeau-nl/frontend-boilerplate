@@ -1,27 +1,24 @@
+var config   = require('../config');
 var gulp     = require('gulp');
 var watch    = require('gulp-watch');
 var changed  = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 
-// Define paths
-var globImages = global.paths.src + '/static/img/**/*.{svg,png,jpg}';
-var dirDist    = global.paths.dist + '/static/img';
-
 /**
  * Task: Image optimizer
  */
 module.exports.optimize = function() {
-    gulp.src(globImages)
-        .pipe(changed(dirDist))
+    gulp.src(config.paths.img.globImages)
+        .pipe(changed(config.paths.img.dirDist))
         .pipe(imagemin())
-        .pipe(gulp.dest(dirDist));
+        .pipe(gulp.dest(config.paths.img.dirDist));
 };
 
 /**
  * Task: Image Watch
  */
 module.exports.watch = function() {
-    watch([globImages], function() {
+    watch([config.paths.img.globImages], function() {
         gulp.start(['img-optimize']);
     });
 };

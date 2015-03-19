@@ -1,3 +1,4 @@
+var config      = require('../config');
 var browsersync = require('browser-sync');
 
 /**
@@ -6,7 +7,7 @@ var browsersync = require('browser-sync');
 module.exports = function() {
     browsersync({
         server: {
-            baseDir: global.paths.dist
+            baseDir: config.paths.browsersync.baseDir
         },
         open: false
     });

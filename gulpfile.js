@@ -1,11 +1,5 @@
 var gulp = require('gulp');
 
-// Define paths
-global.paths = {
-    src:  './src',
-    dist: './dist'
-};
-
 // Load tasks
 var taskBrowsersync = require('./tasks/browsersync');
 var tasksHTML       = require('./tasks/html');

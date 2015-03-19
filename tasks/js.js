@@ -1,3 +1,4 @@
+var config      = require('../config');
 var gulp        = require('gulp');
 var watch       = require('gulp-watch');
 var gulpif      = require('gulp-if');
@@ -7,25 +8,17 @@ var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
 var browsersync = require('browser-sync');
 
-// Define paths
-var globStatic     = global.paths.src + '/static/js/**/*.js';
-var globComponents = global.paths.src + '/components/**/*.js';
-var dirDist        = global.paths.dist + '/static/js';
-
 /**
  * Task: JS Transpile
  */
 module.exports.transpile = function() {
-    var vendorFilter = function(file) {
-        return !/vendor/.test(file.path);
-    };
-    gulp.src([globStatic, globComponents])
-        .pipe(changed(dirDist))
+    gulp.src([config.paths.js.globStatic, config.paths.js.globComponents])
+        .pipe(changed(config.paths.js.dirDist))
         .pipe(sourcemaps.init())
-        .pipe(gulpif(vendorFilter, babel()))
+        .pipe(gulpif(config.paths.js.vendorFilter, babel()))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(dirDist))
+        .pipe(gulp.dest(config.paths.js.dirDist))
         .pipe(browsersync.reload({ stream: true }));
 };
 
@@ -33,7 +26,7 @@ module.exports.transpile = function() {
  * Task: JS Watch
  */
 module.exports.watch = function() {
-    watch([globStatic, globComponents], function() {
+    watch([config.paths.js.globStatic, config.paths.js.globComponents], function() {
         gulp.start(['js-transpile']);
     });
 };
