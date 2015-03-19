@@ -1,7 +1,7 @@
 # Frontend Library
 
 ## How to setup development environment
-cl
+
 1. Make sure the following is installed on your machine:
   - [Node.js](http://nodejs.org/)
 
