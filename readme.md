@@ -2,17 +2,17 @@
 
 ## How to: Setup development environment
 1. Make sure the following is installed on your machine:
-  - [Node.js](http://nodejs.org/), v0.10.x *(v0.12 is not supported at this time)*
+    - [Node.js](http://nodejs.org/), v0.10.x *(v0.12 is not supported at this time)*
 2. Run this command to install the global dependencies:
 
-  ```
-  npm install -g gulp
-  ```
+    ```
+    npm install -g gulp
+    ```
 3. Run these commands to install the project-specific dependencies:
 
-  ```
-  npm install
-  ```
+    ```
+    npm install
+    ```
 4. Done! You can now start your development server.
 
 ## How to: Start the development server
