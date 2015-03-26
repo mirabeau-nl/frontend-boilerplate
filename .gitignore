@@ -1,5 +1,23 @@
 # IDE's
 .idea
+.project
+*.sublime-*
+
 
 # Node.js
 node_modules
+npm-debug.log
+
+
+# Build and test tools
+*.zip
+
+
+# Cache
+.sass-cache
+.cache
+
+
+# Operating system
+.DS_Store
+Thumbs.db
