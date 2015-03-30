@@ -33,6 +33,7 @@ module.exports = {
         js: {
             vendorFilter:   function(file) { return !/vendor/.test(file.path); },
             globStatic:     base.src + '/static/js/**/*.js',
+            globVendor:     base.src + '/static/js/vendor/**/*.js',
             globComponents: base.src + '/components/**/*.js',
             dirDist:        base.dist + '/static/js'
         }
