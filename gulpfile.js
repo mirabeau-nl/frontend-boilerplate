@@ -24,8 +24,10 @@ gulp.task('css-watch', ['css-compile'], tasksCSS.watch);
 
 // JavaScript transpiler
 gulp.task('js-transpile', tasksJS.transpile);
+gulp.task('js-test', tasksJS.test);
 gulp.task('js-watch', ['js-transpile'], tasksJS.watch);
 
 // Group-tasks
 gulp.task('dev', ['browsersync', 'html-watch', 'img-watch', 'css-watch', 'js-watch']);
 gulp.task('dist', [/*'clean', */'html-compile', 'img-optimize', 'css-compile', 'js-transpile']);
+gulp.task('test', ['js-test']);

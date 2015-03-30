@@ -6,6 +6,8 @@ var changed     = require('gulp-changed');
 var babel       = require('gulp-babel');
 var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
+var jshint      = require('gulp-jshint');
+var jscs        = require('gulp-jscs');
 var browsersync = require('browser-sync');
 
 /**
@@ -29,4 +31,15 @@ module.exports.watch = function() {
     watch([config.paths.js.globStatic, config.paths.js.globComponents], function() {
         gulp.start(['js-transpile']);
     });
+};
+
+
+/**
+ * Task: JS Test
+ */
+module.exports.test = function() {
+    gulp.src([config.paths.js.globStatic, config.paths.js.globComponents, '!' + config.paths.js.globVendor])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(jscs());
 };

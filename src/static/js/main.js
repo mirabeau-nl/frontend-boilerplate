@@ -1,6 +1,6 @@
 require.config({
     map: {
-        "*": {
+        '*': {
             conditioner: 'vendor/conditionerjs/conditioner'
         }
     }
