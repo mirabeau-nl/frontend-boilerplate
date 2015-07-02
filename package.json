@@ -19,7 +19,7 @@
         "Christiaan Stegeman <cstegeman@mirabeau.nl> (http://www.mirabeau.nl/)"
     ],
     "readmeFilename": "readme.md",
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "devDependencies": {
         "browser-sync": "^2.3.1",
         "gulp": "^3.8.11",
