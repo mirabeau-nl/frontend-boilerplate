@@ -55,5 +55,24 @@
     "disallowYodaConditions": true,
     "disallowNewlineBeforeBlockStatements": true,
     "validateParameterSeparator": ", ",
-    "requireMultipleVarDecl": true
+    "requireMultipleVarDecl": true,
+    "plugins": [
+        "jscs-jsdoc"
+    ],
+    // Check https://github.com/jscs-dev/jscs-jsdoc#rules for more info
+    "jsDoc": {
+        "enforceExistence": true,
+        "checkParamNames": true,
+        "requireParamTypes": true,
+        "checkRedundantParams": true,
+        "requireParamDescription": true,
+        "requireHyphenBeforeDescription": true,
+        "checkReturnTypes": true,
+        "checkRedundantReturns": true,
+        "requireReturnTypes": true,
+        "checkTypes": true,
+        "checkRedundantAccess": true,
+        "leadingUnderscoreAccess": "private",
+        "requireDescriptionCompleteSentence": true
+    }
 }
