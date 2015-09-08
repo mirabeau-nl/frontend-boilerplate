@@ -21,6 +21,7 @@ gulp.task('img-watch', ['img-optimize'], tasksImages.watch);
 // Sass & Autoprefixer to CSS compiler
 gulp.task('css-compile', tasksCSS.compile);
 gulp.task('css-watch', ['css-compile'], tasksCSS.watch);
+gulp.task('css-sassdoc', tasksCSS.sassdoc);
 
 // JavaScript transpiler
 gulp.task('js-transpile', tasksJS.transpile);
