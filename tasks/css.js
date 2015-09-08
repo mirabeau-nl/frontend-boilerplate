@@ -6,7 +6,7 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var filter       = require('gulp-filter');
 var browsersync  = require('browser-sync');
-var sassdoc  = require('sassdoc');
+var sassdoc      = require('sassdoc');
 
 /**
  * Task: CSS Compile
@@ -40,9 +40,6 @@ module.exports.sassdoc = function() {
     var options = {
         dest: config.paths.css.sassdocsDist
     };
-
-
-    console.log(options.dest);
 
     gulp.src([config.paths.css.globStaticAll, config.paths.css.globComponents])
         .pipe(sassdoc(options));
