@@ -3,25 +3,34 @@ var gulp         = require('gulp');
 var watch        = require('gulp-watch');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer');
+var postcss      = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
 var filter       = require('gulp-filter');
 var browsersync  = require('browser-sync');
 var sassdoc      = require('sassdoc');
+var minifyCss    = require('gulp-minify-css');
 
 /**
  * Task: CSS Compile
  */
 module.exports.compile = function() {
+    var postcssProcessors = [
+        autoprefixer({
+            browsers: config.autoprefixer.browsers
+        })
+    ];
+
     gulp.src(config.paths.css.globStatic)
         .pipe(sourcemaps.init())
-        .pipe(sass({ outputStyle: 'compressed', errLogToConsole: true }))
-        .pipe(sourcemaps.write({ sourceRoot: '.' }))
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(autoprefixer('last 1 version', '> 5%'))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss(postcssProcessors))
+        .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.paths.css.dirDist))
         .pipe(filter('**/*.css'))
-        .pipe(browsersync.reload({ stream: true }));
+        .pipe(browsersync.reload({
+            stream: true
+        }));
 };
 
 /**
