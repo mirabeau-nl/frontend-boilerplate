@@ -19,7 +19,7 @@ module.exports = {
             globStaticAll:  base.src + '/static/scss/**/*.scss',
             globComponents: base.src + '/components/**/*.scss',
             dirDist:        base.dist + '/static/css',
-            sassdocsDist:   base.dist + 'docs/sassdoc'
+            sassdocsDist:   base.dist + '/docs/sassdoc'
         },
         html: {
             globTemplates:  base.src + '/templates/**/*.html',
