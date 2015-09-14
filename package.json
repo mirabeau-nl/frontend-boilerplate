@@ -22,6 +22,7 @@
     "license": "BSD-3-Clause",
     "devDependencies": {
         "browser-sync": "^2.3.1",
+        "sassdoc": "^2.1.15",
         "gulp": "^3.8.11",
         "gulp-autoprefixer": "^2.1.0",
         "gulp-babel": "^4.0.0",

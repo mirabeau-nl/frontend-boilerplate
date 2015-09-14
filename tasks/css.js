@@ -6,6 +6,7 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var filter       = require('gulp-filter');
 var browsersync  = require('browser-sync');
+var sassdoc      = require('sassdoc');
 
 /**
  * Task: CSS Compile
@@ -30,4 +31,16 @@ module.exports.watch = function() {
     watch([config.paths.css.globStaticAll, config.paths.css.globComponents], function() {
         gulp.start(['css-compile']);
     });
+};
+
+/**
+ * Task: Generate Sassdoc documentation
+ */
+module.exports.sassdoc = function() {
+    var options = {
+        dest: config.paths.css.sassdocsDist
+    };
+
+    gulp.src([config.paths.css.globStaticAll, config.paths.css.globComponents])
+        .pipe(sassdoc(options));
 };

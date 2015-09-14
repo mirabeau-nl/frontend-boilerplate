@@ -18,7 +18,8 @@ module.exports = {
             globStatic:     base.src + '/static/scss/**/!(_)*.scss',
             globStaticAll:  base.src + '/static/scss/**/*.scss',
             globComponents: base.src + '/components/**/*.scss',
-            dirDist:        base.dist + '/static/css'
+            dirDist:        base.dist + '/static/css',
+            sassdocsDist:   base.dist + '/docs/sassdoc'
         },
         html: {
             globTemplates:  base.src + '/templates/**/*.html',
@@ -37,5 +38,6 @@ module.exports = {
             globComponents: base.src + '/components/**/*.js',
             dirDist:        base.dist + '/static/js'
         }
+
     }
 };

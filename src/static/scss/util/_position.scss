@@ -1,10 +1,12 @@
-//
-// Mixin to provide short-hand positioning syntax
-//  https://gist.github.com/branneman/9248961
-//
-//  Usage:
-//   @include position(absolute, 0 false 0 20rem);
-//
+/// @author Bran van der Meer
+
+/// Mixin to provide short-hand positioning syntax
+/// @param {Position} $position [relative] - The position value
+/// @param {Map} $coordinates [0 0 0 0] - Position offset top, right, bottom and left
+/// @link https://gist.github.com/branneman/9248961
+/// @example scss - Position mixin
+///     @include position(absolute, 0 false 0 20rem);
+
 @mixin position ($position: relative, $coordinates: 0 0 0 0) {
 
     @if type-of($position) == list {
