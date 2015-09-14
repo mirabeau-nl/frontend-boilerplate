@@ -1,8 +1,11 @@
-// Mixins
+@charset 'UTF-8';
+
+// Utils
+@import 'util/variables';
 @import 'util/position';
 
 // Vendor
-//@import 'vendor/normalize';
+@import 'vendor/normalize';
 
 // Common
 @import 'common/typography';

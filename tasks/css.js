@@ -7,6 +7,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var filter       = require('gulp-filter');
 var browsersync  = require('browser-sync');
 var sassdoc      = require('sassdoc');
+var scsslint     = require('gulp-scss-lint');
 
 /**
  * Task: CSS Compile
@@ -43,4 +44,13 @@ module.exports.sassdoc = function() {
 
     gulp.src([config.paths.css.globStaticAll, config.paths.css.globComponents])
         .pipe(sassdoc(options));
+};
+
+
+/**
+ * Task: SCSS Lint
+ */
+module.exports.scsslint = function() {
+    gulp.src([config.paths.css.globStaticAll, config.paths.css.globComponents])
+        .pipe(scsslint());
 };

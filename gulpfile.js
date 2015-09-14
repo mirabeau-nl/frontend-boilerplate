@@ -18,10 +18,11 @@ gulp.task('html-watch', ['html-compile'], tasksHTML.watch);
 gulp.task('img-optimize', tasksImages.optimize);
 gulp.task('img-watch', ['img-optimize'], tasksImages.watch);
 
-// Sass & Autoprefixer to CSS compiler
+// SASS & CSS Tasks
 gulp.task('css-compile', tasksCSS.compile);
 gulp.task('css-watch', ['css-compile'], tasksCSS.watch);
 gulp.task('css-sassdoc', tasksCSS.sassdoc);
+gulp.task('scss-lint', tasksCSS.scsslint);
 
 // JavaScript transpiler
 gulp.task('js-transpile', tasksJS.transpile);
@@ -31,4 +32,4 @@ gulp.task('js-watch', ['js-transpile'], tasksJS.watch);
 // Group-tasks
 gulp.task('dev', ['browsersync', 'html-watch', 'img-watch', 'css-watch', 'js-watch']);
 gulp.task('dist', [/*'clean', */'html-compile', 'img-optimize', 'css-compile', 'js-transpile']);
-gulp.task('test', ['js-test']);
+gulp.task('test', ['js-test', 'scss-lint']);
