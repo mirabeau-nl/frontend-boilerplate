@@ -9,7 +9,6 @@ var filter       = require('gulp-filter');
 var browsersync  = require('browser-sync');
 var sassdoc      = require('sassdoc');
 var minifyCss    = require('gulp-minify-css');
-var mqpacker     = require("css-mqpacker");
 
 /**
  * Task: CSS Compile
@@ -18,8 +17,7 @@ module.exports.compile = function() {
     var postcssProcessors = [
         autoprefixer({
             browsers: config.autoprefixer.browsers
-        }),
-        mqpacker()
+        })
     ];
 
     gulp.src(config.paths.css.globStatic)
