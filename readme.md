@@ -2,7 +2,7 @@
 
 ## How to: Setup development environment
 1. Make sure the following is installed on your machine:
-    - [Node.js](http://nodejs.org/), v0.10.x *(v0.12 is not supported at this time)*
+    - [Node.js](http://nodejs.org/)
 2. Run this command to install the global dependencies:
 
     ```
