@@ -6,6 +6,9 @@ var base = {
 };
 
 module.exports = {
+    autoprefixer: {
+        browsers: ['last 1 version', '> 5%']
+    },
 
     /**
      * Paths needed for Gulp
