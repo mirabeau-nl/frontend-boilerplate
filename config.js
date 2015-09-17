@@ -31,7 +31,7 @@ module.exports = {
             dirDist:        base.dist + '/templates'
         },
         img: {
-            globImages:     base.src + '/static/img/**/*.{svg,png,jpg}',
+            globImages:     base.src + '/static/img/**/*.{svg,png,jpg,gif,webp}',
             dirDist:        base.dist + '/static/img'
         },
         js: {
