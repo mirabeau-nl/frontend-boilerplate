@@ -40,6 +40,11 @@ module.exports = {
             globVendor:     base.src + '/static/js/vendor/**/*.js',
             globComponents: base.src + '/components/**/*.js',
             dirDist:        base.dist + '/static/js'
+        },
+        githooks: {
+            globGithooks:   './githooks/*',
+            globDist:       './.git/hooks/*',
+            dirDist:        './.git/hooks'
         }
 
     }

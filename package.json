@@ -7,12 +7,14 @@
         "url": "https://github.com/mirabeau-nl/frontend-bootstrap.git"
     },
     "scripts": {
-        "start": "node_modules/gulp/bin/gulp.js dev"
+        "postinstall": "node node_modules/gulp/bin/gulp.js githooks",
+        "start": "node node_modules/gulp/bin/gulp.js dev",
+        "test": "node node_modules/gulp/bin/gulp.js test"
     },
     "contributors": [
         "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
         "Rik Schennink <rikschennink@gmail.com> (http://rikschennink.nl/)",
-        "Niek Bosch <nbosch@mirabeau.nl> (http://rikschennink.nl/)",
+        "Niek Bosch <nbosch@mirabeau.nl> (http://www.mirabeau.nl/)",
         "Eric Weerstra <eweerstra@mirabeau.nl> (http://www.mirabeau.nl/)",
         "Arno Wolkers <awolkers@mirabeau.nl> (http://www.mirabeau.nl/)",
         "Leendert Ullersma <lullersma@mirabeau.nl> (http://www.mirabeau.nl/)",
@@ -24,6 +26,7 @@
         "browser-sync": "^2.3.1",
         "sassdoc": "^2.1.15",
         "autoprefixer": "^6.0.2",
+        "del": "^2.0.2",
         "gulp": "^3.8.11",
         "gulp-babel": "^4.0.0",
         "gulp-changed": "^1.2.1",
