@@ -22,7 +22,12 @@ gulp dev
 
 Then point your browser to `http://localhost:3000/`
 
-## How to: Build, test and deploy
+## How to: Build, test and upload
+```
+gulp dist
+```
+### Upload
+Add a .env file to the project root with your FTP credentials (host, user and password).   
 ```
 gulp dist
 ```
