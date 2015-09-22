@@ -43,7 +43,7 @@ module.exports.compile = function() {
     gulp.task('css-copy-fonts', function() {
         return gulp.src(config.paths.css.globFonts)
             .pipe(gulp.dest(config.paths.css.dirDistFonts))
-            /*.pipe(browsersync.reload({ stream: true }))*/; /* Todo: seems to cause a problem with browserSync (refresh) */
+            .pipe(browsersync.reload({ stream: true })); /* Todo: seems to cause a problem with browserSync (refresh) */
     });
 
     return gulp.start(['css-compile-sass', 'css-copy-fonts']);
