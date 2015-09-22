@@ -47,7 +47,7 @@ module.exports = {
             dirDist:        base.dist + '/static/js'
         },
         githooks: {
-            globGithooks:   './githooks/*',
+            globGithooks:   './tasks/githooks/*',
             globDist:       './.git/hooks/*',
             dirDist:        './.git/hooks'
         }

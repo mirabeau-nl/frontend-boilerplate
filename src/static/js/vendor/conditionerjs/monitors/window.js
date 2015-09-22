@@ -1,1 +1,51 @@
-!function(e){"use strict";var t=e.document,n=function(){return e.innerWidth||t.documentElement.clientWidth},i=function(){return e.innerHeight||t.documentElement.clientHeight},r=function(e){return parseInt(e,10)},u={trigger:{resize:e},test:{"min-width":function(e){return r(e.expected)<=n()},"max-width":function(e){return r(e.expected)>=n()},"min-height":function(e){return r(e.expected)<=i()},"max-height":function(e){return r(e.expected)>=i()}}};"undefined"!=typeof module&&module.exports?module.exports=u:"function"==typeof define&&define.amd&&define(function(){return u})}(this);
+/**
+ * Tests if the window dimensions match certain expectations
+ * @module monitors/window
+ */
+(function (win, undefined) {
+
+    'use strict';
+
+    var doc = win.document;
+    var width = function () {
+        return win.innerWidth || doc.documentElement.clientWidth;
+    };
+    var height = function () {
+        return win.innerHeight || doc.documentElement.clientHeight;
+    };
+    var toInt = function (value) {
+        return parseInt(value, 10);
+    };
+
+    var exports = {
+        trigger: {
+            'resize': win
+        },
+        test: {
+            'min-width': function (data) {
+                return toInt(data.expected) <= width();
+            },
+            'max-width': function (data) {
+                return toInt(data.expected) >= width();
+            },
+            'min-height': function (data) {
+                return toInt(data.expected) <= height();
+            },
+            'max-height': function (data) {
+                return toInt(data.expected) >= height();
+            }
+        }
+    };
+
+    // CommonJS
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = exports;
+    }
+    // AMD
+    else if (typeof define === 'function' && define.amd) {
+        define(function () {
+            return exports;
+        });
+    }
+
+}(this));

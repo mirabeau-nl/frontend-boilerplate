@@ -1,1 +1,49 @@
-!function(n){"use strict";var e,o=n.document?n.document.body:null;e=o&&o.compareDocumentPosition?function(n,e){return!!(16&n.compareDocumentPosition(e))}:o&&o.contains?function(n,e){return n!=e&&n.contains(e)}:function(n,e){for(var o=e.parentNode;o;){if(o===n)return!0;o=o.parentNode}return!1},"undefined"!=typeof module&&module.exports?module.exports=e:"function"==typeof define&&define.amd?define(function(){return e}):n.contains=e}(this);
+(function (win, undefined) {
+
+    'use strict';
+
+    // define contains method based on browser capabilities
+    var el = win.document ? win.document.body : null;
+    var exports;
+
+    if (el && el.compareDocumentPosition) {
+        exports = function (parent, child) { /* jshint -W016 */
+            return !!(parent.compareDocumentPosition(child) & 16);
+        };
+    } /* istanbul ignore next */
+    else if (el && el.contains) {
+        exports = function (parent, child) {
+            return parent != child && parent.contains(child);
+        };
+    } /* istanbul ignore else */
+    else {
+        exports = function (parent, child) {
+            var node = child.parentNode;
+            while (node) {
+                if (node === parent) {
+                    return true;
+                }
+                node = node.parentNode;
+            }
+            return false;
+        };
+    }
+
+    // CommonJS
+    /* istanbul ignore if */
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = exports;
+    }
+    // AMD
+    else if (typeof define === 'function' && define.amd) {
+        define(function () {
+            return exports;
+        });
+    }
+    // Browser globals
+    /* istanbul ignore else */
+    else { /* istanbul ignore next */
+        win.contains = exports;
+    }
+
+}(this));

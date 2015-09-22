@@ -6,8 +6,7 @@ var changed     = require('gulp-changed');
 var babel       = require('gulp-babel');
 var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
-var jshint      = require('gulp-jshint');
-var jscs        = require('gulp-jscs');
+var eslint      = require('gulp-eslint');
 var browsersync = require('browser-sync');
 
 /**
@@ -38,15 +37,7 @@ module.exports.watch = function() {
  */
 module.exports.lint = function() {
     return gulp.src([config.paths.js.globStatic, config.paths.js.globComponents, '!' + config.paths.js.globVendor])
-        .pipe(jscs())
-        .on('error',handleJscsError)
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        .pipe(jshint.reporter('fail'));
-};
-
-// JSCS error handler
-var handleJscsError = function(err) {
-    console.log(err.toString());
-    process.exit(1);
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 };

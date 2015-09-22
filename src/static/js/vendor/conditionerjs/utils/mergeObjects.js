@@ -1,1 +1,61 @@
-!function(e){"use strict";var t=function(e,n){var o=Array.isArray(n),c=o&&[]||{};return n=n||{},o?c=n.concat():(e&&"object"==typeof e&&Object.keys(e).forEach(function(t){c[t]=e[t]}),Object.keys(n).forEach(function(o){c[o]="object"==typeof n[o]&&n[o]&&e[o]?t(e[o],n[o]):n[o]})),c};"undefined"!=typeof module&&module.exports?module.exports=t:"function"==typeof define&&define.amd?define(function(){return t}):e.mergeObjects=t}(this);
+(function (win, undefined) {
+
+    'use strict';
+
+    var exports = function (target, src) {
+
+        var array = Array.isArray(src);
+        var dst = array && [] || {};
+
+        src = src || {};
+
+        if (array) {
+            // arrays are not merged
+            dst = src.concat();
+        }
+        else {
+
+            if (target && typeof target === 'object') {
+
+                Object.keys(target).forEach(function (key) {
+                    dst[key] = target[key];
+                });
+
+            }
+
+            Object.keys(src).forEach(function (key) {
+
+                if (typeof src[key] !== 'object' || !src[key]) {
+                    dst[key] = src[key];
+                }
+                else {
+                    if (!target[key]) {
+                        dst[key] = src[key];
+                    }
+                    else {
+                        dst[key] = exports(target[key], src[key]);
+                    }
+                }
+
+            });
+        }
+
+        return dst;
+    };
+
+    // CommonJS
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = exports;
+    }
+    // AMD
+    else if (typeof define === 'function' && define.amd) {
+        define(function () {
+            return exports;
+        });
+    }
+    // Browser globals
+    else {
+        win.mergeObjects = exports;
+    }
+
+}(this));
