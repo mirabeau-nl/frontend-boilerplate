@@ -9,6 +9,8 @@ module.exports = function() {
         server: {
             baseDir: config.paths.browsersync.baseDir
         },
+        /*ghostMode: false,
+        notify: false,*/
         open: false
     });
 };

@@ -1,11 +1,19 @@
 var gulp = require('gulp');
 
+// Load vars from .env files into ENV
+require('dotenv').load();
+
 // Load tasks
+var taskClean       = require('./tasks/clean');
 var taskBrowsersync = require('./tasks/browsersync');
 var tasksHTML       = require('./tasks/html');
 var tasksImages     = require('./tasks/img');
 var tasksCSS        = require('./tasks/css');
 var tasksJS         = require('./tasks/js');
+var tasksUpload     = require('./tasks/upload');
+
+// Clean dist/ folder
+gulp.task('clean', taskClean);
 
 // Serve files from dist/ folder
 gulp.task('browsersync', taskBrowsersync);
@@ -28,7 +36,11 @@ gulp.task('js-transpile', tasksJS.transpile);
 gulp.task('js-test', tasksJS.test);
 gulp.task('js-watch', ['js-transpile'], tasksJS.watch);
 
+// Upload
+gulp.task('file-upload', ['dist'], tasksUpload.upload);
+
 // Group-tasks
-gulp.task('dev', ['browsersync', 'html-watch', 'img-watch', 'css-watch', 'js-watch']);
-gulp.task('dist', [/*'clean', */'html-compile', 'img-optimize', 'css-compile', 'js-transpile']);
+gulp.task('dev', ['clean', 'browsersync', 'html-watch', 'img-watch', 'css-watch', 'js-watch']);
+gulp.task('dist', ['clean', 'html-compile', 'img-optimize', 'css-compile', 'js-transpile']);
 gulp.task('test', ['js-test']);
+gulp.task('upload', ['file-upload']);

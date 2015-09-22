@@ -14,12 +14,17 @@ module.exports = {
      * Paths needed for Gulp
      */
     paths: {
+        clean: {
+            dirDest: base.dist
+        },
         browsersync: {
             baseDir:        base.dist
         },
         css: {
             globStatic:     base.src + '/static/scss/**/!(_)*.scss',
             globStaticAll:  base.src + '/static/scss/**/*.scss',
+            globFonts:      base.src + '/static/fonts/*',
+            dirDistFonts:   base.dist + '/static/fonts',
             globComponents: base.src + '/components/**/*.scss',
             dirDist:        base.dist + '/static/css',
             sassdocsDist:   base.dist + '/docs/sassdoc'
@@ -42,5 +47,21 @@ module.exports = {
             dirDist:        base.dist + '/static/js'
         }
 
+    },
+
+    /**
+     * Upload
+     * HOST, USER and PASSWORD constants should be defined within .env file
+     */
+    upload: {
+        globDist: base.dist + '/**',
+        targetPath: '/test',
+        targetBase: base.dist,
+        options: {
+            host: process.env.UPLOAD_HOST,
+            user: process.env.UPLOAD_USER,
+            password: process.env.UPLOAD_PASSWORD
+        }
     }
+
 };

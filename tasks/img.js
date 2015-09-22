@@ -8,7 +8,7 @@ var imagemin = require('gulp-imagemin');
  * Task: Image optimizer
  */
 module.exports.optimize = function() {
-    gulp.src(config.paths.img.globImages)
+    return gulp.src(config.paths.img.globImages)
         .pipe(changed(config.paths.img.dirDist))
         .pipe(imagemin())
         .pipe(gulp.dest(config.paths.img.dirDist));
