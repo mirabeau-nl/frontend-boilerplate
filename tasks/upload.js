@@ -7,7 +7,6 @@ var config = require('../config');
  * Task: Upload via FTP
  */
 module.exports.upload = function() {
-
     var opts = config.upload.options;
     opts.log = gutil.log;
 
