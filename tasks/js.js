@@ -14,7 +14,7 @@ var browsersync = require('browser-sync');
  * Task: JS Transpile
  */
 module.exports.transpile = function() {
-    gulp.src([config.paths.js.globStatic, config.paths.js.globComponents])
+    return gulp.src([config.paths.js.globStatic, config.paths.js.globComponents])
         .pipe(changed(config.paths.js.dirDist))
         .pipe(sourcemaps.init())
         .pipe(gulpif(config.paths.js.vendorFilter, babel()))
