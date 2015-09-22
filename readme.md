@@ -29,5 +29,5 @@ gulp dist
 ### Upload
 Add a .env file to the project root with your FTP credentials (host, user and password).   
 ```
-gulp dist
+gulp upload
 ```
