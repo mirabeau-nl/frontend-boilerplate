@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Get list of changed files
+CHANGED_FILES="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+# Check if the package.json file has changed
+echo "$CHANGED_FILES" | grep '^package.json' >/dev/null 2>&1
+
+# Check if the exit code of the last command is 0 (success)
+if [[ $? == 0 ]]; then
+
+    # Notify the user
+    echo ""
+    echo "githook: post-merge: Running 'npm install && npm prune' because the package.json has changed"
+    echo ""
+
+    # Run install
+    npm install && npm prune
+fi
+
+# Check if a githook has changed
+echo "$CHANGED_FILES" | grep '^githooks' >/dev/null 2>&1
+
+# Check if the exit code of the last command is 0 (success)
+if [[ $? == 0 ]]; then
+
+    # Notify the user
+    echo ""
+    echo "githook: post-merge: Running 'gulp githooks' because a githook has changed"
+    echo ""
+
+    # Run gulp task
+    gulp githooks
+fi
