@@ -4,8 +4,8 @@
 class Nav {
 
     /**
-     * @param {HTMLElement} element
-     * @param {Object} options
+     * @param {HTMLElement} element - The HTMLElement this module is constructed upon
+     * @param {Object} options - ConditionerJS's merged options
      */
     constructor(element, options) {
         this._element = element;
