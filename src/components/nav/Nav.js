@@ -1,34 +1,35 @@
-define(function() {
-
-    'use strict';
+/**
+ * @module Nav
+ */
+class Nav {
 
     /**
-     * @constructor
+     * @param {HTMLElement} element
+     * @param {Object} options
      */
-    function Nav(element, options) {
-        this.element = element;
-        this.options = options;
+    constructor(element, options) {
+        this._element = element;
+        this._options = options;
         this.load();
     }
 
     /**
-     * Default options
+     * Base options
      */
-    Nav.options = {};
+    static get options() {}
 
     /**
      * Construct module
      */
-    Nav.prototype.load = function() {
-        this.element.innerHTML += [2, 4, 6, 8, 10].map(v => v + 1);
-    };
+    load() {
+        this._element.innerHTML += [2, 4, 6, 8, 10].map(v => v + 1);
+    }
 
     /**
      * Deconstruct module
      */
-    Nav.prototype.unload = function() {};
+    unload() {}
+}
 
-    // Exports
-    return Nav;
-
-});
+// Exports
+export default Nav;
