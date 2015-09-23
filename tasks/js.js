@@ -36,9 +36,17 @@ module.exports.watch = function() {
 /**
  * Task: JS Test
  */
-module.exports.test = function() {
-    gulp.src([config.paths.js.globStatic, config.paths.js.globComponents, '!' + config.paths.js.globVendor])
+module.exports.lint = function() {
+    return gulp.src([config.paths.js.globStatic, config.paths.js.globComponents, '!' + config.paths.js.globVendor])
+        .pipe(jscs())
+        .on('error',handleJscsError)
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
-        .pipe(jscs());
+        .pipe(jshint.reporter('fail'));
+};
+
+// JSCS error handler
+var handleJscsError = function(err) {
+    console.log(err.toString());
+    process.exit(1);
 };
