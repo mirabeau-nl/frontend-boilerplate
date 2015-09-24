@@ -1,5 +1,7 @@
 'use strict';
 
+var pkg = require('./package.json');
+
 var base = {
     src:  './src',
     dist: './dist'
@@ -51,7 +53,13 @@ module.exports = {
             globDist:       './.git/hooks/*',
             dirDist:        './.git/hooks'
         }
-
+    },
+    zip: {
+        paths: {
+            globDist:       base.dist + '/**/!(*.zip)',
+            dirDist:        base.dist
+        },
+        filename: pkg.name + '.zip'
     },
 
     /**

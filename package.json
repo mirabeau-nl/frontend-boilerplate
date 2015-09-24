@@ -18,7 +18,8 @@
         "Eric Weerstra <eweerstra@mirabeau.nl> (http://www.mirabeau.nl/)",
         "Arno Wolkers <awolkers@mirabeau.nl> (http://www.mirabeau.nl/)",
         "Leendert Ullersma <lullersma@mirabeau.nl> (http://www.mirabeau.nl/)",
-        "Christiaan Stegeman <cstegeman@mirabeau.nl> (http://www.mirabeau.nl/)"
+        "Christiaan Stegeman <cstegeman@mirabeau.nl> (http://www.mirabeau.nl/)",
+        "Sybren Wartna <sybren@gmail.com> (http://wheressyb.nl/)"
     ],
     "readmeFilename": "readme.md",
     "license": "BSD-3-Clause",
@@ -43,6 +44,7 @@
         "gulp-uglify": "^1.4.1",
         "gulp-util": "^3.0.6",
         "gulp-watch": "^4.3.5",
+        "gulp-zip": "^3.0.2",
         "sassdoc": "^2.1.15",
         "vinyl-ftp": "^0.4.5"
     }

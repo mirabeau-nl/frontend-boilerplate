@@ -19,15 +19,23 @@
 ```
 gulp dev
 ```
-
 Then point your browser to `http://localhost:3000/`
 
-## How to: Build, test and upload
+## How to: Build
 ```
 gulp dist
 ```
+
+## How to: Test
+```
+gulp test
+```
+The test suite contains:
+- JavaScript code linting
+- Sass file code linting
+
 ### Upload
-Add a .env file to the project root with your FTP credentials (host, user and password).   
 ```
 gulp upload
 ```
+Add a .env file to the project root with your FTP credentials (host, user and password).   

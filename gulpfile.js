@@ -12,6 +12,7 @@ var tasksCSS        = require('./tasks/css');
 var tasksJS         = require('./tasks/js');
 var tasksUpload     = require('./tasks/upload');
 var tasksGithooks   = require('./tasks/githooks');
+var tasksZip        = require('./tasks/zip');
 
 // Clean dist/ folder
 gulp.task('clean', taskClean);
@@ -41,12 +42,15 @@ gulp.task('js-watch', ['js-transpile'], tasksJS.watch);
 // Upload
 gulp.task('file-upload', ['dist'], tasksUpload.upload);
 
+// Zip
+gulp.task('zip', tasksZip.zip);
+
 // Githook tasks
 gulp.task('githooks-clean', tasksGithooks.clean);
 gulp.task('githooks', ['githooks-clean'], tasksGithooks.copy);
 
 // Group-tasks
 gulp.task('dev', ['clean', 'browsersync', 'html-watch', 'img-watch', 'css-watch', 'js-watch']);
-gulp.task('dist', ['clean', 'html-compile', 'img-optimize', 'css-compile', 'js-transpile']);
+gulp.task('dist', ['clean', 'html-compile', 'img-optimize', 'css-compile', 'js-transpile'], function() { gulp.start(['zip']); });
 gulp.task('test', ['js-lint', 'css-lint']);
 gulp.task('upload', ['file-upload']);
