@@ -10,14 +10,24 @@
 
     {#- Shortest and fastest shim for ie-old html5 elements, add only the elements you need, or replace this with Modernizr -#}
     <!--[if lt IE 9]><script>'article main footer'.replace(/\w+/g,function(n){document.createElement(n)})</script><![endif]-->
+
+    <script>
+        (function(d){
+            if (!('querySelector' in d && 'addEventListener' in window)) return;
+            d.documentElement.className += ' has-js';
+            d.addEventListener('DOMContentLoaded', function() {
+                var s = d.createElement('script');
+                s.setAttribute('src', '../static/js/vendor/requirejs/require.js');
+                s.setAttribute('data-main', '../static/js/main');
+                d.body.appendChild(s);
+            });
+        }(document));
+    </script>
 </head>
 <body>
 
     {%- block body %}{% endblock -%}
 
-    <!--[if gt IE 8]><!--> {# IE8 NoJS! #}
-    <script data-main="../static/js/main" src="../static/js/vendor/requirejs/require.js"></script>
-    <!--<![endif]-->
 </body>
 </html>
 
