@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
 // Load vars from .env files into ENV
-require('dotenv').load();
+require('dotenv').load({ silent: true });
 
 // Load tasks
 var taskClean       = require('./tasks/clean');
