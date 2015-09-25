@@ -34,8 +34,8 @@ The test suite contains:
 - JavaScript code linting
 - Sass file code linting
 
-### Upload
+## How to: Upload
+Add a .env file to the project root with your FTP credentials (host, user and password).   
 ```
 gulp upload
 ```
-Add a .env file to the project root with your FTP credentials (host, user and password).   
