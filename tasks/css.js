@@ -7,7 +7,6 @@ var postcss      = require('gulp-postcss');
 var filter       = require('gulp-filter');
 var minifyCss    = require('gulp-minify-css');
 var autoprefixer = require('autoprefixer');
-var sassdoc      = require('sassdoc');
 var browsersync  = require('browser-sync');
 
 /**
@@ -57,11 +56,3 @@ gulp.task('css-watch', ['css-compile'], function() {
  * Task: CSS Test
  */
 gulp.task('css-lint', []);
-
-/**
- * Task: Generate Sassdoc documentation
- */
-gulp.task('css-sassdoc', function() {
-    gulp.src([config.css.src.staticAll, config.css.src.components])
-        .pipe(sassdoc({ dest: config.css.dist.sassdocs }));
-});

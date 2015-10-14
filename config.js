@@ -32,8 +32,7 @@ module.exports = {
         },
         dist: {
             base: base.dist + '/static/css',
-            fonts: base.dist + '/static/fonts',
-            sassdocs: base.dist + '/docs/sassdoc'
+            fonts: base.dist + '/static/fonts'
         }
     },
 
@@ -47,7 +46,8 @@ module.exports = {
         dist: {
             base: base.dist,
             index: base.dist + '/index.html',
-            static: base.dist + '/docs/static/'
+            static: base.dist + '/docs/static/',
+            sassdocs: base.dist + '/docs/sassdoc'
         }
     },
 
