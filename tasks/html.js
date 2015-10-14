@@ -7,19 +7,19 @@ var browsersync = require('browser-sync');
 /**
  * Task: HTML Compile
  */
-module.exports.compile = function() {
-    return gulp.src(config.paths.html.globTemplates)
+gulp.task('html-compile', function() {
+    return gulp.src(config.html.src.templates)
         .pipe(swig({ defaults: { cache: false } }))
-        .pipe(gulp.dest(config.paths.html.dirDist))
+        .pipe(gulp.dest(config.html.dist.base))
         .pipe(browsersync.reload({ stream: true }));
-};
+});
 
 /**
  * Task: HTML Watch
  */
-module.exports.watch = function() {
-    var paths = config.paths.html;
-    watch([paths.globTemplates, paths.globLayout, paths.globComponents], function() {
+gulp.task('html-watch', ['html-compile'], function() {
+    var paths = config.html.src;
+    watch([paths.templates, paths.layout, paths.components], function() {
         gulp.start(['html-compile']);
     });
-};
+});

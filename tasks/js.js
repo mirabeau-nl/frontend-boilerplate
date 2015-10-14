@@ -12,32 +12,33 @@ var browsersync = require('browser-sync');
 /**
  * Task: JS Transpile
  */
-module.exports.transpile = function() {
-    return gulp.src([config.paths.js.globStatic, config.paths.js.globComponents])
-        .pipe(changed(config.paths.js.dirDist))
+gulp.task('js-transpile', function() {
+    return gulp.src([config.js.src.all, config.js.src.components])
+        .pipe(changed(config.js.dist.base))
         .pipe(sourcemaps.init())
-        .pipe(gulpif(config.paths.js.vendorFilter, babel()))
+        .pipe(gulpif(config.js.vendorFilter, babel()))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.paths.js.dirDist))
+        .pipe(gulp.dest(config.js.dist.base))
         .pipe(browsersync.reload({ stream: true }));
-};
+});
 
 /**
  * Task: JS Watch
  */
-module.exports.watch = function() {
-    watch([config.paths.js.globStatic, config.paths.js.globComponents], function() {
+gulp.task('js-watch', ['js-transpile'], function() {
+    watch([config.js.src.all, config.js.src.components], function() {
         gulp.start(['js-transpile']);
     });
-};
+});
 
 /**
  * Task: JS Test
  */
-module.exports.lint = function() {
-    return gulp.src([config.paths.js.globStatic, config.paths.js.globComponents, '!' + config.paths.js.globVendor])
+gulp.task('js-lint', function() {
+    var src = config.js.src;
+    return gulp.src([src.all, src.components, '!' + src.vendor])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
-};
+});

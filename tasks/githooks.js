@@ -5,14 +5,14 @@ var del    = require('del');
 /**
  * Task: Copy Githooks
  */
-module.exports.copy = function() {
-    return gulp.src(config.paths.githooks.globGithooks)
-        .pipe(gulp.dest(config.paths.githooks.dirDist));
-};
+gulp.task('githooks', ['githooks-clean'], function() {
+    return gulp.src(config.githooks.src.all)
+        .pipe(gulp.dest(config.githooks.dist.base));
+});
 
 /**
  * Task: Clean Githooks dist folder
  */
-module.exports.clean = function() {
-    return del([config.paths.githooks.globDist]);
-};
+gulp.task('githooks-clean', function() {
+    return del([config.githooks.dist.all]);
+});

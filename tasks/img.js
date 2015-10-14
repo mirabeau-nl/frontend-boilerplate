@@ -7,18 +7,18 @@ var imagemin = require('gulp-imagemin');
 /**
  * Task: Image optimizer
  */
-module.exports.optimize = function() {
-    return gulp.src(config.paths.img.globImages)
-        .pipe(changed(config.paths.img.dirDist))
+gulp.task('img-optimize', function() {
+    return gulp.src(config.img.src.all)
+        .pipe(changed(config.img.dist.base))
         .pipe(imagemin())
-        .pipe(gulp.dest(config.paths.img.dirDist));
-};
+        .pipe(gulp.dest(config.img.dist.base));
+});
 
 /**
  * Task: Image Watch
  */
-module.exports.watch = function() {
-    watch([config.paths.img.globImages], function() {
+gulp.task('img-watch', ['img-optimize'], function() {
+    watch([config.img.src.all], function() {
         gulp.start(['img-optimize']);
     });
-};
+});
