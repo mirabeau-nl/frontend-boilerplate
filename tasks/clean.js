@@ -1,9 +1,10 @@
 var config = require('../config');
+var gulp   = require('gulp');
 var del    = require('del');
 
 /**
  * Task: Clean dist/ folder
  */
-module.exports = function() {
-    del.sync(config.paths.clean.dirDest);
-};
+gulp.task('clean', function() {
+    del.sync(config.clean.dist.base);
+});

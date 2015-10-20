@@ -5,9 +5,8 @@ var zip    = require("gulp-zip");
 /**
  * Task: Add content to zip archive
  */
-module.exports.zip = function() {
-
-    return gulp.src([config.zip.paths.globDist])
+gulp.task('zip', function() {
+    return gulp.src([config.zip.src.all])
         .pipe(zip(config.zip.filename))
-        .pipe(gulp.dest(config.zip.paths.dirDist));
-};
+        .pipe(gulp.dest(config.zip.dist.base));
+});

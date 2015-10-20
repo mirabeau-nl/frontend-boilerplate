@@ -1,16 +1,17 @@
 var config      = require('../config');
+var gulp        = require('gulp');
 var browsersync = require('browser-sync');
 
 /**
  * Task: BrowserSync HTTP server
  */
-module.exports = function() {
+gulp.task('browsersync', function() {
     browsersync({
         server: {
-            baseDir: config.paths.browsersync.baseDir
+            baseDir: config.browsersync.dist.base
         },
         /*ghostMode: false,
         notify: false,*/
         open: false
     });
-};
+});
