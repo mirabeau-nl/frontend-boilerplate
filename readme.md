@@ -35,10 +35,13 @@ The test suite contains:
 - Sass file code linting
 
 ## How to: Upload
-Add a .env file to the project root with your FTP credentials:      
-UPLOAD_HOST=username    
-UPLOAD_USER=password     
-UPLOAD_PASSWORD=ftp://host    
+Add a `.env` file to the project root with your FTP credentials:
+```
+UPLOAD_HOST=ftp://host
+UPLOAD_USER=username
+UPLOAD_PASSWORD=password
+```
+Then run:
 ```
 gulp upload
 ```
