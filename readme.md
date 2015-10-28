@@ -37,7 +37,7 @@ The test suite contains:
 ## How to: Upload
 Add a `.env` file to the project root with your FTP credentials:
 ```
-UPLOAD_HOST=ftp://host
+UPLOAD_HOST=ftp.example.org
 UPLOAD_USER=username
 UPLOAD_PASSWORD=password
 ```
