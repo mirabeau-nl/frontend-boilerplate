@@ -2,7 +2,8 @@ var pkg = require('./package.json');
 
 var base = {
     src:  './src',
-    dist: './dist'
+    dist: './dist',
+    docs: './tasks/docs'
 };
 
 module.exports = {
@@ -33,6 +34,20 @@ module.exports = {
             base: base.dist + '/static/css',
             fonts: base.dist + '/static/fonts',
             sassdocs: base.dist + '/docs/sassdoc'
+        }
+    },
+
+    docs: {
+        src: {
+            index: base.docs + '/index.html',
+            templates: base.src + '/templates',
+            templatesAll: base.src + '/templates/**/**.html',
+            statics: base.docs + '/static/**'
+        },
+        dist: {
+            base: base.dist,
+            index: base.dist + '/index.html',
+            static: base.dist + '/docs/static/'
         }
     },
 
