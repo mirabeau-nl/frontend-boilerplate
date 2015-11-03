@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Front-End Library</title>
+    <link rel="stylesheet" href="docs/static/css/bootstrap.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Front-End Library</h1>
+        <p>Last updated: {{ lastUpdated }}</p>
+        <!--[[dist.zip]]-->
+
+        <h2>Templates</h2>
+        <ol>
+        {%- for tpl in templates %}
+            <li><a href="templates/{{ tpl }}">{{ tpl|replace('/', ' / ') }}</a></li>
+        {%- endfor %}
+        </ol>
+
+    </div>
+
+</body>
+</html>

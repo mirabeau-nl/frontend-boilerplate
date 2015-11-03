@@ -9,6 +9,7 @@ require('./tasks/browsersync');
 require('./tasks/html');
 require('./tasks/img');
 require('./tasks/css');
+require('./tasks/docs');
 require('./tasks/js');
 require('./tasks/upload');
 require('./tasks/githooks');
@@ -17,6 +18,7 @@ require('./tasks/zip');
 gulp.task('dev', [
     'clean',
     'browsersync',
+    'docs-watch',
     'html-watch',
     'img-watch',
     'css-watch',
@@ -25,6 +27,7 @@ gulp.task('dev', [
 
 gulp.task('dist', [
     'clean',
+    'docs-compile',
     'html-compile',
     'img-optimize',
     'css-compile',
