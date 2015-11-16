@@ -1,10 +1,11 @@
-var config = require('../config');
-var gulp   = require('gulp');
-var swig   = require('gulp-swig');
-var watch  = require('gulp-watch');
-var glob   = require('glob');
-var path   = require('path');
-var moment = require('moment-timezone');
+var config  = require('../config');
+var gulp    = require('gulp');
+var swig    = require('gulp-swig');
+var watch   = require('gulp-watch');
+var glob    = require('glob');
+var path    = require('path');
+var moment  = require('moment-timezone');
+var sassdoc = require('sassdoc');
 
 /**
  * Sub-task: Docs copy statics
@@ -39,7 +40,7 @@ gulp.task('docs-render-index', function() {
 /**
  * Task: Docs Compile
  */
-gulp.task('docs-compile', ['docs-copy-statics', 'docs-render-index']);
+gulp.task('docs-compile', ['docs-copy-statics', 'docs-render-index', 'docs-sassdoc']);
 
 /**
  * Task: Docs Watch
@@ -54,4 +55,12 @@ gulp.task('docs-watch', ['docs-compile'], function() {
     watch(watching, function() {
         gulp.start(['docs-compile']);
     });
+});
+
+/**
+ * Task: Docs sassdoc
+ */
+gulp.task('docs-sassdoc', function() {
+    gulp.src([config.css.src.staticAll, config.css.src.components])
+        .pipe(sassdoc({ dest: config.docs.dist.sassdocs }))
 });
