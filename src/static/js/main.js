@@ -6,17 +6,16 @@ require.config({
     }
 });
 
+let polyfills = [];
+
 /**
- * Feature detections to include polyfills if necessary.
- * Uncomment the code below to activate it in your project and expand on it to your needs.
+ * Uncomment the feature detection below to activate the polyfill in your project and expand on it to your needs.
  */
 
-//let polyfills = [];
-//
-//if (!('classList' in document.documentElement)) {
-//    polyfills.push('polyfill/classList');
-//}
+if (!('classList' in document.documentElement)) {
+    polyfills.push('polyfill/classList');
+}
 
-require(['conditioner'].concat(typeof polyfills !== 'undefined' ? polyfills : ''), function(conditioner) {
+require(['conditioner'].concat(polyfills), function(conditioner) {
     conditioner.init();
 });
