@@ -16,7 +16,7 @@ class Nav {
     /**
      * Base options
      */
-    static get options() {}
+    static options = {};
 
     /**
      * Construct module

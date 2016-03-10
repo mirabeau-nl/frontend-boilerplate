@@ -1,6 +1,9 @@
-var pkg = require('./package.json');
+import pkg from './package.json';
+import dotenv from 'dotenv';
 
-var base = {
+dotenv.load({ silent: true });
+
+const base = {
     src:  './src',
     dist: './dist',
     docs: './tasks/docs'
@@ -9,9 +12,12 @@ var base = {
 module.exports = {
 
     browsersync: {
-        dist: {
-            base: base.dist
-        }
+        server: {
+            baseDir: base.dist
+        },
+        open: false,
+        ui: false,
+        notify: false
     },
 
     clean: {
@@ -27,12 +33,10 @@ module.exports = {
         src: {
             static: base.src + '/static/scss/**/!(_)*.scss',
             staticAll: base.src + '/static/scss/**/*.scss',
-            fonts: base.src + '/static/fonts/**/*',
             components: base.src + '/components/**/*.scss'
         },
         dist: {
-            base: base.dist + '/static/css',
-            fonts: base.dist + '/static/fonts'
+            base: base.dist + '/static/css'
         }
     },
 
@@ -48,6 +52,15 @@ module.exports = {
             index: base.dist + '/index.html',
             static: base.dist + '/docs/static/',
             sassdocs: base.dist + '/docs/sassdoc'
+        }
+    },
+
+    fonts: {
+        src: {
+            fonts: base.src + '/static/fonts/**/*'
+        },
+        dist: {
+            fonts: base.dist + '/static/fonts'
         }
     },
 
@@ -88,11 +101,11 @@ module.exports = {
             components: base.src + '/components/**/*.js'
         },
         dist: {
-            base: base.dist + '/static/js'
+            base: base.dist + '/static/js',
+            main: base.dist + '/static/js/main.js',
+            babelHelpers: base.dist + '/static/js/polyfill/babel-helpers.js'
         },
-        vendorFilter: function(file) {
-            return !/vendor/.test(file.path);
-        }
+        vendorFilter: file => !/vendor/.test(file.path)
     },
 
     upload: {
@@ -106,7 +119,7 @@ module.exports = {
         options: { // Defined in .env file
             host: process.env.UPLOAD_HOST,
             user: process.env.UPLOAD_USER,
-            password: process.env.UPLOAD_PASSWORD
+            password: process.env.UPLOAD_PASS
         }
     },
 

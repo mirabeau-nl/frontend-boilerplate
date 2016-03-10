@@ -1,11 +1,12 @@
-var config  = require('../config');
-var gulp    = require('gulp');
-var swig    = require('gulp-swig');
-var watch   = require('gulp-watch');
-var glob    = require('glob');
-var path    = require('path');
-var moment  = require('moment-timezone');
-var sassdoc = require('sassdoc');
+import config from '../config';
+import { sync as glob } from 'glob';
+import gulp from 'gulp';
+import swig from 'gulp-swig';
+import watch from 'gulp-watch';
+import moment from 'moment-timezone';
+import { relative } from 'path';
+import runSequence from 'run-sequence';
+import sassdoc from 'sassdoc';
 
 /**
  * Sub-task: Docs copy statics
@@ -21,8 +22,8 @@ gulp.task('docs-copy-statics', function() {
 gulp.task('docs-render-index', function() {
 
     // Grab list of templates
-    var templates = glob.sync(config.docs.src.templatesAll, { nosort: true }).map(function(dir) {
-        return path.relative(config.docs.src.templates, dir);
+    var templates = glob(config.docs.src.templatesAll, { nosort: true }).map(function(dir) {
+        return relative(config.docs.src.templates, dir);
     });
 
     // Data
@@ -38,29 +39,27 @@ gulp.task('docs-render-index', function() {
 });
 
 /**
+ * Task: Docs sassdoc
+ */
+gulp.task('docs-sassdoc', function() {
+    return gulp.src([config.css.src.staticAll, config.css.src.components])
+        .pipe(sassdoc({ dest: config.docs.dist.sassdocs }));
+});
+
+/**
  * Task: Docs Compile
  */
-gulp.task('docs-compile', ['docs-copy-statics', 'docs-render-index', 'docs-sassdoc']);
+gulp.task('docs', cb => runSequence(['docs-copy-statics', 'docs-render-index', 'docs-sassdoc'], cb));
 
 /**
  * Task: Docs Watch
  */
-gulp.task('docs-watch', ['docs-compile'], function() {
+gulp.task('docs-watch', function(cb) {
     var watching = [
         config.docs.src.index,
         config.html.src.templates,
         config.html.src.layout,
         config.html.src.components
     ];
-    watch(watching, function() {
-        gulp.start(['docs-compile']);
-    });
-});
-
-/**
- * Task: Docs sassdoc
- */
-gulp.task('docs-sassdoc', function() {
-    gulp.src([config.css.src.staticAll, config.css.src.components])
-        .pipe(sassdoc({ dest: config.docs.dist.sassdocs }))
+    watch(watching, () => gulp.start(['docs'], cb));
 });

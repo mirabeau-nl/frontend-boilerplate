@@ -1,10 +1,10 @@
-var config = require('../config');
-var gulp   = require('gulp');
-var del    = require('del');
+import { clean as config } from '../config';
+import del from 'del';
+import gulp from 'gulp';
 
 /**
  * Task: Clean dist/ folder
  */
 gulp.task('clean', function() {
-    del.sync(config.clean.dist.base);
+    del.sync(config.dist.base);
 });

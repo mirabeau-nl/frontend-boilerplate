@@ -12,8 +12,7 @@ require.config({
 /**
  * Determine which polyfills to load
  */
-let polyfills = [];
-
+let polyfills = ['polyfill/babel-helpers'];
 // if (!('classList' in document.documentElement)) {
 //     polyfills.push('polyfill/classList');
 // }
@@ -21,6 +20,4 @@ let polyfills = [];
 /**
  * Load polyfills & start Conditioner.js
  */
-require(['conditioner'].concat(polyfills), function(conditioner) {
-    conditioner.init();
-});
+require(['conditioner'].concat(polyfills), conditioner => conditioner.init());

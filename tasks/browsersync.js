@@ -1,17 +1,10 @@
-var config      = require('../config');
-var gulp        = require('gulp');
-var browsersync = require('browser-sync');
+import { browsersync as config } from '../config';
+import browsersync from 'browser-sync';
+import gulp from 'gulp';
 
 /**
  * Task: BrowserSync HTTP server
  */
-gulp.task('browsersync', function() {
-    browsersync({
-        server: {
-            baseDir: config.browsersync.dist.base
-        },
-        /*ghostMode: false,
-        notify: false,*/
-        open: false
-    });
+gulp.task('browsersync', function(cb) { /* eslint no-unused-vars: 0 */
+    browsersync(config);
 });
