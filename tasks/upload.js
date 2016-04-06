@@ -1,14 +1,13 @@
-var config = require('../config');
-var gulp   = require('gulp');
-var gutil  = require('gulp-util');
-var ftp    = require('vinyl-ftp');
+import { upload as config } from '../config';
+import gulp from 'gulp';
+import { log } from 'gulp-util';
+import ftp from 'vinyl-ftp';
 
 /**
  * Task: Upload via FTP
  */
-gulp.task('file-upload', ['dist'], function() {
-    var opts = config.upload.options;
-    opts.log = gutil.log;
-    return gulp.src([config.upload.src.all], { base: config.upload.dist.base, buffer: false })
-        .pipe(ftp.create(opts).dest(config.upload.dist.target));
+gulp.task('file-upload', function() {
+    config.options.log = log;
+    return gulp.src([config.src.all], { base: config.dist.base, buffer: false })
+        .pipe(ftp.create(config.options).dest(config.dist.target));
 });

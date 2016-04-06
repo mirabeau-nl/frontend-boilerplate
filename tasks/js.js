@@ -1,43 +1,101 @@
-var config      = require('../config');
-var gulp        = require('gulp');
-var watch       = require('gulp-watch');
-var gulpif      = require('gulp-if');
-var changed     = require('gulp-changed');
-var babel       = require('gulp-babel');
-var uglify      = require('gulp-uglify');
-var sourcemaps  = require('gulp-sourcemaps');
-var eslint      = require('gulp-eslint');
-var browsersync = require('browser-sync');
+import { reload as browsersync } from 'browser-sync';
+import { js as config } from '../config';
+import { readFileSync, writeFileSync } from 'fs';
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+import eslint from 'gulp-eslint';
+import gulpif from 'gulp-if';
+import sourcemaps from 'gulp-sourcemaps';
+import uglify from 'gulp-uglify';
+import watch from 'gulp-watch';
+import path from 'path';
+import through from 'through2';
+import uglifyjs from 'uglify-js';
 
 /**
- * Task: JS Transpile
+ * Capture which babel helpers are actually used
+ * @param {String[]} usedBabelHelpers - The array of babel helpers, passed by reference
+ * @returns {Transform} - A Node.js streams3 transform stream
  */
-gulp.task('js-transpile', function() {
-    return gulp.src([config.js.src.all, config.js.src.components])
-        .pipe(changed(config.js.dist.base))
+const collectUsedBabelHelpers = function(usedBabelHelpers) {
+    return through.obj((file, enc, cb) => {
+        file.babel.usedHelpers.map(helper => usedBabelHelpers.push(helper));
+        cb(null, file);
+    });
+};
+
+/**
+ * Write-out babel-helpers
+ * @param {String[]} usedBabelHelpers - The array of babel helpers, passed by reference
+ */
+const writeBabelHelpers = function(usedBabelHelpers) { /* eslint max-statements: 0 */
+
+    // Generate the babel helpers file
+    const buildHelpers = require(__dirname + '/../node_modules/babel-core/lib/tools/build-external-helpers');
+    writeFileSync(config.dist.babelHelpers, buildHelpers(usedBabelHelpers));
+
+    const pwd = process.cwd();
+    const filename = path.relative(config.dist.base, config.dist.babelHelpers);
+
+    // Sourcemap: Make sure the 'sourceMappingURL' is correct
+    process.chdir(config.dist.base);
+    const minified = uglifyjs.minify(filename, {
+        outSourceMap: path.basename(filename) + '.map',
+        sourceRoot: '/source/',
+        sourceMapIncludeSources: true
+    });
+    process.chdir(pwd);
+
+    // Sourcemap: Make sure the 'file' property is correct
+    const sourcemap = JSON.parse(minified.map);
+    sourcemap.file = filename;
+    minified.map = JSON.stringify(sourcemap);
+
+    // Write babel helpers and it's sourcemap
+    writeFileSync(config.dist.babelHelpers, minified.code);
+    writeFileSync(config.dist.babelHelpers + '.map', minified.map);
+};
+
+/**
+ * Task: JS Compile
+ */
+gulp.task('js', function() {
+
+    // Build list of active babel presets & plugins
+    const babelrc = JSON.parse(readFileSync(__dirname + '/../.babelrc', { encoding: 'utf8' }));
+    const babelConfig = { presets: babelrc.presets, plugins: babelrc.env.browser.plugins };
+
+    const usedBabelHelpers = [];
+    return gulp.src([config.src.all, config.src.components])
         .pipe(sourcemaps.init())
-        .pipe(gulpif(config.js.vendorFilter, babel()))
+        .pipe(gulpif(config.vendorFilter, babel(babelConfig)))
+        .pipe(gulpif(config.vendorFilter, collectUsedBabelHelpers(usedBabelHelpers)))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.js.dist.base))
-        .pipe(browsersync.reload({ stream: true }));
+        .pipe(gulp.dest(config.dist.base))
+        .pipe(browsersync({ stream: true }))
+        .on('end', writeBabelHelpers.bind(null, usedBabelHelpers));
 });
 
 /**
  * Task: JS Watch
  */
-gulp.task('js-watch', ['js-transpile'], function() {
-    watch([config.js.src.all, config.js.src.components], function() {
-        gulp.start(['js-transpile']);
-    });
+gulp.task('js-watch', function(cb) {
+    watch([config.src.all, config.src.components], () => gulp.start(['js'], cb));
 });
 
 /**
  * Task: JS Test
  */
 gulp.task('js-lint', function() {
-    var src = config.js.src;
-    return gulp.src([src.all, src.components, '!' + src.vendor])
+    var src = [
+        './gulpfile.babel.js',
+        './tasks/**/*.js',
+        config.src.all,
+        config.src.components,
+        '!' + config.src.vendor
+    ];
+    return gulp.src(src)
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());

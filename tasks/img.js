@@ -1,24 +1,22 @@
-var config   = require('../config');
-var gulp     = require('gulp');
-var watch    = require('gulp-watch');
-var changed  = require('gulp-changed');
-var imagemin = require('gulp-imagemin');
+import { img as config } from '../config';
+import gulp from 'gulp';
+import changed from 'gulp-changed';
+import imagemin from 'gulp-imagemin';
+import watch from 'gulp-watch';
 
 /**
  * Task: Image optimizer
  */
-gulp.task('img-optimize', function() {
-    return gulp.src(config.img.src.all)
-        .pipe(changed(config.img.dist.base))
+gulp.task('img', function() {
+    return gulp.src(config.src.all)
+        .pipe(changed(config.dist.base))
         .pipe(imagemin())
-        .pipe(gulp.dest(config.img.dist.base));
+        .pipe(gulp.dest(config.dist.base));
 });
 
 /**
  * Task: Image Watch
  */
-gulp.task('img-watch', ['img-optimize'], function() {
-    watch([config.img.src.all], function() {
-        gulp.start(['img-optimize']);
-    });
+gulp.task('img-watch', function(cb) {
+    watch([config.src.all], () => gulp.start(['img'], cb));
 });
