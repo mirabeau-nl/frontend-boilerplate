@@ -11,6 +11,7 @@ import watch from 'gulp-watch';
 import path from 'path';
 import through from 'through2';
 import uglifyjs from 'uglify-js';
+import mocha from 'gulp-mocha';
 
 /**
  * Capture which babel helpers are actually used
@@ -99,4 +100,14 @@ gulp.task('js-lint', function() {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
+});
+
+/**
+ * Task: JS unit tests
+ */
+gulp.task('js-test', function() {
+    var src = config.src;
+
+    return gulp.src([src.tests])
+        .pipe(mocha());
 });

@@ -98,14 +98,21 @@ module.exports = {
         src: {
             all: base.src + '/static/js/**/*.js',
             vendor: base.src + '/static/js/vendor/**/*.js',
-            components: base.src + '/components/**/*.js'
+            components: base.src + '/components/**/*!(Spec).js',
+            tests: base.src + '/components/**/*.Spec.js'
         },
         dist: {
             base: base.dist + '/static/js',
             main: base.dist + '/static/js/main.js',
-            babelHelpers: base.dist + '/static/js/polyfill/babel-helpers.js'
+            babelHelpers: base.dist + '/static/js/polyfill/babel-helpers.js',
+            tests: base.dist + '/**/*.Spec.js'
         },
-        vendorFilter: file => !/vendor/.test(file.path)
+        vendorFilter: function(file) {
+            if (/vendor/.test(file.path) || /.Spec.js/.test(file.path)) {
+                return false;
+            }
+            return true;
+        }
     },
 
     upload: {

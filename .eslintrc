@@ -6,7 +6,8 @@
         "es6": true,
         "amd": true,
         "node": true,
-        "browser": true
+        "browser": true,
+        "mocha": true
     },
 
     "rules": {
