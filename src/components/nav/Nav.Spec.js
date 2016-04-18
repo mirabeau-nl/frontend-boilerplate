@@ -1,28 +1,21 @@
-'use strict';
+import assert from 'assert';
+import Nav from './Nav';
 
-var assert = require('assert');
-// var Nav = require('./Nav.js');
-
-describe('Nav', function() {
+describe('Nav', () => {
     describe('load()', function() {
-        it('should test', function() {
+        it('should have set the innerHTML of element to 3,5,7,9,11', function() {
             // Arrange
-/*            var context = {
+            var context = {
                 _element: {
-                    innerHTML: {}
+                    innerHTML: ''
                 }
-            };*/
-
-            // console.log(Nav)
+            };
 
             // Act
-            // Nav.prototype.load.apply(context);
+            Nav.prototype.load.apply(context);
 
             // Assert
-            // console.log(context._element.innerHTML);
-
-            assert.equal(-1, [1, 2, 3].indexOf(5));
-            assert.equal(-1, [1, 2, 3].indexOf(0));
+            assert.strictEqual(context._element.innerHTML, '3,5,7,9,11');
         });
     });
 });

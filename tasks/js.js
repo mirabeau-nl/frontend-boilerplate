@@ -69,11 +69,11 @@ gulp.task('js', function() {
     const usedBabelHelpers = [];
     return gulp.src([config.src.all, config.src.components])
         .pipe(sourcemaps.init())
-        .pipe(gulpif(config.vendorFilter, babel(babelConfig)))
-        .pipe(gulpif(config.vendorFilter, collectUsedBabelHelpers(usedBabelHelpers)))
-        .pipe(uglify())
+        .pipe(gulpif(config.babelFilter, babel(babelConfig)))
+        .pipe(gulpif(config.babelFilter, collectUsedBabelHelpers(usedBabelHelpers)))
+        .pipe(gulpif(config.needsCopying, uglify()))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.dist.base))
+        .pipe(gulpif(config.needsCopying, gulp.dest(config.dist.base)))
         .pipe(browsersync({ stream: true }))
         .on('end', writeBabelHelpers.bind(null, usedBabelHelpers));
 });
@@ -106,6 +106,7 @@ gulp.task('js-lint', function() {
  * Task: JS unit tests
  */
 gulp.task('js-test', function() {
+    require('babel-register');
     var src = config.src;
 
     return gulp.src([src.tests])
