@@ -26,13 +26,20 @@ Then point your browser to `http://localhost:3000/`
 gulp dist
 ```
 
-## How to: Test
+## How to: Linting
+```
+gulp lint
+```
+The linting tools currently cover:
+- JavaScript code linting
+- Sass file code linting
+
+
+## How to: Unit tests
 ```
 gulp test
 ```
-The test suite contains:
-- JavaScript code linting
-- Sass file code linting
+Javascript files in the component folder ending with `.Spec.js` will be run through Mocha.
 
 ## How to: Upload
 Add a `.env` file to the project root with your FTP credentials:
