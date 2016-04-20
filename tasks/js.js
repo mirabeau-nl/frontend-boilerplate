@@ -11,6 +11,7 @@ import watch from 'gulp-watch';
 import path from 'path';
 import through from 'through2';
 import uglifyjs from 'uglify-js';
+import mocha from 'gulp-mocha';
 
 /**
  * Capture which babel helpers are actually used
@@ -68,11 +69,11 @@ gulp.task('js', function() {
     const usedBabelHelpers = [];
     return gulp.src([config.src.all, config.src.components])
         .pipe(sourcemaps.init())
-        .pipe(gulpif(config.vendorFilter, babel(babelConfig)))
-        .pipe(gulpif(config.vendorFilter, collectUsedBabelHelpers(usedBabelHelpers)))
-        .pipe(uglify())
+        .pipe(gulpif(config.babelFilter, babel(babelConfig)))
+        .pipe(gulpif(config.babelFilter, collectUsedBabelHelpers(usedBabelHelpers)))
+        .pipe(gulpif(config.needsCopying, uglify()))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.dist.base))
+        .pipe(gulpif(config.needsCopying, gulp.dest(config.dist.base)))
         .pipe(browsersync({ stream: true }))
         .on('end', writeBabelHelpers.bind(null, usedBabelHelpers));
 });
@@ -99,4 +100,15 @@ gulp.task('js-lint', function() {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
+});
+
+/**
+ * Task: JS unit tests
+ */
+gulp.task('js-test', function() {
+    require('babel-register');
+    var src = config.src;
+
+    return gulp.src([src.tests])
+        .pipe(mocha());
 });

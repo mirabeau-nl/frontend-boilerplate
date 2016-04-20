@@ -29,9 +29,13 @@ gulp.task('dist', cb => runSequence(
     cb
 ));
 
-gulp.task('test', [
+gulp.task('lint', [
     'js-lint',
     'css-lint'
+]);
+
+gulp.task('test', [
+    'js-test'
 ]);
 
 gulp.task('upload', cb => runSequence(
