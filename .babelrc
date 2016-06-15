@@ -5,11 +5,18 @@
   ],
   "env": {
     "browser": {
-      "plugins": [
-        "external-helpers",
-        "add-module-exports",
-        "transform-es2015-modules-amd"
-      ]
+      "requirejs": {
+        "plugins": [
+          "external-helpers",
+          "add-module-exports",
+          "transform-es2015-modules-amd"
+        ]
+      },
+      "browserify": {
+        "plugins": [
+          "external-helpers"
+        ]
+      }
     }
   }
 }

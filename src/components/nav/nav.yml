@@ -1,2 +1,10 @@
 title: Navigation
+component: Nav
 description: The navigation module, visible on all pages, inside the header module.
+preview: |
+  <style>
+    body {
+      background:#ededed;
+    }
+  </style>
+implementation: Implementation instructions

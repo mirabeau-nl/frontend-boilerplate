@@ -1,7 +1,7 @@
-import { html as config } from '../config';
+import { html as config, moduleLoader } from '../config';
 import { reload as browsersync } from 'browser-sync';
 import gulp from 'gulp';
-import swig from 'gulp-swig';
+import render from 'gulp-nunjucks-render';
 import watch from 'gulp-watch';
 
 /**
@@ -9,7 +9,16 @@ import watch from 'gulp-watch';
  */
 gulp.task('html', () => {
     return gulp.src(config.src.templates)
-        .pipe(swig({ defaults: { cache: false } }))
+        .pipe(render({
+            path: [
+                config.src.templatesDir,
+                config.src.layoutDir,
+                config.src.componentsDir
+            ],
+            data: {
+                moduleLoader: moduleLoader
+            }
+        }))
         .pipe(gulp.dest(config.dist.base))
         .pipe(browsersync({ stream: true }));
 });
