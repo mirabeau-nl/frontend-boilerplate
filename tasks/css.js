@@ -3,7 +3,7 @@ import autoprefixer from 'autoprefixer';
 import { reload } from 'browser-sync';
 import gulp from 'gulp';
 import filter from 'gulp-filter';
-import minifyCss from 'gulp-minify-css';
+import cleanCSS from 'gulp-clean-css';
 import postcss from 'gulp-postcss';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
@@ -22,7 +22,7 @@ gulp.task('css', function() {
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(postcssProcessors))
-        .pipe(minifyCss())
+        .pipe(cleanCSS())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.dist.base))
         .pipe(filter('**/*.css'))

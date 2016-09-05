@@ -6,7 +6,7 @@
   "env": {
     "browser": {
       "plugins": [
-        "external-helpers-2",
+        "external-helpers",
         "add-module-exports",
         "transform-es2015-modules-amd"
       ]
