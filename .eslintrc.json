@@ -153,7 +153,7 @@
         "no-nested-ternary": 2,
         "no-new-object": 2,
         "no-trailing-spaces": [2, { "skipBlankLines": true }], // autofix
-        "no-underscore-dangle": [2, { "allowAfterThis": true, "allowAfterSuper": true }],
+//        "no-underscore-dangle": [2, { "allowAfterThis": true, "allowAfterSuper": true }],
         "no-unneeded-ternary": 2,
         "no-whitespace-before-property": 2, // autofix
         "object-curly-newline": ["error", { "multiline": true }], // autofix
