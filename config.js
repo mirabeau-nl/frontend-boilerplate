@@ -98,6 +98,7 @@ module.exports = {
         src: {
             all: base.src + '/static/js/**/*.js',
             vendor: base.src + '/static/js/vendor/**/*.js',
+            polyfill: base.src + '/static/js/polyfill/**/*.js',
             components: base.src + '/components/**/*.js',
             tests: base.src + '/components/**/*.Spec.js'
         },
@@ -111,7 +112,8 @@ module.exports = {
         },
         needsCopying: function(file) {
             return !/\.Spec\.js/.test(file.path);
-        }
+        },
+        eslintAutofix: false
     },
 
     upload: {
