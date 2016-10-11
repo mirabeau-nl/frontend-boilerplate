@@ -111,7 +111,8 @@ module.exports = {
         },
         needsCopying: function(file) {
             return !/\.Spec\.js/.test(file.path);
-        }
+        },
+        eslintAutofix: false
     },
 
     upload: {
