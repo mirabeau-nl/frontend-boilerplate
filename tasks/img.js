@@ -7,7 +7,7 @@ import watch from 'gulp-watch';
 /**
  * Task: Image optimizer
  */
-gulp.task('img', function() {
+gulp.task('img', () => {
     return gulp.src(config.src.all)
         .pipe(changed(config.dist.base))
         .pipe(imagemin())
@@ -17,6 +17,6 @@ gulp.task('img', function() {
 /**
  * Task: Image Watch
  */
-gulp.task('img-watch', function(cb) {
+gulp.task('img-watch', cb => {
     watch([config.src.all], () => gulp.start(['img'], cb));
 });

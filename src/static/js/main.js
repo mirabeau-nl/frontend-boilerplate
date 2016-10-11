@@ -12,7 +12,8 @@ require.config({
 /**
  * Determine which polyfills to load
  */
-let polyfills = ['polyfill/babel-helpers'];
+const polyfills = ['polyfill/babel-helpers'];
+
 // if (!('classList' in document.documentElement)) {
 //     polyfills.push('polyfill/classList');
 // }
