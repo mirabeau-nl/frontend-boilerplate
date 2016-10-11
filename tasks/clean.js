@@ -5,6 +5,6 @@ import gulp from 'gulp';
 /**
  * Task: Clean dist/ folder
  */
-gulp.task('clean', function() {
+gulp.task('clean', () => {
     del.sync(config.dist.base);
 });

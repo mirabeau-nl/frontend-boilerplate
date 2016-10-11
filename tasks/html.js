@@ -7,7 +7,7 @@ import watch from 'gulp-watch';
 /**
  * Task: HTML Compile
  */
-gulp.task('html', function() {
+gulp.task('html', () => {
     return gulp.src(config.src.templates)
         .pipe(swig({ defaults: { cache: false } }))
         .pipe(gulp.dest(config.dist.base))
@@ -17,7 +17,7 @@ gulp.task('html', function() {
 /**
  * Task: HTML Watch
  */
-gulp.task('html-watch', function(cb) {
-    var paths = config.src;
+gulp.task('html-watch', cb => {
+    const paths = config.src;
     watch([paths.templates, paths.layout, paths.components], () => gulp.start(['html'], cb));
 });

@@ -11,7 +11,7 @@ import sassdoc from 'sassdoc';
 /**
  * Sub-task: Docs copy statics
  */
-gulp.task('docs-copy-statics', function() {
+gulp.task('docs-copy-statics', () => {
     return gulp.src(config.docs.src.statics)
         .pipe(gulp.dest(config.docs.dist.static));
 });
@@ -19,15 +19,13 @@ gulp.task('docs-copy-statics', function() {
 /**
  * Sub-task: Docs render index
  */
-gulp.task('docs-render-index', function() {
+gulp.task('docs-render-index', () => {
 
     // Grab list of templates
-    var templates = glob(config.docs.src.templatesAll, { nosort: true }).map(function(dir) {
-        return relative(config.docs.src.templates, dir);
-    });
+    const templates = glob(config.docs.src.templatesAll, { nosort: true }).map(dir => relative(config.docs.src.templates, dir));
 
     // Data
-    var data = {
+    const data = {
         templates: templates,
         lastUpdated: moment().tz('Europe/Amsterdam').format('DD-MM-YYYY HH:mm:ss z')
     };
@@ -41,7 +39,7 @@ gulp.task('docs-render-index', function() {
 /**
  * Task: Docs sassdoc
  */
-gulp.task('docs-sassdoc', function() {
+gulp.task('docs-sassdoc', () => {
     return gulp.src([config.css.src.staticAll, config.css.src.components])
         .pipe(sassdoc({ dest: config.docs.dist.sassdocs }));
 });
@@ -54,8 +52,8 @@ gulp.task('docs', cb => runSequence(['docs-copy-statics', 'docs-render-index', '
 /**
  * Task: Docs Watch
  */
-gulp.task('docs-watch', function(cb) {
-    var watching = [
+gulp.task('docs-watch', cb => {
+    const watching = [
         config.docs.src.index,
         config.html.src.templates,
         config.html.src.layout,

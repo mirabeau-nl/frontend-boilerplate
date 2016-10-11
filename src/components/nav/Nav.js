@@ -28,7 +28,9 @@ class Nav {
     /**
      * Deconstruct module
      */
-    unload() {}
+    unload() {
+        // unload ftw
+    }
 }
 
 // Exports

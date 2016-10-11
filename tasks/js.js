@@ -99,16 +99,14 @@ gulp.task('js-lint', () => {
         './tasks/**/*.js',
         config.src.all,
         config.src.components,
-        // `!${config.src.polyfill}`,
+        `!${config.src.polyfill}`,
         `!${config.src.vendor}`
     ];
 
     return gulp.src(src)
         .pipe(eslint({ fix: config.eslintAutofix }))
         .pipe(eslint.format())
-        .pipe(gulpif(isFixed, gulp.dest(file => {
-            return file.base;
-        })))
+        .pipe(gulpif(isFixed, gulp.dest(file => file.base)))
         .pipe(eslint.failAfterError());
 });
 
@@ -117,8 +115,7 @@ gulp.task('js-lint', () => {
  */
 gulp.task('js-test', () => {
     require('babel-register');
-    const src = config.src;
 
-    return gulp.src([src.tests])
+    return gulp.src([config.src.tests])
         .pipe(mocha());
 });

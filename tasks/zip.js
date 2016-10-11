@@ -6,7 +6,7 @@ import zip from 'gulp-zip';
 /**
  * Write a-href to zip file to index.html
  */
-const updateIndex = function() {
+const updateIndex = () => {
 
     // Read generated index.html
     const docsTpl = readFileSync(config.docs.dist.index, { encoding: 'utf8' });
@@ -22,7 +22,7 @@ const updateIndex = function() {
 /**
  * Task: Add content to zip archive
  */
-gulp.task('zip', function() {
+gulp.task('zip', () => {
     return gulp.src([config.zip.src.all])
         .pipe(zip(config.zip.filename))
         .pipe(gulp.dest(config.zip.dist.base))

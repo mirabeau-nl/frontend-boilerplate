@@ -12,12 +12,13 @@ import watch from 'gulp-watch';
 /**
  * Task: CSS Compile
  */
-gulp.task('css', function() {
+gulp.task('css', () => {
     const postcssProcessors = [
         autoprefixer({
             browsers: config.autoprefixer.browsers
         })
     ];
+
     return gulp.src(config.src.static)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -32,7 +33,7 @@ gulp.task('css', function() {
 /**
  * Task: CSS Watch
  */
-gulp.task('css-watch', function(cb) {
+gulp.task('css-watch', cb => {
     watch([config.src.staticAll, config.src.components], () => gulp.start(['css'], cb));
 });
 
