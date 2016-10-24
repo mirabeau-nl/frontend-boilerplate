@@ -4,6 +4,7 @@ import { relative, sep } from 'path';
 import yaml from 'js-yaml';
 import { nunjucks } from 'gulp-nunjucks-render';
 import marked from 'marked';
+import fs from 'fs';
 import { html as htmlBeautify } from 'js-beautify';
 
 /**
@@ -71,8 +72,9 @@ class docsHelpers {
         const files = docsHelpers.getRelativePaths(globString, relativeTo);
 
         return files.reduce((tree, file) => {
+            const yml = yaml.safeLoad(fs.readFileSync(`${config.docs.src.components}/${file}`));
             const path = file.split(sep).reverse()[1];
-            const name = file.split(sep).reverse()[0].replace('.yml', '');
+            const name = yml.title;
 
             tree[path] = tree[path] || {};
             tree[path].variations = tree[path].variations || [];

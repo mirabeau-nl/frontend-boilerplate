@@ -20,10 +20,10 @@
             {% for name, component in components %}
                 {% if component.variations.length <= 1 %}
                     {%- set variation = component.variations[0] %}
-                    <li><a href="docs/components/{{ variation.url }}">{{ name }}</a></li>
+                    <li><a href="docs/components/{{ variation.url }}">{{ variation.name }}</a></li>
                 {% else %}
                     <li class="component-variations">
-                        <strong>{{ loop.key }}</strong>
+                        <strong>{{ name }}</strong>
                         <ul>
                             {% for variation in component.variations %}
                             <li><a href="docs/components/{{ variation.url }}">{{ variation.name }}</a></li>
