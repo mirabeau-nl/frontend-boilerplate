@@ -62,24 +62,18 @@ module.exports = {
     /**
      * Return a new Browserify instance
      * @param {String} src, Source entry file to initiate browserify
-     * @param {Object} plugins, Source entry file to initiate browserify
+     * @param {Object} plugin, Source entry file to initiate browserify
      * @returns {Object} - Browserify object
      */
-    getBundler: (src, plugins) => {
+    getBundler: (src, plugin) => {
         // Get the babel config
         const babelrc = JSON.parse(readFileSync(`${__dirname}/../../.babelrc`, { encoding: 'utf8' }));
         const babelConfig = { presets: babelrc.presets, plugins: babelrc.env.browser.browserify.plugins };
         let bundler = browserify({
             entries: [src],
-            debug: true,
-            insertGlobals: true,
-            cache: {},
-            paths: ['./src/static/js', './src/components'],
-            packageCache: {},
-            fullPaths: true,
-            plugin: plugins
-        })
-        .transform(babelify, babelConfig);
+            plugin: plugin,
+            ...config.browserify
+        }).transform(babelify, babelConfig);
 
         return bundler;
     }

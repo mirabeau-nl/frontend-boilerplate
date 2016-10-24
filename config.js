@@ -131,6 +131,14 @@ module.exports = {
                 components: [] // Components that should be included in the bundle
             }
         ],
+        browserify: {
+            debug: true,
+            insertGlobals: true,
+            cache: {},
+            paths: ['./src/static/js', './src/components'],
+            packageCache: {},
+            fullPaths: true
+        },
         babelFilter: function(file) {
             return !/vendor|\.Spec\.js/.test(file.path);
         },
