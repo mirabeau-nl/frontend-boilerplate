@@ -1,6 +1,6 @@
 import config from '../../config';
 import { sync as glob } from 'glob';
-import { relative } from 'path';
+import { relative, sep } from 'path';
 import yaml from 'js-yaml';
 import { nunjucks } from 'gulp-nunjucks-render';
 import marked from 'marked';
@@ -26,7 +26,7 @@ class docsHelpers {
             title: yml.title,
             description: marked(yml.description || ''),
             implementation: marked(yml.implementation || '').replace('<table', '<table class="table"'),
-            demo: file.path.split('/').pop().replace('.yml', '.demo.html'),
+            demo: file.path.split(sep).pop().replace('.yml', '.demo.html'),
             sample: sample
         };
 
@@ -71,9 +71,8 @@ class docsHelpers {
         const files = docsHelpers.getRelativePaths(globString, relativeTo);
 
         return files.reduce((tree, file) => {
-
-            const path = file.split('/').reverse()[1];
-            const name = file.split('/').reverse()[0].replace('.yml', '');
+            const path = file.split(sep).reverse()[1];
+            const name = file.split(sep).reverse()[0].replace('.yml', '');
 
             tree[path] = tree[path] || {};
             tree[path].variations = tree[path].variations || [];
