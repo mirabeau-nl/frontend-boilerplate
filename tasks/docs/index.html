@@ -11,7 +11,9 @@
         <h2>Templates</h2>
         <ol>
         {%- for tpl in templates %}
-            <li><a href="templates/{{ tpl }}">{{ tpl | replace('/', ' / ') }}</a></li>
+            {%- set name = tpl | replace('.html', '') %}
+            {%- set name = name | replace( r/[_-]/g, ' ') %}
+            <li><a href="templates/{{ tpl }}">{{ name | replace('/', ' / ') | capitalize }}</a></li>
         {%- endfor %}
         </ol>
 
