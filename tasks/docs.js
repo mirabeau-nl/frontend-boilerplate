@@ -28,7 +28,7 @@ gulp.task('docs-render-index', () => {
 
     // Data
     const data = {
-        templates: templates,
+        templates: templates.map(template => template.replace(/[\\]/g, '/')),
         components: components,
         lastUpdated: moment().tz('Europe/Amsterdam').format('DD-MM-YYYY HH:mm:ss z')
     };
