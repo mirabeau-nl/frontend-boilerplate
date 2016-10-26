@@ -2,10 +2,7 @@ import { js as config } from '../config';
 import { collectUsedBabelHelpers, writeBabelHelpers, getBundler } from '../tasks/util/taskhelpers';
 import gulp from 'gulp';
 import es from 'event-stream';
-import streamify from 'gulp-streamify';
 import source from 'vinyl-source-stream';
-import sourcemaps from 'gulp-sourcemaps';
-import uglify from 'gulp-uglify';
 import { reload as browsersync } from 'browser-sync';
 import babelify from 'babelify';
 import glob from 'glob';
@@ -26,14 +23,11 @@ if (task === 'dev') {
 const createBundle = options => {
 
     // Build list of active babel presets & plugins
-    let bundler = getBundler(options.entry, plugins);
+    let bundler = getBundler(options.entry, options.bundle, plugins);
     const bundle = () => {
         // Transform, bundle, minify and save bundle + init browsersync;
         return bundler.bundle()
             .pipe(source(options.bundle))
-            .pipe(streamify(sourcemaps.init({ loadMaps: true })))
-            .pipe(streamify(uglify()))
-            .pipe(streamify(sourcemaps.write('./')))
             .pipe(gulp.dest(config.dist.base))
             .pipe(browsersync({ stream: true }));
     };

@@ -62,10 +62,11 @@ module.exports = {
     /**
      * Return a new Browserify instance
      * @param {String} src, Source entry file to initiate browserify
+     * @param {String} bundle, Name of the bunle
      * @param {Object} plugin, Source entry file to initiate browserify
      * @returns {Object} - Browserify object
      */
-    getBundler: (src, plugin) => {
+    getBundler: (src, bundle, plugin) => {
         // Get the babel config
         const babelrc = JSON.parse(readFileSync(`${__dirname}/../../.babelrc`, { encoding: 'utf8' }));
         const babelConfig = { presets: babelrc.presets, plugins: babelrc.env.browser.browserify.plugins };
@@ -73,7 +74,7 @@ module.exports = {
             entries: [src],
             plugin: plugin,
             ...config.browserify
-        }).transform(babelify, babelConfig);
+        }).plugin('minifyify', { map: `${bundle}.map`, output: `${config.dist.base}/${bundle}.map` }).transform(babelify, babelConfig);
 
         return bundler;
     }
