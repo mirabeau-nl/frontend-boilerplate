@@ -72,3 +72,16 @@ Then run:
 ```
 gulp upload
 ```
+
+## How to: Component library
+Components are visible in the component library when they contain a YAML (.yml) file.
+The YAML file should contain the following content:
+```
+title: Title of the component shown in the library
+component: Name of the component's JS file without .js extension
+description: Component description text
+demo: |
+  <div style="width:100%;height:200px;background:#f2f2f2">{}</div>
+implementation: Implementation instructions
+```
+Note that `demo` should at least contain `{}` as this gets replaced with the component's HTML.
