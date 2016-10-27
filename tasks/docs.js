@@ -7,6 +7,7 @@ import runSequence from 'run-sequence';
 import sassdoc from 'sassdoc';
 import transform from 'gulp-transform';
 import ext from 'gulp-ext-replace';
+import gulpif from 'gulp-if';
 import helpers from './util/docHelpers';
 
 /**
@@ -53,7 +54,7 @@ gulp.task('docs-render-index', () => {
 gulp.task('docs-render-components', ['docs-render-component-demos'], () =>
 
     gulp.src([config.docs.src.componentsAll])
-        .pipe(transform((content, file) => helpers.renderComponent(content, file)))
+        .pipe(gulpif(helpers.hasContent, transform((content, file) => helpers.renderComponent(content, file))))
         .pipe(ext('.html'))
         .pipe(gulp.dest(config.docs.dist.components))
 
@@ -62,7 +63,7 @@ gulp.task('docs-render-components', ['docs-render-component-demos'], () =>
 gulp.task('docs-render-component-demos', () =>
 
     gulp.src([config.docs.src.componentsAll])
-        .pipe(transform((content, file) => helpers.renderComponentDemo(content, file)))
+        .pipe(gulpif(helpers.hasContent, transform((content, file) => helpers.renderComponentDemo(content, file))))
         .pipe(ext('.demo.html'))
         .pipe(gulp.dest(config.docs.dist.components))
 

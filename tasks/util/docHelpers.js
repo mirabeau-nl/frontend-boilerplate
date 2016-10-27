@@ -21,7 +21,13 @@ class docsHelpers {
     static renderComponent(content, file) {
         const yml = yaml.load(content);
         const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
-        let sample = htmlBeautify(nunjucks.render(file.path.replace('.yml', '.html'), locals));
+        let sample = '';
+
+        try {
+            sample = htmlBeautify(nunjucks.render(file.path.replace('.yml', '.html'), locals));
+        } catch (error) {
+            global.console.log(error);
+        }
 
         const data = {
             title: yml.title,
@@ -44,8 +50,14 @@ class docsHelpers {
     static renderComponentDemo(content, file) {
         const yml = yaml.load(content);
         const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
-        let demo = nunjucks.render(file.path.replace('.yml', '.html'), locals);
-        demo = (yml.demo || '{}').replace(/\{\}/g, demo);
+        let demo = '';
+
+        try {
+            demo = nunjucks.render(file.path.replace('.yml', '.html'), locals);
+            demo = (yml.demo || '{}').replace(/\{\}/g, demo);
+        } catch (error) {
+            global.console.log(error);
+        }
 
         return nunjucks.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo, moduleLoader: config.moduleLoader });
 
@@ -72,17 +84,29 @@ class docsHelpers {
         const files = docsHelpers.getRelativePaths(globString, relativeTo);
 
         return files.reduce((tree, file) => {
-            const yml = yaml.safeLoad(fs.readFileSync(`${config.docs.src.components}/${file}`));
-            const path = file.split(sep)[0];
-            const name = yml.title;
+            const yml = yaml.safeLoad(fs.readFileSync(`${config.docs.src.components}/${file}`)) || false;
 
-            tree[path] = tree[path] || {};
-            tree[path].variations = tree[path].variations || [];
-            tree[path].variations.push({ url: file.replace('.yml', '.html'), name: name });
+            if (typeof yml === 'object') {
+                const path = file.split(sep)[0];
+                const name = yml.title;
+
+                tree[path] = tree[path] || {};
+                tree[path].variations = tree[path].variations || [];
+                tree[path].variations.push({ url: file.replace('.yml', '.html'), name: name });
+            }
 
             return tree;
 
         }, {});
+    }
+
+    /**
+     * Check if a yaml file has content
+     * @param {VinylObject} file -
+     * @returns {Boolean} hasContent -
+     */
+    static hasContent(file) {
+        return typeof yaml.safeLoad(file.contents) === 'object';
     }
 
 }
