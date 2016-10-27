@@ -73,7 +73,7 @@ class docsHelpers {
 
         return files.reduce((tree, file) => {
             const yml = yaml.safeLoad(fs.readFileSync(`${config.docs.src.components}/${file}`));
-            const path = file.split(sep).reverse()[1];
+            const path = file.split(sep)[0];
             const name = yml.title;
 
             tree[path] = tree[path] || {};
