@@ -45,7 +45,7 @@ class docsHelpers {
         const yml = yaml.load(content);
         const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
         let demo = nunjucks.render(file.path.replace('.yml', '.html'), locals);
-        demo = (yml.demo || '{}').replace('{}', demo);
+        demo = (yml.demo || '{}').replace(/\{\}/g, demo);
 
         return nunjucks.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo, moduleLoader: config.moduleLoader });
 

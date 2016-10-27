@@ -84,6 +84,7 @@ demo: |
 implementation: Implementation instructions
 ```
 Note that `demo` should at least contain `{}` as this gets replaced with the component's HTML.
+The component is rendered for each `{}` you provide within the demo parameter.
 
 Components can be nested either with or without a sub-folder. Currently folders can only be nested one level deep.
 ```
