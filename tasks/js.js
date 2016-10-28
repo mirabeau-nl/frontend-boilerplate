@@ -47,7 +47,7 @@ gulp.task('js-watch', cb => {
 });
 
 /**
- * Task: JS Test
+ * Task: JS Lint
  */
 gulp.task('js-lint', () => {
     const src = [

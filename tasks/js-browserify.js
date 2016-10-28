@@ -57,7 +57,7 @@ const createBundle = options => {
  * Task: JS Browserify Compile
  */
 gulp.task('js-browserify', () => {
-    // Create a tasklist wit an entry for each bundle
+    // Create a task list with an entry for each bundle
     let tasks = config.bundles.map(entry => createBundle(entry));
 
     // Merge tasks and write babel helpers when all tasks are finished
