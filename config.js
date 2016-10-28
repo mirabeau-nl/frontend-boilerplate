@@ -137,7 +137,7 @@ module.exports = {
             cache: {},
             paths: ['./src/static/js', './src/components'],
             packageCache: {},
-            fullPaths: true
+            fullPaths: false
         },
         babelFilter: function(file) {
             return !/vendor|\.Spec\.js/.test(file.path);
