@@ -38,6 +38,6 @@ gulp.task('css-watch', cb => {
 });
 
 /**
- * Task: CSS Test
+ * Task: CSS Lint
  */
 gulp.task('css-lint', []);

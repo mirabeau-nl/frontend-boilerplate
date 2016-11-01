@@ -15,16 +15,18 @@ import './tasks/upload';
 import './tasks/githooks';
 import './tasks/zip';
 
-gulp.task('dev', cb => runSequence(
-    'clean',
-    ['docs', 'html', 'img', 'css', 'fonts', 'js'],
-    ['browsersync', 'docs-watch', 'html-watch', 'img-watch', 'css-watch', 'fonts-watch', 'js-watch'],
-    cb
-));
+gulp.task('dev', cb => {
+    return runSequence(
+        'clean',
+        ['docs', 'html', 'img', 'css', 'fonts', 'js-vendor', 'js'],
+        ['browsersync', 'docs-watch', 'html-watch', 'img-watch', 'css-watch', 'fonts-watch', 'js-watch'],
+        cb
+    );
+});
 
 gulp.task('dist', cb => runSequence(
     'clean',
-    ['docs', 'html', 'img', 'css', 'fonts', 'js'],
+    ['docs', 'html', 'img', 'css', 'fonts', 'js-vendor', 'js'],
     'zip',
     cb
 ));

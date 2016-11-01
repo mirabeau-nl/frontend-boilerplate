@@ -1,31 +1,44 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Front-End Library</title>
-    <link rel="stylesheet" href="docs/static/css/bootstrap.css">
-</head>
-<body>
+{%- extends 'layout/default.html' %}
 
-    <div class="container">
+{%- block body %}
 
-        <h1>Front-End Library</h1>
+<div class="container">
+
+    <h1>Front-End Library</h1>
         <p>Last updated: {{ lastUpdated }}</p>
         <!--[[dist.zip]]-->
 
         <h2>Templates</h2>
         <ol>
         {%- for tpl in templates %}
-            <li><a href="templates/{{ tpl }}">{{ tpl|replace('/', ' / ') }}</a></li>
+            {%- set name = tpl | replace('.html', '') %}
+            {%- set name = name | replace( r/[_-]/g, ' ') %}
+            <li><a href="templates/{{ tpl }}">{{ name | replace('/', ' / ') | capitalize }}</a></li>
         {%- endfor %}
         </ol>
+
+        <h2>Components</h2>
+        <ul>
+            {% for name, component in components %}
+                {% if component.variations.length <= 1 %}
+                    {%- set variation = component.variations[0] %}
+                    <li><a href="docs/components/{{ variation.url }}">{{ variation.name }}</a></li>
+                {% else %}
+                    <li class="component-variations">
+                        <strong>{{ name }}</strong>
+                        <ul>
+                            {% for variation in component.variations %}
+                            <li><a href="docs/components/{{ variation.url }}">{{ variation.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
         <h2>Sassdoc</h2>
         <p><a href="docs/sassdoc/index.html">Sassdoc</a></p>
 
-    </div>
+</div>
 
-</body>
-</html>
+{%- endblock %}

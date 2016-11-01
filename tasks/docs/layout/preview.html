@@ -3,14 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Front-End Library</title>
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../static/css/all.css">
-
-    {#- Shortest and fastest shim for ie-old html5 elements, add only the elements you need, or replace this with Modernizr -#}
-    <!--[if lt IE 9]><script>'article main footer'.replace(/\w+/g,function(n){document.createElement(n)})</script><![endif]-->
-
+    <link rel="stylesheet" href="/docs/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/all.css">
     <script>
         (function(d){
             if (!('querySelector' in d && 'addEventListener' in window)) return;
@@ -25,8 +21,8 @@
                     s.setAttribute('src', '/static/js/main.js'); // main.js bunle
                     d.body.appendChild(s);
                 {% elif moduleLoader == 'requirejs' %}
-                    s.setAttribute('src', '../static/js/vendor/requirejs/require.js');
-                    s.setAttribute('data-main', '../static/js/main');
+                    s.setAttribute('src', '/static/js/vendor/requirejs/require.js');
+                    s.setAttribute('data-main', '/static/js/main');
                     d.body.appendChild(s);
                 {% endif %}
             });
@@ -35,7 +31,7 @@
 </head>
 <body>
 
-    {%- block body %}{% endblock -%}
+    {%- block body %}{%- endblock %}
 
 </body>
 </html>

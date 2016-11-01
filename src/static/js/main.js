@@ -1,5 +1,6 @@
 /**
  * Require.js config paths
+ * !!! This file is NOT used when using browserify.
  */
 require.config({
     map: {
