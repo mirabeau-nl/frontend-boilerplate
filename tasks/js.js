@@ -21,10 +21,7 @@ if (moduleLoader === 'browserify') {
 /**
  * Task: JS Compile
  */
-gulp.task('js', () => {
-    // Start the right task
-    return gulp.start([`js-${moduleLoader}`]);
-});
+gulp.task('js', [`js-${moduleLoader}`]);
 
 /**
  * Task: JS Vendor
