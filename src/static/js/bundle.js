@@ -17,12 +17,9 @@ import conditioner from 'conditioner-js';
 conditioner.setOptions({
     loader: {
         require: (paths, callback) => {
-            let module = require(paths);
-            if (module.default) {
-                module = module.default;
-            }
+            const module = require(paths);
 
-            return callback(module);
+            return callback(module.default ? module.default : module);
         },
         toUrl: path => path
     },
