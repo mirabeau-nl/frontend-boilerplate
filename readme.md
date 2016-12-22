@@ -14,7 +14,7 @@
 4. Done! You can now start your development server.
 
 ## How to: Configure module loader
-By default, the bootstrap uses Browserify to bundle all available components into one file starting at the default entry point **src/static/bundle.js**.
+By default, the bootstrap uses Browserify to bundle all available components into one file starting at the default entry point **src/static/js/bundle.js**.
 
 ### Defining additional bundles:
 1. Open config.js and navigate to the js section
@@ -33,7 +33,7 @@ If you want to use RequireJS instead of Browserify, just change the 'moduleLoade
 ```
 moduleLoader: 'requirejs', // browserify || requirejs
 ```
-RequireJS uses **src/static/main.js** instead of **src/static/bundle.js**
+RequireJS uses **src/static/js/main.js** instead of **src/static/js/bundle.js**
 
 ## How to: Start the development server
 ```
