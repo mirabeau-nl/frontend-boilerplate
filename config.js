@@ -35,7 +35,8 @@ module.exports = {
         src: {
             static: base.src + '/static/scss/**/!(_)*.scss',
             staticAll: base.src + '/static/scss/**/*.scss',
-            components: base.src + '/components/**/*.scss'
+            components: base.src + '/components/**/*.scss',
+            vendor: base.src + '/static/scss/vendor/**/*.scss'
         },
         dist: {
             base: base.dist + '/static/css'

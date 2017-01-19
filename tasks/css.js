@@ -8,6 +8,7 @@ import postcss from 'gulp-postcss';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import watch from 'gulp-watch';
+import stylelint from 'gulp-stylelint';
 
 /**
  * Task: CSS Compile
@@ -40,4 +41,19 @@ gulp.task('css-watch', cb => {
 /**
  * Task: CSS Lint
  */
-gulp.task('css-lint', []);
+gulp.task('css-lint', () => {
+    return gulp.src([
+        config.src.staticAll,
+        config.src.components,
+        `!${config.src.vendor}`
+    ])
+        .pipe(stylelint({
+            failAfterError: true,
+            reporters: [
+                {
+                    formatter: 'string',
+                    console: true
+                }
+            ]
+        }));
+});
