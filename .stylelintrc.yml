@@ -1,0 +1,75 @@
+extends: stylelint-config-standard
+plugins:
+  - stylelint-scss
+  - stylelint-declaration-strict-value
+rules:
+
+  # CSS (http://stylelint.io/user-guide/rules/)
+  at-rule-empty-line-before:
+    - always
+    -
+      except:
+        - blockless-after-same-name-blockless
+        - first-nested
+      ignore:
+        - after-comment
+        - all-nested
+  block-closing-brace-newline-after:
+    - always
+    -
+      ignoreAtRules:
+        - if
+        - else
+  declaration-empty-line-before: never
+  indentation: 4
+
+  # Declaration strict value (https://github.com/AndyOGo/stylelint-declaration-strict-value)
+  scale-unlimited/declaration-strict-value:
+    - "/color/"
+    -
+      ignoreFunctions: false
+      ignoreKeywords:
+        - rgba
+        - currentColor
+        - transparent
+        - inherit
+      ignoreVariables: true
+
+  # SCSS (https://github.com/kristerkari/stylelint-scss)
+  scss/at-else-closing-brace-newline-after: ~
+  scss/at-else-closing-brace-space-after: ~
+  scss/at-else-empty-line-before: ~
+  scss/at-extend-no-missing-placeholder: true
+  scss/at-function-pattern: ~
+  scss/at-if-closing-brace-newline-after: ~
+  scss/at-if-closing-brace-space-after: ~
+  scss/at-import-no-partial-leading-underscore: true
+  scss/at-import-partial-extension-blacklist: ~
+  scss/at-import-partial-extension-whitelist: ~
+  scss/at-mixin-argumentless-call-parentheses: never
+  scss/at-mixin-pattern: ~
+  scss/declaration-nested-properties: never
+  scss/declaration-nested-properties-no-divided-groups: true
+  scss/dollar-variable-colon-newline-after: ~
+  scss/dollar-variable-colon-space-after: always
+  scss/dollar-variable-colon-space-before: never
+  scss/dollar-variable-empty-line-before: ~
+  scss/dollar-variable-no-missing-interpolation: ~
+  scss/dollar-variable-pattern: ~
+  scss/double-slash-comment-empty-line-before:
+    - always
+    -
+      except:
+        - first-nested
+      ignore:
+        - between-comments
+        - stylelint-commands
+  scss/double-slash-comment-inline: ~
+  scss/double-slash-comment-whitespace-inside: always
+  scss/media-feature-value-dollar-variable: ~
+  scss/operator-no-newline-after: true
+  scss/operator-no-newline-before: true
+  scss/operator-no-unspaced: true
+  scss/partial-no-import: ~
+  scss/percent-placeholder-pattern: ~
+  scss/selector-no-redundant-nesting-selector: true
