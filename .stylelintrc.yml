@@ -13,7 +13,7 @@ rules:
         - first-nested
       ignore:
         - after-comment
-        - all-nested
+        - inside-block
   block-closing-brace-newline-after:
     - always
     -
