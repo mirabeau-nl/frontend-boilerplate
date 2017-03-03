@@ -11,8 +11,6 @@ const base = {
 
 module.exports = {
 
-    moduleLoader: 'browserify', // browserify || requirejs
-
     browsersync: {
         server: {
             baseDir: base.dist
@@ -111,40 +109,20 @@ module.exports = {
     js: {
         src: {
             all: base.src + '/static/js/**/*.js',
-            vendor: base.src + '/static/js/vendor/**/*.js',
-            polyfill: base.src + '/static/js/polyfill/**/*.js',
+            bundles: base.src + '/static/js/*.js',
             components: base.src + '/components/**/!(*.Spec).js',
-            conditioner: './node_modules/conditioner-js/dist/min/*.js',
-            tests: base.src + '/components/**/*.Spec.js',
-            main: base.src + '/static/js/main.js',
-            componentsDir: base.src + '/components',
+            vendor: base.src + '/static/js/vendor',
+            tests: base.src + '/components/**/*.Spec.js'
         },
         dist: {
             base: base.dist + '/static/js',
-            main: base.dist + '/static/js/main.js',
-            vendor: base.dist + '/static/js/vendor',
-            babelHelpers: base.dist + '/static/js/polyfill/babel-helpers.js'
+            babelHelpers: base.dist + '/static/js/babel-helpers.js'
         },
-        bundles: [
-            {
-                entry: base.src + '/static/js/bundle.js', // Path to the js es6 entry file for the bundle
-                bundle: 'main.js', // The name of the bundled file
-                components: [] // Components that should be included in the bundle
-            }
-        ],
-        browserify: {
+        browserify:  {
+            paths: [ base.src + '/static/js/', base.src + '/components/' ],
             debug: true,
-            insertGlobals: true,
-            cache: {},
-            paths: ['./src/static/js', './src/components'],
-            packageCache: {},
-            fullPaths: false
-        },
-        babelFilter: function(file) {
-            return !/vendor|\.Spec\.js/.test(file.path);
-        },
-        needsCopying: function(file) {
-            return !/\.Spec\.js/.test(file.path);
+            plugin: ['errorify'], // Keep in config, we concat 'watchify' when running 'gulp dev'
+            transform: ['babelify', 'require-globify']
         },
         eslintAutofix: false
     },

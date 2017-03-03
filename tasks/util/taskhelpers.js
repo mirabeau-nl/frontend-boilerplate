@@ -1,28 +1,20 @@
-import { js as config, moduleLoader } from '../../config';
-import { readFileSync, writeFileSync } from 'fs';
+import { js as config } from '../../config';
+import { writeFileSync } from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import uglifyjs from 'uglify-js';
-import browserify from 'browserify';
-import through from 'through2';
 import babelify from 'babelify';
 
 module.exports = {
 
     /**
      * Capture which babel helpers are actually used
-     * @param {Object} result - The result object created by Browserify
+     * @param {Object} tr - The transform passed in
      * @param {String[]} usedBabelHelpers - The array of babel helpers, passed by reference
-     * @returns {Transform} - A Node.js streams3 transform stream
      */
-    collectUsedBabelHelpers: (result, usedBabelHelpers) => { /* eslint consistent-return: 0 */
-        if (moduleLoader === 'browserify') {
-            result.metadata.usedHelpers.map(helper => usedBabelHelpers.push(helper));
-        } else if (moduleLoader === 'requirejs') {
-            return through.obj((file, enc, cb) => {
-                file.babel.usedHelpers.map(helper => usedBabelHelpers.push(helper));
-                cb(null, file);
-            });
+    collectUsedBabelHelpers: (tr, usedBabelHelpers) => { /* eslint consistent-return: 0 */
+        if (tr instanceof babelify) {
+            tr.once('babelify', result => result.metadata.usedHelpers.map(helper => usedBabelHelpers.push(helper)));
         }
     },
 
@@ -49,33 +41,14 @@ module.exports = {
         });
         process.chdir(pwd);
 
+        // Write babel helpers
+        writeFileSync(config.dist.babelHelpers, minified.code);
+
         // Sourcemap: Make sure the 'file' property is correct
         const sourcemap = JSON.parse(minified.map);
         sourcemap.file = filename;
         minified.map = JSON.stringify(sourcemap);
 
-        // Write babel helpers and it's sourcemap
-        writeFileSync(config.dist.babelHelpers, minified.code);
         writeFileSync(`${config.dist.babelHelpers}.map`, minified.map);
-    },
-
-    /**
-     * Return a new Browserify instance
-     * @param {String} src, Source entry file to initiate browserify
-     * @param {String} bundle, Name of the bunle
-     * @param {Object} plugin, Source entry file to initiate browserify
-     * @returns {Object} - Browserify object
-     */
-    getBundler: (src, bundle, plugin) => {
-        // Get the babel config
-        const babelrc = JSON.parse(readFileSync(`${__dirname}/../../.babelrc`, { encoding: 'utf8' }));
-        const babelConfig = { presets: babelrc.presets, plugins: babelrc.env.browser.browserify.plugins };
-        let bundler = browserify({
-            entries: [src],
-            plugin: plugin,
-            ...config.browserify
-        }).plugin('minifyify', { map: `${bundle}.map`, output: `${config.dist.base}/${bundle}.map` }).transform(babelify, babelConfig);
-
-        return bundler;
     }
 };

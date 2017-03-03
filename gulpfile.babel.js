@@ -18,15 +18,15 @@ import './tasks/zip';
 gulp.task('dev', cb => {
     return runSequence(
         'clean',
-        ['docs', 'html', 'img', 'css', 'fonts', 'js-vendor', 'js'],
-        ['browsersync', 'docs-watch', 'html-watch', 'img-watch', 'css-watch', 'fonts-watch', 'js-watch'],
+        ['docs', 'html', 'img', 'css', 'fonts'],
+        ['js', 'browsersync', 'docs-watch', 'html-watch', 'img-watch', 'css-watch', 'fonts-watch'],
         cb
     );
 });
 
 gulp.task('dist', cb => runSequence(
     'clean',
-    ['docs', 'html', 'img', 'css', 'fonts', 'js-vendor', 'js'],
+    ['docs', 'html', 'img', 'css', 'fonts', 'js'],
     'zip',
     cb
 ));

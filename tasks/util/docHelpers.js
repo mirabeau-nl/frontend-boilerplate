@@ -59,7 +59,7 @@ class docsHelpers {
             global.console.log(error);
         }
 
-        return nunjucks.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo, moduleLoader: config.moduleLoader });
+        return nunjucks.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo });
 
     }
 
