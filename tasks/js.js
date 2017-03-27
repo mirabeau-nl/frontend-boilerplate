@@ -5,6 +5,7 @@ import mocha from 'gulp-mocha';
 import watch from 'gulp-watch';
 import uglify from 'gulp-uglify';
 import gulpif from 'gulp-if';
+import babel from 'gulp-babel';
 
 const isFixed = file => file.eslint && file.eslint.fixed;
 
@@ -28,6 +29,7 @@ gulp.task('js', [`js-${moduleLoader}`]);
  */
 gulp.task('js-vendor', () => {
     return gulp.src(config.src.vendor)
+        .pipe(babel({presets: ['es2015']}))
         .pipe(uglify())
         .pipe(gulp.dest(config.dist.vendor));
 });
