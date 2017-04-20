@@ -2,4 +2,4 @@ title: Navigation
 description: The navigation module, visible on all pages, inside the header module.
 demo: |
   <div style="width:100%;height:200px;background:#f2f2f2">{}</div>
-implementation: Implementation instructions
+implementation: Implementation instructions.

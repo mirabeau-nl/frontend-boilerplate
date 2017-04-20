@@ -1,4 +1,4 @@
-import { html as config, moduleLoader } from '../config';
+import { html as config } from '../config';
 import { reload as browsersync } from 'browser-sync';
 import gulp from 'gulp';
 import render from 'gulp-nunjucks-render';
@@ -14,10 +14,7 @@ gulp.task('html', () => {
                 config.src.templatesDir,
                 config.src.layoutDir,
                 config.src.componentsDir
-            ],
-            data: {
-                moduleLoader: moduleLoader
-            }
+            ]
         }))
         .pipe(gulp.dest(config.dist.base))
         .pipe(browsersync({ stream: true }));

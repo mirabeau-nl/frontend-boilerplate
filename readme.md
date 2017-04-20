@@ -13,27 +13,21 @@
     ```
 4. Done! You can now start your development server.
 
-## How to: Configure module loader
-By default, the bootstrap uses Browserify to bundle all available components into one file starting at the default entry point **src/static/js/bundle.js**.
+## How to: Configure bundles
+By default, the bootstrap uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file: 
+```
+export default require('./**/!(*.Spec).js', { mode: 'hash', resolve: ['reduce', 'strip-ext'] });
+```
 
-### Defining additional bundles:
-1. Open config.js and navigate to the js section
-2. Add an additional object to the bundles array
-```
-{
-    entry: '',      // Path to the js es6 entry file for the bundle
-    bundle: '',     // The name of the bundled file
-    components: []  // Array of components that should be included in the bundle
-}
-```
-If you specify additional bundles make sure you define the components for each bundle.
+## How to: Including external dependencies
+To include external dependencies in your procect, you can either install them as runtime dependency using `npm i --save` or import them directly from a vendor folder.
 
-### Switch to RequireJS
-If you want to use RequireJS instead of Browserify, just change the 'moduleLoader' setting in config.js
-```
-moduleLoader: 'requirejs', // browserify || requirejs
-```
-RequireJS uses **src/static/js/main.js** instead of **src/static/js/bundle.js**
+## How to: Run ConditionerJS instead of Vanilla
+if you want to run conditioner:
+1. Run `npm i conditioner-js --save`
+2. Remove the manual init code block in main.js
+3. Uncomment the conditioner init code block in main.js
+4. Enjoy
 
 ## How to: Start the development server
 ```

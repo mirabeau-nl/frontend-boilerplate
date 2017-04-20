@@ -1,22 +1,10 @@
 {
   "presets": [
     "es2015",
-    "stage-0"
+    "es2016",
+    "stage-2"
   ],
   "env": {
-    "browser": {
-      "requirejs": {
-        "plugins": [
-          "external-helpers",
-          "add-module-exports",
-          "transform-es2015-modules-amd"
-        ]
-      },
-      "browserify": {
-        "plugins": [
-          "external-helpers"
-        ]
-      }
-    }
+    "plugins": [ "external-helpers" ]
   }
 }
