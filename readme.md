@@ -20,7 +20,7 @@ export default require('./**/!(*.Spec).js', { mode: 'hash', resolve: ['reduce', 
 ```
 
 ## How to: Including external dependencies
-To include external dependencies in your procect, you can either install them as runtime dependency using `npm i --save` or import them directly from a vendor folder.
+To include external dependencies in your procect, you can either install them as runtime dependency using `npm i --save` or import them directly from a vendor folder. 
 
 ## How to: Run ConditionerJS instead of Vanilla
 if you want to run conditioner:
