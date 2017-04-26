@@ -46,10 +46,12 @@ gulp.task('js-lint', () => {
  * Task: JS unit tests
  */
 gulp.task('js-test', () => {
-    require('babel-register');
-
     return gulp.src([config.src.tests])
-        .pipe(mocha());
+        .pipe(mocha({
+            compilers: [
+                'js:babel-register'
+            ]
+        }));
 });
 
 
