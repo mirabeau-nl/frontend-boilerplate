@@ -58,7 +58,6 @@ module.exports = {
             base: base.dist,
             index: base.dist + '/index.html',
             static: base.dist + '/docs/static/',
-            sassdocs: base.dist + '/docs/sassdoc',
             components: base.dist + '/docs/components/'
         }
     },
