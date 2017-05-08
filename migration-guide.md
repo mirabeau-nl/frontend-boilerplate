@@ -40,15 +40,16 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
   ```
   <script>
       (function(d){
-
+      
           if (!('querySelector' in d && 'addEventListener' in window)) return;
 
           d.documentElement.className += ' has-js';
 
-          function load(src, dep) {
+          function loadInOrder(src) {
               var s = d.createElement('script');
+              var deps = [].slice.call(arguments).slice(1);
               s.src = src;
-              s.onload = function() { dep && load(dep) };
+              s.onload = function() { deps.length && loadInOrder.apply(null, deps); };
               s.onerror = console.error;
               d.head.appendChild(s);
           }
@@ -61,12 +62,10 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
               'dataset' in document.createElement('div') &&
               Symbol.iterator in NodeList.prototype;
 
-          load('/static/js/babel-helpers.js');
-
           if (supported) {
-              load('/static/js/main.js');
+              loadInOrder('/static/js/babel-helpers.js', '/static/js/main.js');
           } else {
-              load('/static/js/polyfill.js', '/static/js/main.js')
+              loadInOrder('/static/js/babel-helpers.js', '/static/js/polyfill.js', '/static/js/main.js');
           }
 
       }(document));
