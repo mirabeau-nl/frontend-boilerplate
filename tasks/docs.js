@@ -4,7 +4,6 @@ import render from 'gulp-nunjucks-render';
 import watch from 'gulp-watch';
 import moment from 'moment-timezone';
 import runSequence from 'run-sequence';
-import sassdoc from 'sassdoc';
 import transform from 'gulp-transform';
 import ext from 'gulp-ext-replace';
 import gulpif from 'gulp-if';
@@ -70,14 +69,6 @@ gulp.task('docs-render-component-demos', () =>
 );
 
 /**
- * Task: Docs sassdoc
- */
-gulp.task('docs-sassdoc', () =>
-    gulp.src([config.css.src.staticAll, config.css.src.components])
-        .pipe(sassdoc({ dest: config.docs.dist.sassdocs }))
-);
-
-/**
  * Task: Docs Compile
  */
 gulp.task('docs', cb =>
@@ -85,8 +76,7 @@ gulp.task('docs', cb =>
         'docs-copy-statics',
         'docs-render-index',
         'docs-render-components',
-        'docs-render-component-demos',
-        'docs-sassdoc'
+        'docs-render-component-demos'
     ], cb)
 );
 

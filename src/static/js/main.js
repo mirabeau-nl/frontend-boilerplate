@@ -29,8 +29,9 @@ const main = () => {
 
         element.dataset.module
             .split(',')
-            .forEach(module => {
-                const Component = components[module].default;
+            .forEach(path => {
+                const module = path in components ? components[path] : require(path);
+                const Component = module.default ? module.default : module;
                 new Component(element, options); /* eslint no-new: 0 */
             });
 
@@ -58,7 +59,7 @@ ready().then(main);
 // conditioner.setOptions({
 //     loader: {
 //         require: (path, callback) => {
-//             const module = components[path];
+//             const module = path in components ? components[path] : require(path);
 //             return callback(module.default ? module.default : module);
 //         },
 //         toUrl: path => path
