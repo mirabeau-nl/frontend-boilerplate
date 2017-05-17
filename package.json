@@ -50,7 +50,7 @@
     "gulp-filter": "^4.0.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^3.0.1",
-    "gulp-mocha": "^2.2.0",
+    "gulp-mocha": "^4.3.0",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-postcss": "^6.4.0",
     "gulp-rename": "^1.2.2",
