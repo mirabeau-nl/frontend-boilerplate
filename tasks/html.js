@@ -14,10 +14,15 @@ gulp.task('html', () => {
                 config.src.templatesDir,
                 config.src.layoutDir,
                 config.src.componentsDir
-            ]
+            ],
+            data: {
+                baseUri: config.baseUri.templates
+            }
         }))
         .pipe(gulp.dest(config.dist.base))
-        .pipe(browsersync({ stream: true }));
+        .on('end', () => {
+            browsersync();
+        });
 });
 
 /**

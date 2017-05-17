@@ -31,43 +31,43 @@ module.exports = {
             browsers: ['last 1 version', '> 5%']
         },
         src: {
-            static: base.src + '/static/scss/**/!(_)*.scss',
-            staticAll: base.src + '/static/scss/**/*.scss',
-            components: base.src + '/components/**/*.scss',
-            vendor: base.src + '/static/scss/vendor/**/*.scss'
+            static: `${base.src}/static/scss/**/!(_)*.scss`,
+            staticAll: `${base.src}/static/scss/**/*.scss`,
+            components: `${base.src}/components/**/*.scss`,
+            vendor: `${base.src}/static/scss/vendor/**/*.scss`
         },
         dist: {
-            base: base.dist + '/static/css'
+            base: `${base.dist}/static/css`
         }
     },
 
     docs: {
         src: {
-            index: base.docs + '/index.html',
+            index: `${base.docs}/index.html`,
             indexDir: base.docs,
-            layoutDir: base.docs + '/layout',
-            templates: base.src + '/templates',
-            templatesAll: base.src + '/templates/**/**.html',
-            statics: base.docs + '/static/**',
-            component: base.docs + '/component-detail.html',
-            preview: base.docs + '/component-preview.html',
-            components: base.src + '/components',
-            componentsAll: base.src + '/components/**/*.yml'
+            layoutDir: `${base.docs}/layout`,
+            templates: `${base.src}/templates`,
+            templatesAll: `${base.src}/templates/**/**.html`,
+            statics: `${base.docs}/static/**`,
+            component: `${base.docs}/component-detail.html`,
+            demo: `${base.docs}/component-demo.html`,
+            components: `${base.src}/components`,
+            componentsAll: `${base.src}/components/**/*.yml`
         },
         dist: {
             base: base.dist,
-            index: base.dist + '/index.html',
-            static: base.dist + '/docs/static/',
-            components: base.dist + '/docs/components/'
+            index: `${base.dist}/index.html`,
+            static: `${base.dist}/docs/static/`,
+            components: `${base.dist}/docs/components/`
         }
     },
 
     fonts: {
         src: {
-            fonts: base.src + '/static/fonts/**/*'
+            fonts: `${base.src}/static/fonts/**/*`
         },
         dist: {
-            fonts: base.dist + '/static/fonts'
+            fonts: `${base.dist}/static/fonts`
         }
     },
 
@@ -83,44 +83,48 @@ module.exports = {
 
     html: {
         src: {
-            templates: base.src + '/templates/**/*.html',
-            templatesDir: base.src + '/templates',
-            layout: base.src + '/layout/*.html',
-            layoutDir: base.src + '/layout',
-            components: base.src + '/components/**/*.html',
-            componentsDir: base.src + '/components'
+            templates: `${base.src}/templates/**/*.html`,
+            templatesDir: `${base.src}/templates`,
+            layout: `${base.src}/layout/*.html`,
+            layoutDir: `${base.src}/layout`,
+            components: `${base.src}/components/**/*.html`,
+            componentsDir: `${base.src}/components`
         },
         dist: {
-            base: base.dist + '/templates'
+            base: `${base.dist}/templates`
         },
-        baseUri: '/'
+        baseUri: {
+            demo: '../../../',
+            templates: '../'
+        }
     },
 
     img: {
         src: {
-            all: base.src + '/static/img/**/*.{svg,png,jpg,gif,webp}'
+            all: `${base.src}/static/img/**/*.{svg,png,jpg,gif,webp}`
         },
         dist: {
-            base: base.dist + '/static/img'
+            base: `${base.dist}/static/img`
         }
     },
 
     js: {
         src: {
-            all: base.src + '/static/js/**/*.js',
-            bundles: base.src + '/static/js/*.js',
-            components: base.src + '/components/**/!(*.Spec).js',
-            vendor: base.src + '/static/js/vendor',
-            tests: base.src + '/components/**/*.Spec.js'
+            all: `${base.src}/static/js/**/*.js`,
+            bundles: `${base.src}/static/js/*.js`,
+            components: `${base.src}/components/**/!(*.Spec).js`,
+            vendor: `${base.src}/static/js/vendor`,
+            tests: `${base.src}/components/**/*.Spec.js`
         },
         dist: {
-            base: base.dist + '/static/js',
-            babelHelpers: base.dist + '/static/js/babel-helpers.js'
+            base: `${base.dist}/static/js`,
+            babelHelpers: `${base.dist}/static/js/babel-helpers.js`
         },
-        browserify:  {
-            paths: [ base.src + '/static/js/', base.src + '/components/' ],
+        browserify: {
+            paths: [`${base.src}/static/js/`, `${base.src}/components/`],
             debug: true,
-            plugin: ['errorify'], // Keep in config, we concat 'watchify' when running 'gulp dev'
+            // Keep in config, we concat 'watchify' when running 'gulp dev'
+            plugin: ['errorify'],
             transform: ['babelify', 'require-globify']
         },
         eslintAutofix: false
@@ -128,13 +132,14 @@ module.exports = {
 
     upload: {
         src: {
-            all: base.dist + '/**'
+            all: `${base.dist}/**`
         },
         dist: {
             target: '/test',
             base: base.dist
         },
-        options: { // Defined in .env file
+        options: {
+            // Defined in .env file
             host: process.env.UPLOAD_HOST,
             user: process.env.UPLOAD_USER,
             password: process.env.UPLOAD_PASSWORD
@@ -142,9 +147,9 @@ module.exports = {
     },
 
     zip: {
-        filename: pkg.name + '.zip',
+        filename: `${pkg.name}.zip`,
         src: {
-            all: base.dist + '/**/!(*.zip)'
+            all: `${base.dist}/**/!(*.zip)`
         },
         dist: {
             base: base.dist
