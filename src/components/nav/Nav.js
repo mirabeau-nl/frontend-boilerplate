@@ -22,7 +22,7 @@ class Nav {
      * Construct module
      */
     load() {
-        this._element.innerHTML += [2, 4, 6, 8, 20].map(v => v + 1);
+        this._element.innerHTML += [2, 4, 6, 8, 10].map(v => v + 1);
     }
 
     /**
