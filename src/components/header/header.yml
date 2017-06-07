@@ -1,5 +1,0 @@
-title: Header
-description: The Header module, visible on all pages
-demo: |
-  <div style="width:100%;height:200px;background:#f2f2f2">{}</div>
-implementation: Implementation instructions.
