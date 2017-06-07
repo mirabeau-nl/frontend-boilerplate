@@ -1,1 +1,11 @@
 /* stylelint-disable-line no-empty-source */
+
+.wrapper {
+    max-width: 55em;
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}

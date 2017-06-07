@@ -5,7 +5,7 @@ dotenv.load({ silent: true });
 
 const base = {
     src: './src',
-    dist: './dist',
+    dist: '../src/SphWebsite/wwwroot',
     docs: './tasks/docs'
 };
 

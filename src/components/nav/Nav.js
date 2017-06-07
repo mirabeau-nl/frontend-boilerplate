@@ -18,12 +18,11 @@ class Nav {
      */
     static options = {};
 
-    /**
-     * Construct module
-     */
-    load() {
-        this._element.innerHTML += [2, 4, 6, 8, 10].map(v => v + 1);
-    }
+    // /**
+    //  * Construct module
+    //  */
+    // load() {
+    // }
 
     /**
      * Deconstruct module
