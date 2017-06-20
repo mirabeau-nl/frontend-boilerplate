@@ -1,11 +1,10 @@
 import config from '../../config';
 import { sync as glob } from 'glob';
-import { relative, sep } from 'path';
+import { relative, sep, dirname } from 'path';
 import yaml from 'js-yaml';
 import { nunjucks } from 'gulp-nunjucks-render';
 import marked from 'marked';
 import fs from 'fs';
-import { html as htmlBeautify } from 'js-beautify';
 
 /**
  * Doc task helper functions
@@ -20,13 +19,22 @@ class docsHelpers {
      */
     static renderComponent(content, file) {
         const yml = yaml.load(content);
-        const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
-        let sample = '';
+        const locals = Object.assign(yml.data || {}, { baseUri: config.html.baseUri.demo });
+        const dir = dirname(file.path);
+        const sources = [];
 
-        try {
-            sample = htmlBeautify(nunjucks.render(file.path.replace('.yml', '.html'), locals));
-        } catch (error) {
-            global.console.log(error);
+        if (yml.viewsource) {
+            yml.viewsource.forEach(source => {
+                try {
+                    sources.push({
+                        filename: source,
+                        code: nunjucks.render(`${dir}${sep}${source}`, locals),
+                        type: source.split('.').pop()
+                    });
+                } catch (error) {
+                    global.console.log(error);
+                }
+            });
         }
 
         const data = {
@@ -34,11 +42,11 @@ class docsHelpers {
             description: marked(yml.description || ''),
             implementation: marked(yml.implementation || '').replace('<table', '<table class="table"'),
             demo: file.path.split(sep).pop().replace('.yml', '.demo.html'),
-            sample: sample
+            sources: sources,
+            baseUri: locals.baseUri
         };
 
         return nunjucks.render(config.docs.src.component, data);
-
     }
 
     /**
@@ -49,7 +57,8 @@ class docsHelpers {
      */
     static renderComponentDemo(content, file) {
         const yml = yaml.load(content);
-        const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
+        const baseUri = config.html.baseUri.demo;
+        const locals = Object.assign(yml.data || {}, { baseUri: baseUri });
         let demo = '';
 
         try {
@@ -59,7 +68,7 @@ class docsHelpers {
             global.console.log(error);
         }
 
-        return nunjucks.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo });
+        return nunjucks.render(config.docs.src.demo, { baseUri: baseUri, demo: demo });
 
     }
 

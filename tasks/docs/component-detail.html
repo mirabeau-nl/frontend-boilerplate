@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Front-End Library</title>
-    <link rel="stylesheet" href="/docs/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/docs/static/css/highlight.css">
-    <script src="/docs/static/js/vendor/highlight.pack.js" type="text/javascript"></script>
+    <title>{{ title }} | Component documentation</title>
+    <link rel="stylesheet" href="{{ baseUri }}docs/static/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ baseUri }}docs/static/css/highlight.css">
+    <script src="{{ baseUri }}docs/static/js/vendor/highlight.pack.js" type="text/javascript"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <style>
@@ -46,18 +46,32 @@
         {% endif %}
 
         {% if implementation %}
-        <h2>Implementation</h2>
-        {{ implementation | safe }}
+            <h2>Implementation</h2>
+            {{ implementation | safe }}
         {% endif %}
 
-        {% if sample %}
-            <h2>Code sample</h2>
-            <pre><code class="html">{{ sample }}</code></pre>
+        {% if sources | length > 0 %}
+            <h2>Code sample{{ "s" if sources | length > 1 }}</h2>
         {% endif %}
 
+        {% if sources | length > 1 %}
+            {% for source in sources %}
+                {% if loop.first %}
+                    <ul>
+                {% endif %}
+                <li><a href="#source-sample-{{ loop.index }}">{{source.filename}}</a></li>
+                {% if loop.last %}
+                    </ul>
+                {% endif %}
+            {% endfor%}
+        {% endif %}
+
+        {% for source in sources %}
+            <h3 id="source-sample-{{ loop.index }}">{{ source.filename }}</h3>
+            <pre><code class="{{ source.type }}">{{ source.code }}</code></pre>
+        {% endfor%}
     </main>
 
-    <!--[if gt IE 9]><!--><script src="/docs/static/js/iframe-height-resizer.js"></script><!--<![endif]-->
-
+    <!--[if gt IE 9]><!--><script src="{{ baseUri }}/docs/static/js/iframe-height-resizer.js"></script><!--<![endif]-->
 </body>
 </html>

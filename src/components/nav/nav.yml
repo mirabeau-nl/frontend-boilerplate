@@ -3,3 +3,10 @@ description: The navigation module, visible on all pages, inside the header modu
 demo: |
   <div style="width:100%;height:200px;background:#f2f2f2">{}</div>
 implementation: Implementation instructions.
+viewsource:
+  - nav.html
+  - nav.scss
+data:
+  what: Properties within this data object
+  is: will be available as nunjucks variables
+  this: within the components html

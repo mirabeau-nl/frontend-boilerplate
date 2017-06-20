@@ -6,11 +6,9 @@
     <title>Front-End Library</title>
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/static/css/all.css">
-
+    <link rel="stylesheet" href="{{ baseUri }}static/css/all.css">
     {#- Shortest and fastest shim for ie-old html5 elements, add only the elements you need, or replace this with Modernizr -#}
     <!--[if lt IE 9]><script>'article main footer'.replace(/\w+/g,function(n){document.createElement(n)})</script><![endif]-->
-
     <script>
         (function(d){
 
@@ -36,17 +34,15 @@
                 Symbol.iterator in NodeList.prototype;
 
             if (supported) {
-                loadInOrder('/static/js/babel-helpers.js', '/static/js/main.js');
+                loadInOrder('{{ baseUri }}static/js/babel-helpers.js', '{{ baseUri }}static/js/main.js');
             } else {
-                loadInOrder('/static/js/babel-helpers.js', '/static/js/polyfill.js', '/static/js/main.js');
+                loadInOrder('{{ baseUri }}static/js/babel-helpers.js', '{{ baseUri }}static/js/polyfill.js', '{{ baseUri }}static/js/main.js');
             }
 
         }(document));
     </script>
 </head>
 <body>
-
-    {%- block body %}{% endblock -%}
-
+    {% block body %}{% endblock %}
 </body>
 </html>
