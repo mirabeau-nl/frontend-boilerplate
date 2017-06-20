@@ -14,14 +14,18 @@
   "contributors": [
     "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
     "Rik Schennink <rikschennink@gmail.com> (http://rikschennink.nl/)",
-    "Niek Bosch <nbosch@mirabeau.nl> (http://www.mirabeau.nl/)",
-    "Eric Weerstra <eweerstra@mirabeau.nl> (http://www.mirabeau.nl/)",
-    "Arno Wolkers <awolkers@mirabeau.nl> (http://www.mirabeau.nl/)",
-    "Leendert Ullersma <lullersma@mirabeau.nl> (http://www.mirabeau.nl/)",
-    "Christiaan Stegeman <cstegeman@mirabeau.nl> (http://www.mirabeau.nl/)",
-    "Sybren Wartna <sybren@gmail.com> (http://wheressyb.nl/)",
-    "Wouter Kroes <wkroes@mirabeau.nl> (http://www.mirabeau.nl/)",
-    "Sanjay Twisk <stwisk@mirabeau.nl> (http://www.mirabeau.nl/)"
+    "Niek Bosch <just.niek@gmail.com>",
+    "Eric Weerstra <eweerstra@mirabeau.nl> (http://visualformation.com/)",
+    "Arno Wolkers <awolkers@mirabeau.nl> (https://www.mirabeau.nl/)",
+    "Leendert Ullersma <leendert.ullersma@gmail.com>",
+    "Christiaan Stegeman <henkverdenk@hotmail.com>",
+    "Sybren Wartna <sybren@gmail.com> (http://waarissyb.nl/)",
+    "Wouter Kroes <wkroes@mirabeau.nl> (http://www.wouterkroes.nl/)",
+    "Sanjay Twisk <stwisk@mirabeau.nl> (http://twisk-interactive.nl/)",
+    "Peeke Kuepers <pkuepers@mirabeau.nl> (https://peeke.nl/)",
+    "Bram Swier <bswier@mirabeau.nl> (https://www.mirabeau.nl/)",
+    "Marius de Corte <mdecorte@mirabeau.nl> (http://mariusdecorte.nl/)"
+    "Cosmin Epureanu <cosmin.epureanu@gmail.com> (http://cosminepureanu.com/)"
   ],
   "readmeFilename": "readme.md",
   "license": "BSD-3-Clause",
