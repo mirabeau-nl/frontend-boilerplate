@@ -1,5 +1,5 @@
 import { html as config } from '../config';
-import { reload as browsersync } from 'browser-sync';
+import { reload } from 'browser-sync';
 import gulp from 'gulp';
 import render from 'gulp-nunjucks-render';
 import watch from 'gulp-watch';
@@ -17,7 +17,7 @@ gulp.task('html', () => {
             ]
         }))
         .pipe(gulp.dest(config.dist.base))
-        .pipe(browsersync({ stream: true }));
+        .on('end', reload);
 });
 
 /**
