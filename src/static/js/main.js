@@ -14,7 +14,7 @@ const ready = () => {
 
 // Attach components to elements
 
-export const attachComponents = context => {
+export const initializeComponents = context => {
 
     const elements = Array.from(context.querySelectorAll('[data-module]:not([data-initialized])'));
 
@@ -22,8 +22,6 @@ export const attachComponents = context => {
 
         // Convert dataset to object in a crossbrowser fashion
         const options = JSON.parse(JSON.stringify(element.dataset));
-
-        element.setAttribute('data-initialized', 'true');
 
         // Using the dataset as option means you pass your options as data-setting="value" instead of
         // data-options='{"setting":"value"}'
@@ -35,11 +33,13 @@ export const attachComponents = context => {
                 const Component = module.default ? module.default : module;
                 new Component(element, options); /* eslint no-new: 0 */
             });
+
+        element.setAttribute('data-initialized', 'true');
     });
 
 };
 
-ready().then(attachComponents(document));
+ready().then(initializeComponents(document));
 
 
 // // If you want to use conditioner instead:
