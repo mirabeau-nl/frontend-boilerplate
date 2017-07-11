@@ -12,17 +12,18 @@ const ready = () => {
 
 };
 
+// Attach components to elements
 
-// Manual init
+export const attachComponents = context => {
 
-const main = () => {
-
-    const elements = Array.from(document.querySelectorAll('[data-module]'));
+    const elements = Array.from(context.querySelectorAll('[data-module]:not([data-initialized])'));
 
     elements.forEach(element => {
 
         // Convert dataset to object in a crossbrowser fashion
         const options = JSON.parse(JSON.stringify(element.dataset));
+
+        element.setAttribute('data-initialized', 'true');
 
         // Using the dataset as option means you pass your options as data-setting="value" instead of
         // data-options='{"setting":"value"}'
@@ -34,14 +35,11 @@ const main = () => {
                 const Component = module.default ? module.default : module;
                 new Component(element, options); /* eslint no-new: 0 */
             });
-
-        element.setAttribute('data-initialized', 'true');
-
     });
 
 };
 
-ready().then(main);
+ready().then(attachComponents(document));
 
 
 // // If you want to use conditioner instead:
@@ -71,3 +69,4 @@ ready().then(main);
 //
 // // Initialize Conditioner
 // ready().then(conditioner.init);
+
