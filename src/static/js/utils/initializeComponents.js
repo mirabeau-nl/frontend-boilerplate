@@ -13,8 +13,7 @@ export const initializeComponents = context => {
     elements.forEach(element => {
 
         // Convert dataset to object in a crossbrowser fashion
-        const options = Object.keys(element.dataset)
-            .reduce((obj, key) => ({ [key]: element.dataset[key] }), {});
+        const options = JSON.parse(JSON.stringify(element.dataset));
 
         // Using the dataset as option means you pass your options as data-setting="value" instead of
         // data-options='{"setting":"value"}'
