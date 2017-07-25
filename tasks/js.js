@@ -29,6 +29,7 @@ gulp.task('js', ['js-browserify']);
 gulp.task('js-lint', () => {
     const src = [
         './gulpfile.babel.js',
+        './config.js',
         './tasks/**/*.js',
         config.src.all,
         config.src.components,
