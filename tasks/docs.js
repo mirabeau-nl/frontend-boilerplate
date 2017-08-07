@@ -8,6 +8,7 @@ import transform from 'gulp-transform';
 import ext from 'gulp-ext-replace';
 import gulpif from 'gulp-if';
 import helpers from './util/docHelpers';
+import envManager from './util/envManager';
 
 /**
  * Sub-task: Docs copy statics
@@ -43,7 +44,7 @@ gulp.task('docs-render-index', () => {
 
     // Render index template
     return gulp.src(config.docs.src.index)
-        .pipe(render({ path: paths, data: data }))
+        .pipe(render({ path: paths, data: data, manageEnv: envManager }))
         .pipe(gulp.dest(config.docs.dist.base));
 });
 

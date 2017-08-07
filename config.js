@@ -49,8 +49,8 @@ module.exports = {
             templates: `${base.src}/templates`,
             templatesAll: `${base.src}/templates/**/**.html`,
             statics: `${base.docs}/static/**`,
-            component: `${base.docs}/component-detail.html`,
-            preview: `${base.docs}/component-preview.html`,
+            component: 'component-detail.html',
+            preview: 'component-preview.html',
             components: `${base.src}/components`,
             componentsAll: `${base.src}/components/**/*.yml`
         },
