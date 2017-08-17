@@ -15,9 +15,7 @@ import stylelint from 'gulp-stylelint';
  */
 gulp.task('css', () => {
     const postcssProcessors = [
-        autoprefixer({
-            browsers: config.autoprefixer.browsers
-        })
+        autoprefixer()
     ];
 
     return gulp.src(config.src.static)
