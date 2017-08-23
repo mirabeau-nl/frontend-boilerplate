@@ -1,48 +1,15 @@
-
 // Reference our components so they get included
-import components from '../../components';
+import { initializeComponents } from 'utils/initializeComponents';
 
 const ready = () => {
-
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
         return Promise.resolve();
     }
 
     return new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve));
-
 };
 
-
-// Manual init
-
-const main = () => {
-
-    const elements = Array.from(document.querySelectorAll('[data-module]'));
-
-    elements.forEach(element => {
-
-        // Convert dataset to object in a crossbrowser fashion
-        const options = JSON.parse(JSON.stringify(element.dataset));
-
-        // Using the dataset as option means you pass your options as data-setting="value" instead of
-        // data-options='{"setting":"value"}'
-
-        element.dataset.module
-            .split(',')
-            .forEach(path => {
-                const module = path in components ? components[path] : require(path);
-                const Component = module.default ? module.default : module;
-                new Component(element, options); /* eslint no-new: 0 */
-            });
-
-        element.setAttribute('data-initialized', 'true');
-
-    });
-
-};
-
-ready().then(main);
-
+ready().then(initializeComponents(document));
 
 // // If you want to use conditioner instead:
 //
@@ -71,3 +38,4 @@ ready().then(main);
 //
 // // Initialize Conditioner
 // ready().then(conditioner.init);
+
