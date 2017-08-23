@@ -27,9 +27,6 @@ module.exports = {
     },
 
     css: {
-        autoprefixer: {
-            browsers: ['last 1 version', '> 5%']
-        },
         src: {
             static: `${base.src}/static/scss/**/!(_)*.scss`,
             staticAll: `${base.src}/static/scss/**/*.scss`,
