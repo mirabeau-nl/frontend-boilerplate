@@ -6,11 +6,31 @@ import { nunjucks } from 'gulp-nunjucks-render';
 import marked from 'marked';
 import fs from 'fs';
 import { html as htmlBeautify } from 'js-beautify';
+import envManager from './envManager';
 
 /**
  * Doc task helper functions
  */
 class docsHelpers {
+
+    /**
+     * Create nunjucks environment
+     * @return {object} environment
+     */
+    static createEnvironment() {
+        const paths = [
+            config.docs.src.indexDir,
+            config.docs.src.layoutDir,
+            config.docs.src.components,
+            config.html.src.layoutDir,
+            config.html.src.componentsDir
+        ];
+        const loaders = paths.map(path => new nunjucks.FileSystemLoader(path));
+        const environment = new nunjucks.Environment(loaders);
+        envManager(environment);
+
+        return environment;
+    }
 
     /**
      * Render component
@@ -19,12 +39,13 @@ class docsHelpers {
      * @returns {string} component - rendered component
      */
     static renderComponent(content, file) {
+        const environment = docsHelpers.createEnvironment();
         const yml = yaml.load(content);
         const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
         let sample = '';
 
         try {
-            sample = htmlBeautify(nunjucks.render(file.path.replace('.yml', '.html'), locals));
+            sample = htmlBeautify(environment.render(file.path.replace('.yml', '.html'), locals));
         } catch (error) {
             global.console.log(error);
         }
@@ -37,7 +58,7 @@ class docsHelpers {
             sample: sample
         };
 
-        return nunjucks.render(config.docs.src.component, data);
+        return environment.render(config.docs.src.component, data);
 
     }
 
@@ -48,18 +69,19 @@ class docsHelpers {
      * @returns {string} component - rendered component
      */
     static renderComponentDemo(content, file) {
+        const environment = docsHelpers.createEnvironment();
         const yml = yaml.load(content);
         const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
         let demo = '';
 
         try {
-            demo = nunjucks.render(file.path.replace('.yml', '.html'), locals);
+            demo = environment.render(file.path.replace('.yml', '.html'), locals);
             demo = (yml.demo || '{}').replace(/\{\}/g, demo);
         } catch (error) {
             global.console.log(error);
         }
 
-        return nunjucks.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo });
+        return environment.render(config.docs.src.preview, { baseUri: config.html.baseUri, demo: demo });
 
     }
 
