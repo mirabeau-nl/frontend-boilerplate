@@ -69,7 +69,7 @@ gulp upload
 
 ## How to: Component library
 Components are visible in the component library when they contain a YAML (.yml) file.
-The YAML file should have the same name as the component's .html file and contains the following parameters:
+The YAML file should have the same name as the component's .njk file and contains the following parameters:
 ```
 title: Title of the component shown in the library
 description: Component description text
@@ -83,11 +83,11 @@ The component is rendered for each `{}` you provide within the demo parameter.
 Components can be nested either with or without a sub-folder. Currently folders can only be nested one level deep.
 ```
 nav/
-  nav.html
+  nav.njk
   nav.yml
-  anotherNav.html
+  anotherNav.njk
   anotherNav.yml
   footerNav/
-    footerNav.html
+    footerNav.njk
     footerNav.yml
 ```

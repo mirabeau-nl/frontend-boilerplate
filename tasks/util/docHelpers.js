@@ -45,7 +45,7 @@ class docsHelpers {
         let sample = '';
 
         try {
-            sample = htmlBeautify(environment.render(file.path.replace('.yml', '.html'), locals));
+            sample = htmlBeautify(environment.render(file.path.replace('.yml', '.njk'), locals));
         } catch (error) {
             global.console.log(error);
         }
@@ -75,7 +75,7 @@ class docsHelpers {
         let demo = '';
 
         try {
-            demo = environment.render(file.path.replace('.yml', '.html'), locals);
+            demo = environment.render(file.path.replace('.yml', '.njk'), locals);
             demo = (yml.demo || '{}').replace(/\{\}/g, demo);
         } catch (error) {
             global.console.log(error);
@@ -114,7 +114,7 @@ class docsHelpers {
 
                 tree[path] = tree[path] || {};
                 tree[path].variations = tree[path].variations || [];
-                tree[path].variations.push({ url: file.replace('.yml', '.html'), name: name });
+                tree[path].variations.push({ url: file.replace('.yml', '.njk'), name: name });
             }
 
             return tree;
