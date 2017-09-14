@@ -19,6 +19,11 @@ dist/*
 .cache
 
 
+# Lock
+package-lock.json
+yarn.lock
+
+
 # Operating system
 .DS_Store
 Thumbs.db
