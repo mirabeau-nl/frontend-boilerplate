@@ -40,14 +40,14 @@ module.exports = {
 
     docs: {
         src: {
-            index: `${base.docs}/index.html`,
+            index: `${base.docs}/index.njk`,
             indexDir: base.docs,
             layoutDir: `${base.docs}/layout`,
             templates: `${base.src}/templates`,
-            templatesAll: `${base.src}/templates/**/**.html`,
+            templatesAll: `${base.src}/templates/**/**.njk`,
             statics: `${base.docs}/static/**`,
-            component: 'component-detail.html',
-            preview: 'component-preview.html',
+            component: 'component-detail.njk',
+            preview: 'component-preview.njk',
             components: `${base.src}/components`,
             componentsAll: `${base.src}/components/**/*.yml`
         },
@@ -80,11 +80,11 @@ module.exports = {
 
     html: {
         src: {
-            templates: `${base.src}/templates/**/*.html`,
+            templates: `${base.src}/templates/**/*.njk`,
             templatesDir: `${base.src}/templates`,
-            layout: `${base.src}/layout/*.html`,
+            layout: `${base.src}/layout/*.njk`,
             layoutDir: `${base.src}/layout`,
-            components: `${base.src}/components/**/*.html`,
+            components: `${base.src}/components/**/*.njk`,
             componentsDir: `${base.src}/components`
         },
         dist: {

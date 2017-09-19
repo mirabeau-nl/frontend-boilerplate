@@ -35,7 +35,7 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
     ```
     Using this old syntax, `bool === true`.
     In the new `data-bool="true"` syntax, `bool === 'true'` (notice the quotes).
-3. If you changed **/src/layout/default.html** update the script initialization to match:
+3. If you changed **/src/layout/default.njk** update the script initialization to match:
 
   ```
   <script>
@@ -71,7 +71,7 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
       }(document));
   </script>
   ```
-  *Don't forget to update `/src/tasks/docs/layout/preview.html` as well!*
+  *Don't forget to update `/src/tasks/docs/layout/preview.njk` as well!*
 4. This version uses Nunjucks instead of Swig, just as the previous version. If you didn't update yet, see https://medium.com/engineers-optimizely/js-templating-transitioning-from-swig-to-nunjucks-ac0e94d1794b#.mf2ddbl2v for a review of syntax changes
 
 5. Install node dependencies
