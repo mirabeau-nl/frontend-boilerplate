@@ -24,12 +24,12 @@ gulp.task('docs-copy-statics', () =>
 gulp.task('docs-render-index', () => {
 
     // Grab list of templates
-    const templates = helpers.getRelativePaths(config.docs.src.templatesAll, config.docs.src.templates);
+    const templates = helpers.getTemplateTree(config.docs.src.templatesAll, config.docs.src.templates);
     const components = helpers.getComponentTree(config.docs.src.componentsAll, config.docs.src.components);
 
     // Data
     const data = {
-        templates: templates.map(template => template.replace(/[\\]/g, '/')),
+        templates: templates,
         components: components,
         lastUpdated: moment().tz('Europe/Amsterdam').format('DD-MM-YYYY HH:mm:ss z')
     };

@@ -96,6 +96,34 @@ class docsHelpers {
     }
 
     /**
+     * Get the template tree
+     * @param {string} globString - glob pattern for the template files
+     * @param {string} relativeTo - dir containing the files in globString
+     * @returns {Object} tree - object with alle templates and children
+     */
+    static getTemplateTree(globString, relativeTo) {
+
+        const files = docsHelpers.getRelativePaths(globString, relativeTo);
+
+        return files.reduce((tree, file) => {
+            const path = file.split(sep);
+            const key = path[0]
+                .replace('.njk', '')
+                .replace(/[_-]/g, ' ');
+            const name = path[path.length - 1]
+                .replace('.njk', '')
+                .replace(/[_-]/g, ' ');
+
+            tree[key] = tree[key] || {};
+            tree[key].variations = tree[key].variations || [];
+            tree[key].variations.push({ url: file, name: name });
+
+            return tree;
+
+        }, {});
+    }
+
+    /**
      * Get the component tree
      * @param {string} globString - glob pattern for the component files
      * @param {string} relativeTo - dir containing the files in globString
