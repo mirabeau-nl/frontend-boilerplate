@@ -3,6 +3,8 @@ plugins:
   - stylelint-scss
   - stylelint-declaration-strict-value
 rules:
+  at-rule-no-unknown:
+    - null
 
   # CSS (http://stylelint.io/user-guide/rules/)
   at-rule-empty-line-before:
@@ -73,3 +75,5 @@ rules:
   scss/partial-no-import: ~
   scss/percent-placeholder-pattern: ~
   scss/selector-no-redundant-nesting-selector: true
+  scss/at-rule-no-unknown: true
+
