@@ -7,7 +7,7 @@ import gulp from 'gulp';
  */
 gulp.task('githooks', ['githooks-clean'], () => {
     return gulp.src(config.src.all)
-        .pipe(gulp.dest(config.dist.base));
+        .pipe(gulp.dest(config.dist.base, { mode: '0500' }));
 });
 
 /**
