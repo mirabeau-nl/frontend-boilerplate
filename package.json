@@ -61,7 +61,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-stylelint": "^5.0.0",
-    "gulp-transform": "^1.0.8",
+    "gulp-transform": "^3.0.5",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
