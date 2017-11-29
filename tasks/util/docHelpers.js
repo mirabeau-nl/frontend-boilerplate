@@ -1,6 +1,5 @@
 import config from '../../config';
-import { sync as glob } from 'glob';
-import { relative, sep } from 'path';
+import * as pathHelpers from 'path';
 import yaml from 'js-yaml';
 import { nunjucks } from 'gulp-nunjucks-render';
 import marked from 'marked';
@@ -54,7 +53,7 @@ class docsHelpers {
             title: yml.title,
             description: marked(yml.description || ''),
             implementation: marked(yml.implementation || '').replace('<table', '<table class="table"'),
-            demo: file.path.split(sep).pop().replace('.yml', '.demo.html'),
+            demo: file.path.split(pathHelpers.sep).pop().replace('.yml', '.demo.html'),
             sample: sample
         };
 
@@ -86,68 +85,80 @@ class docsHelpers {
     }
 
     /**
-     * Get relative paths
-     * @param {string} globString - glob pattern for the files
-     * @param {string} relativeTo - dir name
-     * @returns {Array} paths - array of relative paths
+     * Get the template tree - convenience function for calling `getTree` with template configuration
+     * @param {string} baseDir - dir containing the templates
+     * @param {string} ext - file extension
+     * @returns {Object} tree - the result of `getTree` with the given arguments
      */
-    static getRelativePaths(globString, relativeTo) {
-        return glob(globString, { nosort: true }).map(dir => relative(relativeTo, dir));
+    static getTemplateTree(baseDir, ext = '.njk') {
+
+        return docsHelpers.getTree(baseDir, {
+            pathPrefix: '/templates/',
+            ext: ext,
+            nameCb: path => pathHelpers.basename(path, ext).replace(/[_-]/g, ' ')
+        });
+
     }
 
     /**
-     * Get the template tree
-     * @param {string} globString - glob pattern for the template files
-     * @param {string} relativeTo - dir containing the files in globString
-     * @returns {Object} tree - object with alle templates and children
+     * Get the component tree - convenience function for calling `getTree` with component configuration
+     * @param {string} baseDir - dir containing the components
+     * @param {string} ext - file extension
+     * @returns {Object} tree - the result of `getTree` with the given arguments
      */
-    static getTemplateTree(globString, relativeTo) {
+    static getComponentTree(baseDir, ext = '.yml') {
 
-        const files = docsHelpers.getRelativePaths(globString, relativeTo);
+        return docsHelpers.getTree(baseDir, {
+            pathPrefix: '/docs/components/',
+            ext: ext,
+            dirIsLeaf: true,
+            nameCb: path => yaml.safeLoad(fs.readFileSync(path)).title,
+            effectivePathCb: (path, file) => {
+                const effectivePath = `${path}/${file}${ext}`;
+                try {
+                    fs.accessSync(effectivePath, fs.constants.R_OK);
 
-        return files.reduce((tree, file) => {
-            const path = file.split(sep);
-            const key = path[0]
-                .replace('.njk', '')
-                .replace(/[_-]/g, ' ');
-            const name = path[path.length - 1]
-                .replace('.njk', '')
-                .replace(/[_-]/g, ' ');
+                    return effectivePath;
+                } catch (ex) { /* Shut up, eslint */ }
 
-            tree[key] = tree[key] || {};
-            tree[key].variations = tree[key].variations || [];
-            tree[key].variations.push({ url: file, name: name });
-
-            return tree;
-
-        }, {});
-    }
-
-    /**
-     * Get the component tree
-     * @param {string} globString - glob pattern for the component files
-     * @param {string} relativeTo - dir containing the files in globString
-     * @returns {Object} tree - object with alle components and children
-     */
-    static getComponentTree(globString, relativeTo) {
-
-        const files = docsHelpers.getRelativePaths(globString, relativeTo);
-
-        return files.reduce((tree, file) => {
-            const yml = yaml.safeLoad(fs.readFileSync(`${config.docs.src.components}/${file}`)) || false;
-
-            if (typeof yml === 'object') {
-                const path = file.split(sep)[0];
-                const name = yml.title;
-
-                tree[path] = tree[path] || {};
-                tree[path].variations = tree[path].variations || [];
-                tree[path].variations.push({ url: file.replace('.yml', '.njk'), name: name });
+                return null;
             }
+        });
 
-            return tree;
+    }
 
-        }, {});
+    /**
+     * Get the template or component tree
+     * @param {string} baseDir - dir containing the items
+     * @param {object}   conf - config object
+     * @param {string}   conf.pathPrefix - path prefix for the hrefs
+     * @param {ext}      conf.ext - file extension to look for
+     * @param {boolean}  [conf.dirIsLeaf=false] - whether to treat each directory as one item (leaf)
+     * @param {function} conf.nameCb - callback to determine the display name of an item
+     * @param {string}   conf.nameCb.path - the path to the directory of the current item
+     * @param {function} [conf.effectivePathCb] - callback to determine effective path for the item; useful when `dirIsLeaf === true`
+     * @param {function} conf.effectivePathCb.path - the path to the directory of the current item
+     * @param {function} conf.effectivePathCb.file - the filename of the current item
+     * @returns {array} tree - recursive list of item description objects with signature `{ name, url, branches }`
+     */
+    static getTree(baseDir, conf) {
+        const scandir = dir => {
+            return fs.readdirSync(dir).map(file => {
+                const path = `${dir}/${file}`;
+                const isDir = fs.statSync(path).isDirectory();
+                const isLeaf = !conf.dirIsLeaf && !isDir && pathHelpers.extname(file) === conf.ext;
+                if (!isDir && !isLeaf) { return null; }
+                const effectivePath = conf.effectivePathCb && conf.effectivePathCb(path, file);
+                const href = conf.pathPrefix + pathHelpers.relative(baseDir, effectivePath || path);
+                const url = (isLeaf || effectivePath) && href.replace(conf.ext, '.html');
+                const name = isLeaf || effectivePath ? conf.nameCb(effectivePath || path) : file.replace(/[_-]/g, ' ');
+
+                return { name: name, url: url, branches: isDir && scandir(path) };
+            // Clean up
+            }).filter(x => x);
+        };
+
+        return scandir(baseDir);
     }
 
     /**

@@ -24,8 +24,8 @@ gulp.task('docs-copy-statics', () =>
 gulp.task('docs-render-index', () => {
 
     // Grab list of templates
-    const templates = helpers.getTemplateTree(config.docs.src.templatesAll, config.docs.src.templates);
-    const components = helpers.getComponentTree(config.docs.src.componentsAll, config.docs.src.components);
+    const templates = helpers.getTemplateTree(config.docs.src.templates);
+    const components = helpers.getComponentTree(config.docs.src.components);
 
     // Data
     const data = {

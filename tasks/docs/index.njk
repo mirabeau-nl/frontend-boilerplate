@@ -2,6 +2,24 @@
 
 {%- block body %}
 
+{% macro renderTree(tree) %}
+    <ul>
+    {% for item in tree %}
+        <li>
+        {% if item.url %}
+            <a href="{{ item.url }}">{{ item.name | capitalize }}</a>
+        {% else %}
+            <span>{{ item.name | capitalize }}</span>
+        {% endif %}
+
+        {% if item.branches %}
+            {{ renderTree(item.branches) }}
+        {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endmacro %}
+
 <div class="container">
 
     <h1>Front-End Library</h1>
@@ -9,42 +27,10 @@
         <!--[[dist.zip]]-->
 
         <h2>Templates</h2>
-        <ul>
-            {% for name, template in templates %}
-                {% if template.variations.length <= 1 %}
-                    {%- set variation = template.variations[0] %}
-                    <li><a href="templates/{{ variation.url.replace('.njk', '.html') }}">{{ variation.name | capitalize }}</a></li>
-                {% else %}
-                    <li class="template-variations">
-                        <strong>{{ name | capitalize }}</strong>
-                        <ul>
-                            {% for variation in template.variations %}
-                            <li><a href="templates/{{ variation.url.replace('.njk', '.html') }}">{{ variation.name | capitalize }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+        {{ renderTree(templates) }}
 
         <h2>Components</h2>
-        <ul>
-            {% for name, component in components %}
-                {% if component.variations.length <= 1 %}
-                    {%- set variation = component.variations[0] %}
-                    <li><a href="docs/components/{{ variation.url.replace('.njk', '.html') }}">{{ variation.name }}</a></li>
-                {% else %}
-                    <li class="component-variations">
-                        <strong>{{ name }}</strong>
-                        <ul>
-                            {% for variation in component.variations %}
-                                <li><a href="docs/components/{{ variation.url.replace('.njk', '.html') }}">{{ variation.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+        {{ renderTree(components) }}
 
 </div>
 
