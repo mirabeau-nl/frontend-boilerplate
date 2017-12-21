@@ -30,5 +30,5 @@ if [[ $? == 0 ]]; then
     echo ""
 
     # Run gulp task
-    gulp githooks
+    node node_modules/gulp/bin/gulp.js githooks
 fi

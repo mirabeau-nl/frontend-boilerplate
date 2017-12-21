@@ -7,29 +7,29 @@
 // @example position(absolute, 0 false 0 20rem);
 
 @mixin position ($position: relative, $coordinates: 0 0 0 0) {
-    @if type-of($position) == list {
-        $coordinates: $position;
-        $position: relative;
-    }
-    position: $position;
-    $top: nth($coordinates, 1);
-    $right: nth($coordinates, 2);
-    $bottom: nth($coordinates, 3);
-    $left: nth($coordinates, 4);
+  @if type-of($position) == list {
+    $coordinates: $position;
+    $position: relative;
+  }
+  position: $position;
+  $top: nth($coordinates, 1);
+  $right: nth($coordinates, 2);
+  $bottom: nth($coordinates, 3);
+  $left: nth($coordinates, 4);
 
-    @if $top != false {
-        top: $top;
-    }
+  @if $top != false {
+    top: $top;
+  }
 
-    @if $right != false {
-        right: $right;
-    }
+  @if $right != false {
+    right: $right;
+  }
 
-    @if $bottom != false {
-        bottom: $bottom;
-    }
+  @if $bottom != false {
+    bottom: $bottom;
+  }
 
-    @if $left != false {
-        left: $left;
-    }
+  @if $left != false {
+    left: $left;
+  }
 }

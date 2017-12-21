@@ -3,34 +3,34 @@
 {%- block body %}
 
 {% macro renderTree(tree) %}
-    <ul>
-    {% for item in tree %}
-        <li>
-        {% if item.url %}
-            <a href="{{ item.url }}">{{ item.name | capitalize }}</a>
-        {% else %}
-            <span>{{ item.name | capitalize }}</span>
-        {% endif %}
+<ul>
+  {% for item in tree %}
+  <li>
+    {% if item.url %}
+    <a href="{{ item.url }}">{{ item.name | capitalize }}</a>
+    {% else %}
+    <span>{{ item.name | capitalize }}</span>
+    {% endif %}
 
-        {% if item.branches %}
-            {{ renderTree(item.branches) }}
-        {% endif %}
-        </li>
-    {% endfor %}
-    </ul>
+    {% if item.branches %}
+    {{ renderTree(item.branches) }}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
 {% endmacro %}
 
 <div class="container">
 
-    <h1>Front-End Library</h1>
-        <p>Last updated: {{ lastUpdated }}</p>
-        <!--[[dist.zip]]-->
+  <h1>Front-End Library</h1>
+  <p>Last updated: {{ lastUpdated }}</p>
+  <!--[[dist.zip]]-->
 
-        <h2>Templates</h2>
-        {{ renderTree(templates) }}
+  <h2>Templates</h2>
+  {{ renderTree(templates) }}
 
-        <h2>Components</h2>
-        {{ renderTree(components) }}
+  <h2>Components</h2>
+  {{ renderTree(components) }}
 
 </div>
 
