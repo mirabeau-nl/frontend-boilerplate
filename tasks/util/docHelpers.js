@@ -6,6 +6,7 @@ import marked from 'marked';
 import fs from 'fs';
 import { html as htmlBeautify } from 'js-beautify';
 import envManager from './envManager';
+import Vinyl from 'vinyl';
 
 /**
  * Doc task helper functions
@@ -85,77 +86,89 @@ class docsHelpers {
     }
 
     /**
-     * Get the template tree - convenience function for calling `getTree` with template configuration
+     * Get the template tree
      * @param {string} baseDir - dir containing the templates
-     * @param {string} ext - file extension
-     * @returns {Object} tree - the result of `getTree` with the given arguments
-     */
-    static getTemplateTree(baseDir, ext = '.njk') {
-
-        return docsHelpers.getTree(baseDir, {
-            pathPrefix: '/templates/',
-            ext: ext,
-            nameCb: path => pathHelpers.basename(path, ext).replace(/[_-]/g, ' ')
-        });
-
-    }
-
-    /**
-     * Get the component tree - convenience function for calling `getTree` with component configuration
-     * @param {string} baseDir - dir containing the components
-     * @param {string} ext - file extension
-     * @returns {Object} tree - the result of `getTree` with the given arguments
-     */
-    static getComponentTree(baseDir, ext = '.yml') {
-
-        return docsHelpers.getTree(baseDir, {
-            pathPrefix: '/docs/components/',
-            ext: ext,
-            dirIsLeaf: true,
-            nameCb: path => yaml.safeLoad(fs.readFileSync(path)).title,
-            effectivePathCb: (path, file) => {
-                const effectivePath = `${path}/${file}${ext}`;
-                try {
-                    fs.accessSync(effectivePath, fs.constants.R_OK);
-
-                    return effectivePath;
-                } catch (ex) { /* Shut up, eslint */ }
-
-                return null;
-            }
-        });
-
-    }
-
-    /**
-     * Get the template or component tree
-     * @param {string} baseDir - dir containing the items
-     * @param {object}   conf - config object
-     * @param {string}   conf.pathPrefix - path prefix for the hrefs
-     * @param {ext}      conf.ext - file extension to look for
-     * @param {boolean}  [conf.dirIsLeaf=false] - whether to treat each directory as one item (leaf)
-     * @param {function} conf.nameCb - callback to determine the display name of an item
-     * @param {string}   conf.nameCb.path - the path to the directory of the current item
-     * @param {function} [conf.effectivePathCb] - callback to determine effective path for the item; useful when `dirIsLeaf === true`
-     * @param {function} conf.effectivePathCb.path - the path to the directory of the current item
-     * @param {function} conf.effectivePathCb.file - the filename of the current item
+     * @param {string} ext - file extension to look for
+     * @param {string} baseUrl - base URL for templates
      * @returns {array} tree - recursive list of item description objects with signature `{ name, url, branches }`
      */
-    static getTree(baseDir, conf) {
-        const scandir = dir => {
-            return fs.readdirSync(dir).map(file => {
-                const path = `${dir}/${file}`;
-                const isDir = fs.statSync(path).isDirectory();
-                const isLeaf = !conf.dirIsLeaf && !isDir && pathHelpers.extname(file) === conf.ext;
-                if (!isDir && !isLeaf) { return null; }
-                const effectivePath = conf.effectivePathCb && conf.effectivePathCb(path, file);
-                const href = conf.pathPrefix + pathHelpers.relative(baseDir, effectivePath || path);
-                const url = (isLeaf || effectivePath) && href.replace(conf.ext, '.html');
-                const name = isLeaf || effectivePath ? conf.nameCb(effectivePath || path) : file.replace(/[_-]/g, ' ');
+    static getTemplateTree(baseDir, ext = '.njk', baseUrl = '/templates/') {
 
-                return { name: name, url: url, branches: isDir && scandir(path) };
-            // Clean up
-            }).filter(x => x);
+        const scandir = dir => {
+            return fs.readdirSync(dir)
+
+                // Map to Vinyl objects
+                .map(file => docsHelpers.toVinyl(`${dir}/${file}`, baseDir))
+
+                // Add some metadata
+                .map(file => {
+                    file._isLeaf = file.extname === ext;
+
+                    return file;
+                })
+
+                // Filter out non-dir and non-leaf nodes
+                .filter(file => file.isDirectory() || file._isLeaf)
+
+                // Map nodes to item description objects for use in templates
+                .map(file => {
+                    const name = file.stem.replace(/[_-]/g, ' ');
+                    const url = file._isLeaf && baseUrl + file.relative.replace(ext, '.html');
+                    const branches = file.isDirectory() && scandir(file.path);
+
+                    return { name, url, branches };
+                });
+        };
+
+        return scandir(baseDir);
+    }
+
+    /**
+     * Get the component tree
+     * @param {string} baseDir - dir containing the components
+     * @param {string} ext - file extension to look for
+     * @param {string} baseUrl - base URL for components
+     * @returns {array} tree - recursive list of item description objects with signature `{ name, url, branches }`
+     */
+    static getComponentTree(baseDir, ext = '.yml', baseUrl = '/docs/components/') {
+
+        const scandir = dir => {
+            return fs.readdirSync(dir)
+
+                // Map to Vinyl objects
+                .map(file => docsHelpers.toVinyl(`${dir}/${file}`, baseDir))
+
+                // Filter out non-dir nodes
+                .filter(file => file.isDirectory())
+
+                // Map nodes to item description objects for use in templates
+                .map(file => {
+
+                    // Components are defined by a yaml file, one per directory, with the file name equal to the component's directory name
+                    const yamlPath = `${dir}/${file.basename}/${file.basename}${ext}`;
+                    let yml;
+
+                    // Try to find this yaml file. Otherwise, it's just a plain dir.
+                    try {
+                        yml = yaml.safeLoad(fs.readFileSync(yamlPath));
+                    } catch (ex) { /* Shut up, eslint */ }
+
+                    const name = yml ? yml.title : file.basename.replace(/[_-]/g, ' ');
+                    const url = yml && baseUrl + pathHelpers.relative(baseDir, yamlPath).replace(ext, '.html');
+
+                    // Subtree.
+                    const branches = scandir(file.path);
+
+                    // If the node doesn't have branches and also not a URL (no yaml file), we're dealing with an "anonymous" component; filter it out.
+                    if (!branches.length && !url) { return null; }
+
+                    //
+                    return { name, url, branches };
+
+                })
+
+                // Clean the array
+                .filter(x => x);
         };
 
         return scandir(baseDir);
@@ -168,6 +181,18 @@ class docsHelpers {
      */
     static hasContent(file) {
         return typeof yaml.safeLoad(file.contents) === 'object';
+    }
+
+    /**
+     * Create a Vinyl object from a file path
+     * @param {string} path - file path
+     * @param {string} base - base path
+     * @returns {Vinyl} - a Vinyl file object
+     */
+    static toVinyl(path, base) {
+        const stat = fs.statSync(path);
+
+        return new Vinyl({ base, path, stat });
     }
 
 }

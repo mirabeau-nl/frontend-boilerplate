@@ -78,6 +78,7 @@
     "stylelint-declaration-strict-value": "^1.0.3",
     "stylelint-scss": "^1.4.1",
     "uglify-js": "^2.8.15",
+    "vinyl": "^2.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-ftp": "^0.4.5",
     "vinyl-source-stream": "^1.1.0",
