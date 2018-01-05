@@ -1,4 +1,4 @@
-# Frontend Bootstrap
+# Frontend Boilerplate
 
 ## How to: Setup development environment
 1. Make sure the following is installed on your machine:
@@ -14,7 +14,7 @@
 4. Done! You can now start your development server.
 
 ## How to: Configure bundles
-By default, the bootstrap uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file: 
+By default, the boilerplate uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file: 
 ```
 export default require('./**/!(*.Spec).js', { mode: 'hash', resolve: ['reduce', 'strip-ext'] });
 ```
