@@ -1,10 +1,10 @@
 {
-  "name": "frontend-bootstrap",
+  "name": "frontend-boilerplate",
   "description": "An opinionated blueprint environment to quick start new front-end codebases",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mirabeau-nl/frontend-bootstrap.git"
+    "url": "https://github.com/mirabeau-nl/frontend-boilerplate.git"
   },
   "scripts": {
     "postinstall": "node node_modules/gulp/bin/gulp.js githooks",
