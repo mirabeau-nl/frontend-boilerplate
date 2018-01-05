@@ -1,4 +1,4 @@
-# Frontend Bootstrap Migration Guide
+# Frontend Boilerplate Migration Guide
 
 ## When not to update
 This new version introduces a couple of breaking changes. When not to update:
