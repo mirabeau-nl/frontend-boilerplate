@@ -1,12 +1,12 @@
 import config from '../../config';
-import { sync as glob } from 'glob';
-import { relative, sep } from 'path';
+import * as pathHelpers from 'path';
 import yaml from 'js-yaml';
 import { nunjucks } from 'gulp-nunjucks-render';
 import marked from 'marked';
 import fs from 'fs';
 import { html as htmlBeautify } from 'js-beautify';
 import envManager from './envManager';
+import Vinyl from 'vinyl';
 
 /**
  * Doc task helper functions
@@ -54,7 +54,7 @@ class docsHelpers {
             title: yml.title,
             description: marked(yml.description || ''),
             implementation: marked(yml.implementation || '').replace('<table', '<table class="table"'),
-            demo: file.path.split(sep).pop().replace('.yml', '.demo.html'),
+            demo: file.path.split(pathHelpers.sep).pop().replace('.yml', '.demo.html'),
             sample: sample
         };
 
@@ -86,40 +86,92 @@ class docsHelpers {
     }
 
     /**
-     * Get relative paths
-     * @param {string} globString - glob pattern for the files
-     * @param {string} relativeTo - dir name
-     * @returns {Array} paths - array of relative paths
+     * Get the template tree
+     * @param {string} baseDir - dir containing the templates
+     * @param {string} ext - file extension to look for
+     * @param {string} baseUrl - base URL for templates
+     * @returns {array} tree - recursive list of item description objects with signature `{ name, url, branches }`
      */
-    static getRelativePaths(globString, relativeTo) {
-        return glob(globString, { nosort: true }).map(dir => relative(relativeTo, dir));
+    static getTemplateTree(baseDir, ext = '.njk', baseUrl = '/templates/') {
+
+        const scandir = dir => {
+            return fs.readdirSync(dir)
+
+                // Map to Vinyl objects
+                .map(file => docsHelpers.toVinyl(`${dir}/${file}`, baseDir))
+
+                // Add some metadata
+                .map(file => {
+                    file._isLeaf = file.extname === ext;
+
+                    return file;
+                })
+
+                // Filter out non-dir and non-leaf nodes
+                .filter(file => file.isDirectory() || file._isLeaf)
+
+                // Map nodes to item description objects for use in templates
+                .map(file => {
+                    const name = file.stem.replace(/[_-]/g, ' ');
+                    const url = file._isLeaf && baseUrl + file.relative.replace(ext, '.html');
+                    const branches = file.isDirectory() && scandir(file.path);
+
+                    return { name, url, branches };
+                });
+        };
+
+        return scandir(baseDir);
     }
 
     /**
      * Get the component tree
-     * @param {string} globString - glob pattern for the component files
-     * @param {string} relativeTo - dir containing the files in globString
-     * @returns {Object} tree - object with alle components and children
+     * @param {string} baseDir - dir containing the components
+     * @param {string} ext - file extension to look for
+     * @param {string} baseUrl - base URL for components
+     * @returns {array} tree - recursive list of item description objects with signature `{ name, url, branches }`
      */
-    static getComponentTree(globString, relativeTo) {
+    static getComponentTree(baseDir, ext = '.yml', baseUrl = '/docs/components/') {
 
-        const files = docsHelpers.getRelativePaths(globString, relativeTo);
+        const scandir = dir => {
+            return fs.readdirSync(dir)
 
-        return files.reduce((tree, file) => {
-            const yml = yaml.safeLoad(fs.readFileSync(`${config.docs.src.components}/${file}`)) || false;
+                // Map to Vinyl objects
+                .map(file => docsHelpers.toVinyl(`${dir}/${file}`, baseDir))
 
-            if (typeof yml === 'object') {
-                const path = file.split(sep)[0];
-                const name = yml.title;
+                // Filter out non-dir nodes
+                .filter(file => file.isDirectory())
 
-                tree[path] = tree[path] || {};
-                tree[path].variations = tree[path].variations || [];
-                tree[path].variations.push({ url: file.replace('.yml', '.njk'), name: name });
-            }
+                // Map nodes to item description objects for use in templates
+                .map(file => {
 
-            return tree;
+                    // Components are defined by a yaml file, one per directory, with the file name equal to the component's directory name
+                    const yamlPath = `${dir}/${file.basename}/${file.basename}${ext}`;
+                    let yml;
 
-        }, {});
+                    // Try to find this yaml file. Otherwise, it's just a plain dir.
+                    try {
+                        yml = yaml.safeLoad(fs.readFileSync(yamlPath));
+                    } catch (ex) { /* Shut up, eslint */ }
+
+                    const name = yml ? yml.title : file.basename.replace(/[_-]/g, ' ');
+                    const url = yml && baseUrl + pathHelpers.relative(baseDir, yamlPath).replace(ext, '.html');
+
+                    // Subtree.
+                    const branches = scandir(file.path);
+
+                    // If the node doesn't have branches and also not a URL (no yaml file), we're dealing with an "anonymous" component; filter it out.
+                    if (!branches.length && !url) { return null; }
+
+                    //
+                    return { name, url, branches };
+
+                })
+
+                // Clean the array
+                .filter(x => x);
+        };
+
+        return scandir(baseDir);
     }
 
     /**
@@ -129,6 +181,18 @@ class docsHelpers {
      */
     static hasContent(file) {
         return typeof yaml.safeLoad(file.contents) === 'object';
+    }
+
+    /**
+     * Create a Vinyl object from a file path
+     * @param {string} path - file path
+     * @param {string} base - base path
+     * @returns {Vinyl} - a Vinyl file object
+     */
+    static toVinyl(path, base) {
+        const stat = fs.statSync(path);
+
+        return new Vinyl({ base, path, stat });
     }
 
 }

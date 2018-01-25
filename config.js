@@ -44,7 +44,6 @@ module.exports = {
             indexDir: base.docs,
             layoutDir: `${base.docs}/layout`,
             templates: `${base.src}/templates`,
-            templatesAll: `${base.src}/templates/**/**.njk`,
             statics: `${base.docs}/static/**`,
             component: 'component-detail.njk',
             preview: 'component-preview.njk',
