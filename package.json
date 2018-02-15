@@ -46,7 +46,7 @@
     "errorify": "^0.3.1",
     "event-stream": "^3.3.2",
     "glob": "^7.0.5",
-    "gulp": "^3.5.6",
+    "gulp": "3.9.0",
     "gulp-changed": "^3.1.0",
     "gulp-clean-css": "^3.4.2",
     "gulp-eslint": "^4.0.0",
