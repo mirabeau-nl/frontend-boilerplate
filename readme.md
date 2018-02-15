@@ -5,7 +5,7 @@
     - [Node.js](http://nodejs.org/)
 2. Run this command to install the global dependencies:
     ```
-    npm install -g gulp
+    npm install -g gulp-cli
     ```
 3. Run these commands to install the project-specific dependencies:
     ```
@@ -31,18 +31,18 @@ if you want to run conditioner:
 
 ## How to: Start the development server
 ```
-gulp dev
+npm run dev
 ```
 Then point your browser to `http://localhost:3000/`
 
 ## How to: Build
 ```
-gulp dist
+npm run dist
 ```
 
 ## How to: Linting
 ```
-gulp lint
+npm run lint
 ```
 The linting tools currently cover:
 - JavaScript code linting
@@ -51,7 +51,7 @@ The linting tools currently cover:
 
 ## How to: Unit tests
 ```
-gulp test
+npm run test
 ```
 Javascript files in the component folder ending with `.Spec.js` will be run through Mocha.
 
@@ -64,7 +64,7 @@ UPLOAD_PASSWORD=password
 ```
 Then run:
 ```
-gulp upload
+npm run upload
 ```
 
 ## How to: Component library

@@ -8,8 +8,11 @@
   },
   "scripts": {
     "postinstall": "node node_modules/gulp/bin/gulp.js githooks",
-    "start": "node node_modules/gulp/bin/gulp.js dev",
-    "test": "node node_modules/gulp/bin/gulp.js test"
+    "dev": "node node_modules/gulp/bin/gulp.js dev",
+    "dist": "node node_modules/gulp/bin/gulp.js dist",
+    "lint": "node node_modules/gulp/bin/gulp.js lint",
+    "test": "node node_modules/gulp/bin/gulp.js test",
+    "upload": "node node_modules/gulp/bin/gulp.js upload"
   },
   "contributors": [
     "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
