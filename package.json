@@ -72,6 +72,7 @@
     "marked": "^0.3.6",
     "mkdirp": "^0.5.1",
     "moment-timezone": "^0.5.3",
+    "nunjucks-includeData": "0.0.9",
     "require-globify": "^1.4.1",
     "run-sequence": "^1.1.5",
     "stylelint-config-standard": "^16.0.0",
