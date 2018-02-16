@@ -41,11 +41,17 @@ class docsHelpers {
     static renderComponent(content, file) {
         const environment = docsHelpers.createEnvironment();
         const yml = yaml.load(content);
-        const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
         let sample = '';
+        let sampleData;
 
         try {
-            sample = htmlBeautify(environment.render(file.path.replace('.yml', '.njk'), locals));
+            sampleData = JSON.parse(fs.readFileSync(file.path.replace('.yml', '.json')))
+        } catch (error) {
+            sampleData = {}
+        }
+
+        try {
+            sample = htmlBeautify(environment.render(file.path.replace('.yml', '.njk'), { ...sampleData, baseUri: config.html.baseUri }));
         } catch (error) {
             global.console.log(error);
         }
@@ -71,11 +77,17 @@ class docsHelpers {
     static renderComponentDemo(content, file) {
         const environment = docsHelpers.createEnvironment();
         const yml = yaml.load(content);
-        const locals = Object.assign(yml.data || '{}', { baseUri: config.html.baseUri });
         let demo = '';
+        let data;
 
         try {
-            demo = environment.render(file.path.replace('.yml', '.njk'), locals);
+            data = JSON.parse(fs.readFileSync(file.path.replace('.yml', '.json')))
+        } catch (error) {
+            data = {}
+        }
+
+        try {
+            demo = environment.render(file.path.replace('.yml', '.njk'), { ...data, baseUri: config.html.baseUri });
             demo = (yml.demo || '{}').replace(/\{\}/g, demo);
         } catch (error) {
             global.console.log(error);
