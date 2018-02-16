@@ -3,15 +3,11 @@
 ## How to: Setup development environment
 1. Make sure the following is installed on your machine:
     - [Node.js](http://nodejs.org/)
-2. Run this command to install the global dependencies:
-    ```
-    npm install -g gulp-cli
-    ```
-3. Run these commands to install the project-specific dependencies:
+2. Run these commands to install the project-specific dependencies:
     ```
     npm install
     ```
-4. Done! You can now start your development server.
+3. Done! You can now start your development server.
 
 ## How to: Configure bundles
 By default, the boilerplate uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file: 
