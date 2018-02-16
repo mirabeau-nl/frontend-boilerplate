@@ -27,5 +27,10 @@ gulp.task('html', () => {
  */
 gulp.task('html-watch', cb => {
     const paths = config.src;
-    watch([paths.templates, paths.layout, paths.components], () => gulp.start(['html'], cb));
+    watch([
+        paths.templates,
+        paths.layout,
+        paths.components,
+        paths.componentsData
+    ], () => gulp.start(['html'], cb));
 });
