@@ -54,7 +54,7 @@ gulp.task('docs-render-index', () => {
 gulp.task('docs-render-components', ['docs-render-component-demos'], () =>
 
     gulp.src([config.docs.src.componentsAll])
-        .pipe(gulpif(helpers.hasContent, transform((content, file) => helpers.renderComponent(content, file))))
+        .pipe(gulpif(helpers.hasContent, transform('utf8', (content, file) => helpers.renderComponent(content, file))))
         .pipe(ext('.html'))
         .pipe(gulp.dest(config.docs.dist.components))
 
@@ -63,7 +63,7 @@ gulp.task('docs-render-components', ['docs-render-component-demos'], () =>
 gulp.task('docs-render-component-demos', () =>
 
     gulp.src([config.docs.src.componentsAll])
-        .pipe(gulpif(helpers.hasContent, transform((content, file) => helpers.renderComponentDemo(content, file))))
+        .pipe(gulpif(helpers.hasContent, transform('utf8', (content, file) => helpers.renderComponentDemo(content, file))))
         .pipe(ext('.demo.html'))
         .pipe(gulp.dest(config.docs.dist.components))
 
