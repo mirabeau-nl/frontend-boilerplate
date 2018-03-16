@@ -10,6 +10,11 @@ const base = {
 };
 
 module.exports = {
+    base: {
+        src: base.src,
+        dist: base.dist,
+        docs: base.docs,
+    },
 
     browsersync: {
         server: {
@@ -82,6 +87,7 @@ module.exports = {
         src: {
             templates: `${base.src}/templates/**/*.njk`,
             templatesDir: `${base.src}/templates`,
+            templatesData: `${base.src}/templates/**/*.json`,
             layout: `${base.src}/layout/*.njk`,
             layoutDir: `${base.src}/layout`,
             components: `${base.src}/components/**/*.njk`,

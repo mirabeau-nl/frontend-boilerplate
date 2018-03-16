@@ -1,13 +1,22 @@
 {% extends '../layout/default.njk' %}
-{% includeData './home.json' %}
-{% includeData '../components/nav/nav.json' %}
 
 {% block body %}
     <div class="wrapper">
-        {% include '../components/nav/nav.njk' %}
+        {% component 'nav' %}
         <main>
-            <h1>{{ home.title }}</h1>
-            <p>{{ home.body }}</p>
+            <h1>{{ title }}</h1>
+            <p>{{ body }}</p>
+            <h2>List component with default data</h2>
+            {% component 'list' %}
+            <h2>List component with alternate data source path</h2>
+            <p>Some types of waffles:</p>
+            {% component 'list', 'list-waffles.json' %}
+            <h2>List component with data provided by template data</h2>
+            <p>Some types of pies:</p>
+            {% component 'list', list %}
+            <h2>List component with inline data</h2>
+            <p>Some types of cookies:</p>
+            {% component 'list', { items: ['Chocolate chip cookie', 'Animal cracker', 'Brownie'] } %}
         </main>
     </div>
 {% endblock %}
