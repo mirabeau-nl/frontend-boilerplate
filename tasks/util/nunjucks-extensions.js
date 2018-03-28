@@ -73,7 +73,7 @@ export const ComponentTag = function(env) {
 			path = `${config.base.src}/${dataPathOrData}`
 			if (fs.existsSync(path)) return path
 		} else {
-			// Try to find eponymous data file in component's directory
+			// Try to find data file in component's directory with same name
 			path = `${component.path}/${component.name}.json`
 			if (fs.existsSync(path)) return path
 		}

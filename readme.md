@@ -94,7 +94,7 @@ A custom Nunjucks tag is available as a convenience for loading external JSON da
 {% component 'component-name' %}
 ```
 
-If the component has an accompanying, eponymous JSON file, its contents will be loaded and provided automatically, scoped to just the component.
+If the component has an accompanying JSON file with the same name, its contents will be loaded and provided automatically, scoped to just the component.
 
 You can also augment the data set by providing a POJO (Plain Old JavaScript Object) as the second parameter:
 ```
