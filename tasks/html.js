@@ -39,7 +39,7 @@ gulp.task('html-watch', cb => {
     ], () => gulp.start(['html'], cb));
 });
 
-// If a template has an eponymous .json file in the same location, load it as a data source
+// If a template has a .json file with the same name in the same location, load it as a data source
 const getDataForFile = file => {
     try {
         return JSON.parse(fs.readFileSync(file.path.replace('.njk', '.json')))
