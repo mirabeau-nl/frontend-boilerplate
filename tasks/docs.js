@@ -88,6 +88,7 @@ gulp.task('docs-watch', cb => {
     const watching = [
         config.docs.src.index,
         config.docs.src.componentsAll,
+        config.docs.src.componentsData,
         config.html.src.templates,
         config.html.src.layout,
         config.html.src.components

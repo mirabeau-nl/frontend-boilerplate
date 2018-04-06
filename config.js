@@ -10,6 +10,11 @@ const base = {
 };
 
 module.exports = {
+    base: {
+        src: base.src,
+        dist: base.dist,
+        docs: base.docs,
+    },
 
     browsersync: {
         server: {
@@ -48,7 +53,8 @@ module.exports = {
             component: 'component-detail.njk',
             preview: 'component-preview.njk',
             components: `${base.src}/components`,
-            componentsAll: `${base.src}/components/**/*.yml`
+            componentsAll: `${base.src}/components/**/*.yml`,
+            componentsData: `${base.src}/components/**/*.json`
         },
         dist: {
             base: base.dist,
@@ -81,10 +87,12 @@ module.exports = {
         src: {
             templates: `${base.src}/templates/**/*.njk`,
             templatesDir: `${base.src}/templates`,
+            templatesData: `${base.src}/templates/**/*.json`,
             layout: `${base.src}/layout/*.njk`,
             layoutDir: `${base.src}/layout`,
             components: `${base.src}/components/**/*.njk`,
-            componentsDir: `${base.src}/components`
+            componentsDir: `${base.src}/components`,
+            componentsData: `${base.src}/components/**/*.json`
         },
         dist: {
             base: `${base.dist}/templates`

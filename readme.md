@@ -10,13 +10,13 @@
 3. Done! You can now start your development server.
 
 ## How to: Configure bundles
-By default, the boilerplate uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file: 
+By default, the boilerplate uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file:
 ```
 export default require('./**/!(*.Spec).js', { mode: 'hash', resolve: ['reduce', 'strip-ext'] });
 ```
 
 ## How to: Including external dependencies
-To include external dependencies in your procect, you can either install them as runtime dependency using `npm i --save` or import them directly from a vendor folder. 
+To include external dependencies in your procect, you can either install them as runtime dependency using `npm i --save` or import them directly from a vendor folder.
 
 ## How to: Run ConditionerJS instead of Vanilla
 if you want to run conditioner:
@@ -76,7 +76,7 @@ implementation: Implementation instructions
 Note that `demo` should at least contain `{}` as this gets replaced with the component's HTML.
 The component is rendered for each `{}` you provide within the demo parameter.
 
-Components can be nested either with or without a sub-folder. Currently folders can only be nested one level deep.
+Components can be nested either with or without a sub-folder. Sub-folders can go to any depth.
 ```
 nav/
   nav.njk
@@ -87,3 +87,43 @@ nav/
     footerNav.njk
     footerNav.yml
 ```
+
+### Component tag
+A custom Nunjucks tag is available as a convenience for loading external JSON data into a component:
+```
+{% component 'component-name' %}
+```
+
+If the component has an accompanying JSON file with the same name, its contents will be loaded and provided automatically, scoped to just the component.
+
+You can also augment the data set by providing a POJO (Plain Old JavaScript Object) as the second parameter:
+```
+{% component 'component-name', { cookies: '… are delicious!' } %}
+```
+
+This is especially useful for overriding the default data for a component with template data:
+```
+{% component 'component-name', componentName %}
+```
+… where `componentName` is an object from the template's data set.
+
+Finally, you can also provide an alternative data source as the second parameter — this is great for component variations, for example. First, the component directory is looked in for the provided path:
+```
+{% component 'component-name', 'component-name-variation.json' %}
+```
+
+After that, the path is looked for from the project base:
+```
+{% component 'component-name', '/data/my-custom-data.json' %}
+```
+
+If the component resides in a nested folder, simply write out the path to it. For example:
+```
+{% component 'my-sub-folder/component-name' %}
+```
+
+## Templates
+Like components, templates can be nested inside of sub-folders to any depth. Also like components, templates that have an accompanying JSON file will have it automatically loaded and provided as template data.
+
+## includeData plugin
+In case the above isn't enough at some point, the [includeData plugin](https://github.com/VincentLeung/nunjucks-includeData) is available for even more freedom in including data from external JSON files. Refer to its documentation for details.
