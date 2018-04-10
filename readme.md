@@ -1,3 +1,5 @@
+![Logo](frontend_boilerplate_logo.png)
+
 # Frontend Boilerplate
 
 ## How to: Setup development environment
