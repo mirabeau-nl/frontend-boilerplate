@@ -1,4 +1,4 @@
-![Logo](frontend_boilerplate_logo.png)
+![Logo](frontend_boilerplate_logo.svg)
 
 # Frontend Boilerplate
 
