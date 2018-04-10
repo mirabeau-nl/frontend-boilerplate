@@ -1,7 +1,5 @@
 ![Logo](frontend_boilerplate_logo.svg)
 
-# Frontend Boilerplate
-
 ## How to: Setup development environment
 1. Make sure the following is installed on your machine:
     - [Node.js](http://nodejs.org/)
