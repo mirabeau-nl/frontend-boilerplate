@@ -1,6 +1,6 @@
 ![Logo](frontend_boilerplate_logo.svg)
 
-## How to: Setup development environment
+## 🚀 How to: Setup development environment
 1. Make sure the following is installed on your machine:
     - [Node.js](http://nodejs.org/)
 2. Run this command to install the global dependencies:
@@ -13,34 +13,34 @@
     ```
 4. Done! You can now start your development server.
 
-## How to: Configure bundles
+## 🚚 How to: Configure bundles
 By default, the boilerplate uses Browserify to bundle all direct childs of the `/src/static/js` in their own bundle. To import a whole directory into your bundle, make it importable via an index.js file: 
 ```
 export default require('./**/!(*.Spec).js', { mode: 'hash', resolve: ['reduce', 'strip-ext'] });
 ```
 
-## How to: Including external dependencies
+## 📦 How to: Including external dependencies
 To include external dependencies in your procect, you can either install them as runtime dependency using `npm i --save` or import them directly from a vendor folder. 
 
-## How to: Run ConditionerJS instead of Vanilla
+## 💆‍♀️ How to: Run ConditionerJS instead of Vanilla
 if you want to run conditioner:
 1. Run `npm i conditioner-js --save`
 2. Remove the manual init code block in main.js
 3. Uncomment the conditioner init code block in main.js
 4. Enjoy
 
-## How to: Start the development server
+## 🚧 How to: Start the development server
 ```
 gulp dev
 ```
 Then point your browser to `http://localhost:3000/`
 
-## How to: Build
+## 🛠 How to: Build
 ```
 gulp dist
 ```
 
-## How to: Linting
+## ✏️ How to: Linting
 ```
 gulp lint
 ```
@@ -49,13 +49,13 @@ The linting tools currently cover:
 - Sass file code linting
 
 
-## How to: Unit tests
+## 🔎 How to: Unit tests
 ```
 gulp test
 ```
 Javascript files in the component folder ending with `.Spec.js` will be run through Mocha.
 
-## How to: Upload
+## 🆙 How to: Upload
 Add a `.env` file to the project root with your FTP credentials:
 ```
 UPLOAD_HOST=ftp.example.org
@@ -67,7 +67,7 @@ Then run:
 gulp upload
 ```
 
-## How to: Component library
+## 📚 How to: Component library
 Components are visible in the component library when they contain a YAML (.yml) file.
 The YAML file should have the same name as the component's .njk file and contains the following parameters:
 ```
