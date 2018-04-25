@@ -9,7 +9,7 @@ const ready = () => {
     return new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve));
 };
 
-ready().then(initializeComponents(document));
+ready().then(() => initializeComponents(document));
 
 // // If you want to use conditioner instead:
 //
