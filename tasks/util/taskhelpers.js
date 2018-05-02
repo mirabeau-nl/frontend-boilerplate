@@ -1,5 +1,5 @@
 import { js as config } from '../../config';
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import uglifyjs from 'uglify-js';
@@ -34,11 +34,24 @@ module.exports = {
 
         // Sourcemap: Make sure the 'sourceMappingURL' is correct
         process.chdir(config.dist.base);
-        const minified = uglifyjs.minify(filename, {
-            outSourceMap: `${path.basename(filename)}.map`,
-            sourceRoot: '/source/',
-            sourceMapIncludeSources: true
+
+        const fileContent = readFileSync(filename, 'utf8');
+
+        const minified = uglifyjs.minify(fileContent, {
+            sourceMap: {
+                filename: `${path.basename(filename)}.map`,
+                root: '/source/',
+                includeSources: true
+            },
+            output: {
+                code: true
+            }
         });
+
+        if (minified.error) {
+            global.console.error(`Error minifying: ${minified.error}`);
+        }
+
         process.chdir(pwd);
 
         // Write babel helpers
