@@ -13,7 +13,7 @@ module.exports = {
     base: {
         src: base.src,
         dist: base.dist,
-        docs: base.docs,
+        docs: base.docs
     },
 
     browsersync: {
