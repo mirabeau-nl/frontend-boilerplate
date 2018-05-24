@@ -1,5 +1,7 @@
 ![Logo](frontend-boilerplate.svg)
 
+[![Build Status](https://travis-ci.org/mirabeau-nl/frontend-boilerplate.svg?branch=master)](https://travis-ci.org/mirabeau-nl/frontend-boilerplate-cli)
+
 [We're hiring!](https://www.werkenbijmirabeau.nl/en) ✨
 
 This project is a highly opinionated boilerplate that can be used to quickly kickstart a new web development project. It's built on modern tools such as Gulp, Babel, and Browsersync. Using the boilerplate will help you stay productive by eliminating bikeshedding and by encouraging testing.
