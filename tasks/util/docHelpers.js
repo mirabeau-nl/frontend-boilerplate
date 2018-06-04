@@ -38,16 +38,16 @@ class docsHelpers {
      * @param {File} file - File object
      * @returns {string} component - rendered component
      */
-    static renderComponent(content, file) {
+    static renderComponent(content, file) { // eslint-disable-line max-statements
         const environment = docsHelpers.createEnvironment();
         const yml = yaml.load(content);
         let sample = '';
         let sampleData;
 
         try {
-            sampleData = JSON.parse(fs.readFileSync(file.path.replace('.yml', '.json')))
+            sampleData = JSON.parse(fs.readFileSync(file.path.replace('.yml', '.json')));
         } catch (error) {
-            sampleData = {}
+            sampleData = {};
         }
 
         try {
@@ -74,16 +74,16 @@ class docsHelpers {
      * @param {File} file - File object
      * @returns {string} component - rendered component
      */
-    static renderComponentDemo(content, file) {
+    static renderComponentDemo(content, file) { // eslint-disable-line max-statements
         const environment = docsHelpers.createEnvironment();
         const yml = yaml.load(content);
         let demo = '';
         let data;
 
         try {
-            data = JSON.parse(fs.readFileSync(file.path.replace('.yml', '.json')))
+            data = JSON.parse(fs.readFileSync(file.path.replace('.yml', '.json')));
         } catch (error) {
-            data = {}
+            data = {};
         }
 
         try {

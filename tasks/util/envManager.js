@@ -1,5 +1,5 @@
-import includeData from 'nunjucks-includeData'
-import { ComponentTag } from './nunjucks-extensions'
+import includeData from 'nunjucks-includeData';
+import { ComponentTag } from './nunjucks-extensions';
 
 module.exports = env => {
     // IncludeData plugin
