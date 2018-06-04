@@ -1,6 +1,6 @@
 ![Logo](frontend-boilerplate.svg)
 
-[![Build Status](https://travis-ci.org/mirabeau-nl/frontend-boilerplate.svg?branch=master)](https://travis-ci.org/mirabeau-nl/frontend-boilerplate-cli)
+[![Build Status](https://travis-ci.org/mirabeau-nl/frontend-boilerplate.svg?branch=master)](https://travis-ci.org/mirabeau-nl/frontend-boilerplate)
 
 [We're hiring!](https://www.werkenbijmirabeau.nl/en) ✨
 
