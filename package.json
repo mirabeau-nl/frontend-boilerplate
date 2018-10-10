@@ -90,6 +90,7 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
+    "eligrey-classlist-js-polyfill": "^1.2.20180112",
     "normalize-scss": "^7.0.1"
   }
 }
