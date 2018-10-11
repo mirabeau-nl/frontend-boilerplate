@@ -84,8 +84,6 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
 </script>
 ```
 
-_Don't forget to update `/src/tasks/docs/layout/preview.njk` as well!_
-
 4. This version uses Nunjucks instead of Swig, just as the previous version. If you didn't update yet, see https://medium.com/engineers-optimizely/js-templating-transitioning-from-swig-to-nunjucks-ac0e94d1794b#.mf2ddbl2v for a review of syntax changes
 
 5. Install node dependencies
