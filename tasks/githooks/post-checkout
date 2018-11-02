@@ -37,7 +37,7 @@ if [[ $? == 0 ]]; then
     echo ""
 
     # Run gulp task
-    gulp githooks
+    node node_modules/gulp/bin/gulp.js githooks
 
     # Check if the exit code of the last command is 1 (error)
     if [[ $? == 1 ]]; then

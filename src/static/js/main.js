@@ -1,15 +1,20 @@
 // Reference our components so they get included
-import { initializeComponents } from 'utils/initializeComponents';
+import { initializeComponents } from 'utils/initializeComponents'
 
 const ready = () => {
-    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-        return Promise.resolve();
-    }
+  if (
+    document.readyState === 'interactive' ||
+    document.readyState === 'complete'
+  ) {
+    return Promise.resolve()
+  }
 
-    return new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve));
-};
+  return new Promise(resolve =>
+    document.addEventListener('DOMContentLoaded', resolve)
+  )
+}
 
-ready().then(() => initializeComponents(document));
+ready().then(() => initializeComponents(document))
 
 // // If you want to use conditioner instead:
 //
@@ -38,4 +43,3 @@ ready().then(() => initializeComponents(document));
 //
 // // Initialize Conditioner
 // ready().then(conditioner.init);
-
