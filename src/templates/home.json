@@ -1,7 +1,8 @@
 {
-	"title": "I'm a title",
-	"body": "This codebase is a blueprint environment to quick start new front-end projects. It contains an HTTP server via Browsersync, Nunjucks, SCSS, Babel and a Gulp build script to manage it all.",
-	"list": {
-		"items": ["Cherry pie", "Apple pie", "Quiche"]
-	}
+  "title": "I'm a title",
+  "body":
+    "This codebase is a blueprint environment to quick start new front-end projects. It contains an HTTP server via Browsersync, Nunjucks, SCSS, Babel and a Gulp build script to manage it all.",
+  "list": {
+    "items": ["Cherry pie", "Apple pie", "Quiche"]
+  }
 }

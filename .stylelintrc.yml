@@ -1,79 +1,64 @@
-extends: stylelint-config-standard
 plugins:
   - stylelint-scss
-  - stylelint-declaration-strict-value
+
+# Rules in StyleLint are grouped by category
+#  All rules related to formatting or style are disabled,
+#  because prettier.io supersedes them.
 rules:
   at-rule-no-unknown:
     - null
 
-  # CSS (http://stylelint.io/user-guide/rules/)
-  at-rule-empty-line-before:
-    - always
-    -
-      except:
-        - blockless-after-same-name-blockless
-        - first-nested
-      ignore:
-        - after-comment
-        - inside-block
-  block-closing-brace-newline-after:
-    - always
-    -
-      ignoreAtRules:
-        - if
-        - else
-  declaration-empty-line-before: never
-  indentation: 4
+  # Possible Errors
+  # These rules relate to possible syntax or logic errors
+  color-no-invalid-hex: true
+  font-family-no-duplicate-names: true
+  function-calc-no-unspaced-operator: true
+  function-linear-gradient-no-nonstandard-direction: true
+  string-no-newline: true
+  unit-no-unknown: true
+  property-no-unknown: true
+  keyframe-declaration-no-important: true
+  declaration-block-no-duplicate-properties:
+    - true
+    - ignore:
+        - consecutive-duplicates-with-different-values
+  declaration-block-no-shorthand-property-overrides: true
+  block-no-empty: true
+  selector-pseudo-class-no-unknown: true
+  selector-pseudo-element-no-unknown: true
+  selector-type-no-unknown: true
+  media-feature-name-no-unknown: true
+  comment-no-empty: true
+  no-descending-specificity: true
+  no-duplicate-selectors: true
+  no-empty-source: true
+  no-extra-semicolons: true
+  no-invalid-double-slash-comments: true
 
-  # Declaration strict value (https://github.com/AndyOGo/stylelint-declaration-strict-value)
-  scale-unlimited/declaration-strict-value:
-    - "/color/"
-    -
-      ignoreFunctions: false
-      ignoreKeywords:
-        - rgba
-        - currentColor
-        - transparent
-        - inherit
-      ignoreVariables: true
+  # Limit language features
+  #  These rules relate to better ways of doing things to help you avoid problems
+  shorthand-property-no-redundant-values: true
+  value-no-vendor-prefix: true
+  property-no-vendor-prefix: true
+  declaration-block-no-redundant-longhand-properties: true
+  declaration-no-important: true
+  selector-no-vendor-prefix: true
+  media-feature-name-no-vendor-prefix: true
+  at-rule-no-vendor-prefix: true
+  max-nesting-depth:
+    - 3
+    - ignore:
+        - blockless-at-rules
+  no-unknown-animations: true
+  declaration-property-value-whitelist:
+    "/color$/": ["/^\\$|initial|inherit|transparent|currentColor|darken|lighten|rgba/"]
+    "fill": ["/^\\$|initial|inherit|transparent|currentColor|darken|lighten|rgba/"]
+    "stroke": ["/^\\$|initial|inherit|transparent|currentColor|darken|lighten|rgba/"]
 
-  # SCSS (https://github.com/kristerkari/stylelint-scss)
-  scss/at-else-closing-brace-newline-after: ~
-  scss/at-else-closing-brace-space-after: ~
-  scss/at-else-empty-line-before: ~
+  # SCSS-specific
+  #  https://github.com/kristerkari/stylelint-scss
   scss/at-extend-no-missing-placeholder: true
-  scss/at-function-pattern: ~
-  scss/at-if-closing-brace-newline-after: ~
-  scss/at-if-closing-brace-space-after: ~
-  scss/at-import-no-partial-leading-underscore: true
-  scss/at-import-partial-extension-blacklist: ~
-  scss/at-import-partial-extension-whitelist: ~
-  scss/at-mixin-argumentless-call-parentheses: never
-  scss/at-mixin-pattern: ~
-  scss/declaration-nested-properties: never
-  scss/declaration-nested-properties-no-divided-groups: true
-  scss/dollar-variable-colon-newline-after: ~
-  scss/dollar-variable-colon-space-after: always
-  scss/dollar-variable-colon-space-before: never
-  scss/dollar-variable-empty-line-before: ~
-  scss/dollar-variable-no-missing-interpolation: ~
-  scss/dollar-variable-pattern: ~
-  scss/double-slash-comment-empty-line-before:
-    - always
-    -
-      except:
-        - first-nested
-      ignore:
-        - between-comments
-        - stylelint-commands
-  scss/double-slash-comment-inline: ~
-  scss/double-slash-comment-whitespace-inside: always
-  scss/media-feature-value-dollar-variable: ~
-  scss/operator-no-newline-after: true
-  scss/operator-no-newline-before: true
-  scss/operator-no-unspaced: true
-  scss/partial-no-import: ~
-  scss/percent-placeholder-pattern: ~
-  scss/selector-no-redundant-nesting-selector: true
   scss/at-rule-no-unknown: true
+  scss/media-feature-value-dollar-variable: always
+  scss/selector-no-redundant-nesting-selector: true
 

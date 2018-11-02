@@ -1,27 +1,19 @@
 {
-    "presets": [
-        [
-            "env",
-            {
-                "targets": {
-                    "browsers": [
-                        "> 1%",
-                        "last 2 versions",
-                        "Firefox ESR",
-                        "not dead"
-                    ]
-                },
-                "debug": false
-            }
-        ]
-    ],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "Firefox ESR", "not dead"]
+        },
+        "debug": false
+      }
+    ]
+  ],
 
-    "plugins": [
-        "transform-class-properties",
-        "transform-object-rest-spread"
-    ],
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"],
 
-    "env": {
-        "plugins": ["external-helpers"]
-    }
+  "env": {
+    "plugins": ["external-helpers"]
+  }
 }

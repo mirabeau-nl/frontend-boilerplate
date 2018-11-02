@@ -1,33 +1,24 @@
-/* eslint-disable */
 /**
  * @module IframeHeightResizer
  */
-(function() {
+document.addEventListener('readystatechange', () => {
+  if (document.readyState !== 'complete') {
+    return
+  }
 
-    'use strict';
+  Array.prototype.forEach.call(
+    document.querySelectorAll('[data-resize-to-height]'),
+    elem => {
+      // Cross-browser get iframe height
+      const height = Math.max(
+        elem.contentDocument.body.scrollHeight,
+        elem.contentDocument.body.offsetHeight,
+        elem.contentDocument.documentElement.clientHeight,
+        elem.contentDocument.documentElement.scrollHeight,
+        elem.contentDocument.documentElement.offsetHeight
+      )
 
-    document.addEventListener('readystatechange', function() {
-
-        if (document.readyState !== 'complete') {
-            return;
-        }
-
-        var elems = document.querySelectorAll('[data-resize-to-height]');
-
-        [].forEach.call(elems, function(elem) {
-
-            // Cross-browser get iframe height
-            var height = Math.max(
-                elem.contentDocument.body.scrollHeight,
-                elem.contentDocument.body.offsetHeight,
-                elem.contentDocument.documentElement.clientHeight,
-                elem.contentDocument.documentElement.scrollHeight,
-                elem.contentDocument.documentElement.offsetHeight
-            );
-
-            elem.style.height = height + 'px';
-        });
-
-    });
-
-}());
+      elem.style.height = `${height}px`
+    }
+  )
+})

@@ -1,45 +1,48 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Front-End Library</title>
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#000000">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/static/css/all.css">
-    <script>
-        (function(d, w){
-            if (!('devicePixelRatio' in w)) return;
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Front-End Library</title>
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/static/css/all.css">
+  <script>
+    (function (d, w) {
+      if (!('devicePixelRatio' in w)) return;
 
-            d.documentElement.className += ' has-js';
+      d.documentElement.className += ' has-js';
 
-            function loadInOrder(src) {
-                var s = d.createElement('script');
-                var deps = [].slice.call(arguments).slice(1);
-                s.src = src;
-                s.onload = function() { deps.length && loadInOrder.apply(null, deps); };
-                s.onerror = console.error;
-                d.head.appendChild(s);
-            }
+      function loadInOrder(src) {
+        var s = d.createElement('script');
+        var deps = [].slice.call(arguments).slice(1);
+        s.src = src;
+        s.onload = function () { deps.length && loadInOrder.apply(null, deps); };
+        s.onerror = console.error;
+        d.head.appendChild(s);
+      }
 
-            var supported =
-                'Symbol' in w &&
-                'Promise' in w &&
-                'assign' in Object &&
-                'from' in Array &&
-                Symbol.iterator in NodeList.prototype;
+      var supported =
+        'Symbol' in w &&
+        'Promise' in w &&
+        'assign' in Object &&
+        'from' in Array &&
+        Symbol.iterator in NodeList.prototype;
 
-            if (supported) {
-                loadInOrder('/static/js/babel-helpers.js', '/static/js/main.js');
-            } else {
-                loadInOrder('/static/js/babel-helpers.js', '/static/js/polyfill.js', '/static/js/main.js');
-            }
+      if (supported) {
+        loadInOrder('/static/js/babel-helpers.js', '/static/js/main.js');
+      } else {
+        loadInOrder('/static/js/babel-helpers.js', '/static/js/polyfill.js', '/static/js/main.js');
+      }
 
-        }(document, window));
-    </script>
+    }(document, window));
+  </script>
 </head>
+
 <body>
-    {%- block body %}{% endblock -%}
+  {%- block body %}{% endblock -%}
 </body>
+
 </html>
