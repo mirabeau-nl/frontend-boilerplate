@@ -32,9 +32,9 @@
         Symbol.iterator in NodeList.prototype;
 
       if (supported) {
-        loadInOrder('/static/js/babel-helpers.js', '/static/js/main.js');
+        loadInOrder('/static/js/main.js');
       } else {
-        loadInOrder('/static/js/babel-helpers.js', '/static/js/polyfill.js', '/static/js/main.js');
+        loadInOrder('/static/js/polyfill.js', '/static/js/main.js');
       }
 
     }(document, window));

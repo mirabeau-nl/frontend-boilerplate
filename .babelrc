@@ -1,19 +1,15 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "targets": {
-          "browsers": ["> 1%", "last 2 versions", "Firefox ESR", "not dead"]
-        },
         "debug": false
       }
     ]
   ],
-
-  "plugins": ["transform-class-properties", "transform-object-rest-spread"],
-
-  "env": {
-    "plugins": ["external-helpers"]
-  }
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
 }

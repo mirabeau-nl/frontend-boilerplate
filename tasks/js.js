@@ -1,8 +1,4 @@
 import config from '../config'
-import {
-  collectUsedBabelHelpers,
-  writeBabelHelpers
-} from '../tasks/util/taskhelpers'
 import gulp from 'gulp'
 import eslint from 'gulp-eslint'
 import mocha from 'gulp-mocha'
@@ -17,7 +13,6 @@ import buffer from 'vinyl-buffer'
 import browserify from 'browserify'
 import { reload } from 'browser-sync'
 
-const usedBabelHelpers = []
 const task = process.argv[process.argv.length - 1]
 const isFixed = file => file.eslint && file.eslint.fixed
 
@@ -58,7 +53,7 @@ gulp.task('js', ['js-browserify'])
 gulp.task('js-test', () => {
   return gulp.src([config.js.src.tests]).pipe(
     mocha({
-      compilers: ['js:babel-register']
+      compilers: ['js:@babel/register']
     })
   )
 })
@@ -84,9 +79,7 @@ const bundleFile = file => {
       .pipe(gulp.dest(config.js.dist.base))
       .pipe(reload({ stream: true }))
 
-  bundler
-    .on('transform', tr => collectUsedBabelHelpers(tr, usedBabelHelpers))
-    .on('update', bundle)
+  bundler.on('update', bundle)
 
   return bundle()
 }
@@ -103,7 +96,6 @@ gulp.task('js-browserify', done => {
     const tasks = files.map(bundleFile)
 
     return es.merge(tasks).on('end', () => {
-      writeBabelHelpers(usedBabelHelpers)
       done()
     })
   })
