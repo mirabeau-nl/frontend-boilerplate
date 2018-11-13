@@ -31,7 +31,8 @@
     "Peeke Kuepers <pkuepers@mirabeau.nl> (https://peeke.nl/)",
     "Bram Swier <bswier@mirabeau.nl> (https://www.mirabeau.nl/)",
     "Marius de Corte <mdecorte@mirabeau.nl> (http://mariusdecorte.nl/)",
-    "Cosmin Epureanu <cosmin.epureanu@gmail.com> (http://cosminepureanu.com/)"
+    "Cosmin Epureanu <cosmin.epureanu@gmail.com> (http://cosminepureanu.com/)",
+    "Colin Aarts <hello@colinaarts.com> (https://colinaarts.com)"
   ],
   "readmeFilename": "readme.md",
   "license": "BSD-3-Clause",
@@ -41,15 +42,17 @@
     "tabWidth": 2
   },
   "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-external-helpers": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/register": "^7.0.0",
     "autoprefixer": "^8.3.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.3",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babelify": "^8.0.0",
+    "babel-eslint": "^9.0.0",
+    "babelify": "^10.0.0",
     "browser-sync": "^2.24.1",
     "browserify": "^16.2.0",
     "del": "^3.0.0",
@@ -62,7 +65,7 @@
     "gulp-changed": "^3.2.0",
     "gulp-clean-css": "^3.9.3",
     "gulp-data": "^1.3.1",
-    "gulp-eslint": "^4.0.2",
+    "gulp-eslint": "^5.0.0",
     "gulp-ext-replace": "^0.3.0",
     "gulp-filter": "^5.1.0",
     "gulp-if": "^2.0.0",
@@ -73,7 +76,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-stylelint": "^7.0.0",
+    "gulp-stylelint": "^8.0.0",
     "gulp-tap": "^0.1.3",
     "gulp-transform": "^3.0.5",
     "gulp-uglify": "^3.0.0",
@@ -84,7 +87,6 @@
     "js-beautify": "^1.7.5",
     "js-yaml": "^3.11.0",
     "marked": "^0.3.19",
-    "mkdirp": "^0.5.1",
     "moment-timezone": "^0.5.16",
     "nunjucks-includeData": "0.0.9",
     "prettier": "1.9.2",
@@ -94,7 +96,6 @@
     "stylelint-config-prettier": "^3.2.0",
     "stylelint-declaration-strict-value": "^1.0.4",
     "stylelint-scss": "^3.1.0",
-    "uglify-js": "^3.3.23",
     "vinyl": "^2.1.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-ftp": "^0.6.1",
@@ -103,6 +104,7 @@
     "zen-observable": "^0.7.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "eligrey-classlist-js-polyfill": "^1.2.20180112",
     "normalize-scss": "^7.0.1"
   }

@@ -2,6 +2,7 @@
 .idea
 .project
 *.sublime-*
+*.code-*
 
 
 # Node.js
