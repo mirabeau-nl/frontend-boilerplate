@@ -29,7 +29,8 @@
         'Promise' in w &&
         'assign' in Object &&
         'from' in Array &&
-        Symbol.iterator in NodeList.prototype;
+        Symbol.iterator in NodeList.prototype &&
+        Symbol.iterator in HTMLCollection.prototype;
 
       if (supported) {
         loadInOrder('/static/js/main.js');
