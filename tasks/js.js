@@ -92,8 +92,8 @@ gulp.task('js-browserify', done => {
 
     const tasks = files
       .map(bundleFile)
-      .map(bundler => new Promise(resolve => bundler.on('end', resolve)))
+      .map(bundle => new Promise(resolve => bundle.on('finish', resolve)))
 
-    Promise.all(tasks).then(done)
+    Promise.all(tasks).then(() => done()).catch(done)
   })
 })
