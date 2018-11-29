@@ -57,13 +57,7 @@ gulp.task('js-test', () => {
   )
 })
 
-const bundleFile = file => {
-  const opts = config.js.browserify
-
-  if (task === 'dev') {
-    opts.plugin = opts.plugin.concat('watchify')
-  }
-
+const bundleFile = (file, opts) => {
   const bundler = browserify(file, opts)
 
   const bundle = () =>
@@ -87,11 +81,17 @@ const bundleFile = file => {
  * Task: JS Browserify
  */
 gulp.task('js-browserify', done => {
+  const opts = config.js.browserify
+
+  if (task === 'dev') {
+    opts.plugin = opts.plugin.concat('watchify')
+  }
+
   glob(config.js.src.bundles, (err, files) => {
     if (err) done(err)
 
     const tasks = files
-      .map(bundleFile)
+      .map(file => bundleFile(file, opts))
       .map(bundler => new Promise(resolve => bundler.on('end', resolve)))
 
     Promise.all(tasks).then(done)
