@@ -7,7 +7,6 @@ import rename from 'gulp-rename'
 import uglify from 'gulp-uglify'
 import sourcemaps from 'gulp-sourcemaps'
 import glob from 'glob'
-import es from 'event-stream'
 import source from 'vinyl-source-stream'
 import buffer from 'vinyl-buffer'
 import browserify from 'browserify'
@@ -89,14 +88,12 @@ const bundleFile = file => {
  */
 gulp.task('js-browserify', done => {
   glob(config.js.src.bundles, (err, files) => {
-    if (err) {
-      done(err)
-    }
+    if (err) done(err)
 
-    const tasks = files.map(bundleFile)
+    const tasks = files
+      .map(bundleFile)
+      .map(bundler => new Promise(resolve => bundler.on('end', resolve)))
 
-    return es.merge(tasks).on('end', () => {
-      done()
-    })
+    Promise.all(tasks).then(done)
   })
 })
