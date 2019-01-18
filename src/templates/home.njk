@@ -21,6 +21,10 @@
     <h2>List component with inline data</h2>
     <p>Some types of cookies:</p>
     {% component 'list', { items: ['Chocolate chip cookie', 'Animal cracker', 'Brownie'] } %}
+
+    <h2>List component with alternate data source path and inline data override</h2>
+    <p>Some types of waffles:</p>
+    {% component 'list', 'list-waffles.json', { items: ["There's nothing here anymore, I've eaten all your waffles!"] } %}
   </main>
 </div>
 {% endblock %}

@@ -179,6 +179,12 @@ After that, the path is looked for from the project base:
 {% component 'component-name', '/data/my-custom-data.json' %}
 ```
 
+You can also provide both a data path and inline data:
+
+```
+{% component 'component-name', 'component-name-variation.json', { override: 'something' } %}
+```
+
 If the component resides in a nested folder, simply write out the path to it. For example:
 
 ```
