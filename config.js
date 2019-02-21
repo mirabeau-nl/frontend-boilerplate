@@ -3,7 +3,7 @@ import pkg from './package.json'
 
 dotenv.load({ silent: true })
 
-const { env } = process
+const { argv, env } = process
 
 const base = {
   src: './src',
@@ -24,7 +24,8 @@ module.exports = {
     },
     open: false,
     ui: false,
-    notify: false
+    notify: false,
+    https: argv.includes('--https')
   },
 
   clean: {
