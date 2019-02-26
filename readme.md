@@ -8,17 +8,23 @@ This project is a highly opinionated boilerplate that can be used to quickly kic
 
 ## 📖 Table of contents
 
-* [Features](#features)
-* [Quickstart guide](#-quickstart)
-* [Getting started guide](#-getting-started)
-  * [Set up development environment](#set-up-your-development-environment)
+* [📖 Table of contents](#%F0%9F%93%96-table-of-contents)
+* [💫 Features](#%F0%9F%92%AB-features)
+* [🚀 Quickstart](#%F0%9F%9A%80-quickstart)
+* [➡️ Getting started](#%E2%9E%A1%EF%B8%8F-getting-started)
+  * [Set up your development environment](#set-up-your-development-environment)
   * [Creating new components](#creating-new-components)
   * [Creating new templates](#creating-new-templates)
   * [Linting and testing](#linting-and-testing)
   * [Building and uploading](#building-and-uploading)
-* [Extending the boilerplate](#extending-the-boilerplate)
-* [Using the component library](#-using-the-component-library)
-* [Using the custom component Nunjucks tag](#-using-the-custom-nunjucks-component-tag)
+* [🕹 Extending the boilerplate](#%F0%9F%95%B9-extending-the-boilerplate)
+  * [How to: Configure bundles](#how-to-configure-bundles)
+  * [How to: Including external dependencies](#how-to-including-external-dependencies)
+  * [How to: Run ConditionerJS💆‍♀️ instead of Vanilla](#how-to-run-conditionerjs%F0%9F%92%86%E2%80%8D%E2%99%80%EF%B8%8F-instead-of-vanilla)
+* [📚 Using the component library](#%F0%9F%93%9A-using-the-component-library)
+* [🏷 Using the custom Nunjucks component tag](#%F0%9F%8F%B7-using-the-custom-nunjucks-component-tag)
+  * [Templates](#templates)
+  * [includeData plugin](#includedata-plugin)
 
 ## 💫 Features
 
@@ -54,6 +60,8 @@ This boilerplate utilizes Gulp heavily to automate tasks and manage frontend dep
    npm install
    ```
 4. Done! You can now start your development server by running `npm run dev`. This command will start a local server, located at `http://localhost:3000`.
+
+Note: optionally, you can run the development server in https mode without certificates by passing the `--https` flag. If you have to use certificates you can pass them in `config.js` under 'browsersync'.
 
 It's important to realize that this boilerplate distinguishes between `components` and `templates`. A component (located in `src/components`) is just that, a component. It could be a menu, or a list of items. A template (located in `src/templates`) is a collection of components.
 
