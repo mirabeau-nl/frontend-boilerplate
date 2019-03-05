@@ -5,6 +5,7 @@ import { nunjucks } from 'gulp-nunjucks-render'
 import marked from 'marked'
 import fs from 'fs'
 import { html as htmlBeautify } from 'js-beautify'
+import hljs from 'highlight.js'
 import envManager from './envManager'
 import Vinyl from 'vinyl'
 
@@ -67,8 +68,10 @@ class docsHelpers {
         environment.render(file.path.replace('.yml', '.njk'), {
           ...sampleData,
           baseUri: config.html.baseUri
-        })
+        }),
+        config.docs.codeBeautifier
       )
+      sample = hljs.highlight('html', sample).value
     } catch (error) {
       global.console.log(error)
     }

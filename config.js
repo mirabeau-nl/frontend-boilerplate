@@ -64,6 +64,10 @@ module.exports = {
       index: `${base.dist}/index.html`,
       static: `${base.dist}/docs/static/`,
       components: `${base.dist}/docs/components/`
+    },
+    codeBeautifier: {
+      'indent-size': 2,
+      'max-preserve-newlines': 0
     }
   },
 
