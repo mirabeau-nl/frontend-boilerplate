@@ -1,10 +1,18 @@
-/* eslint-disable no-unused-vars */
-
 import browsersync from 'browser-sync'
 import { browsersync as config } from '../config'
-import gulp from 'gulp'
+import { series } from 'gulp'
+
+/**
+ * Initialize BrowserSync
+ * @returns {Object}
+ */
+function setupBrowserSync() {
+  return browsersync(config)
+}
 
 /**
  * Task: BrowserSync HTTP server
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
  */
-gulp.task('browsersync', cb => browsersync(config))
+export const browserSync = cb => series(setupBrowserSync)(cb)

@@ -1,9 +1,7 @@
 import config from '../config'
-import gulp from 'gulp'
+import { src, dest, series, watch } from 'gulp'
 import render from 'gulp-nunjucks-render'
-import watch from 'gulp-watch'
 import moment from 'moment-timezone'
-import runSequence from 'run-sequence'
 import transform from 'gulp-transform'
 import ext from 'gulp-ext-replace'
 import gulpif from 'gulp-if'
@@ -12,15 +10,17 @@ import envManager from './util/envManager'
 
 /**
  * Sub-task: Docs copy statics
+ * @returns {NodeJS.WritableStream}
  */
-gulp.task('docs-copy-statics', () =>
-  gulp.src(config.docs.src.statics).pipe(gulp.dest(config.docs.dist.static))
-)
+function docsCopyStatics() {
+  return src(config.docs.src.statics).pipe(dest(config.docs.dist.static))
+}
 
 /**
  * Sub-task: Docs render index
+ * @returns {NodeJS.WritableStream}
  */
-gulp.task('docs-render-index', () => {
+function docsRenderIndex() {
   // Grab list of templates
   const templates = helpers.getTemplateTree(config.docs.src.templates)
   const components = helpers.getComponentTree(config.docs.src.components)
@@ -42,18 +42,17 @@ gulp.task('docs-render-index', () => {
   ]
 
   // Render index template
-  return gulp
-    .src(config.docs.src.index)
+  return src(config.docs.src.index)
     .pipe(render({ path: paths, data, manageEnv: envManager }))
-    .pipe(gulp.dest(config.docs.dist.base))
-})
+    .pipe(dest(config.docs.dist.base))
+}
 
 /**
- * Task: Docs components
+ * Render Docs components
+ * @returns {NodeJS.WritableStream}
  */
-gulp.task('docs-render-components', ['docs-render-component-demos'], () =>
-  gulp
-    .src([config.docs.src.componentsAll])
+function docsRenderComponents() {
+  return src([config.docs.src.componentsAll])
     .pipe(
       gulpif(
         helpers.hasContent,
@@ -63,12 +62,15 @@ gulp.task('docs-render-components', ['docs-render-component-demos'], () =>
       )
     )
     .pipe(ext('.html'))
-    .pipe(gulp.dest(config.docs.dist.components))
-)
+    .pipe(dest(config.docs.dist.components))
+}
 
-gulp.task('docs-render-component-demos', () =>
-  gulp
-    .src([config.docs.src.componentsAll])
+/**
+ * Render Docs component demos
+ * @returns {NodeJS.WritableStream}
+ */
+function docsRenderComponentDemos() {
+  return src([config.docs.src.componentsAll])
     .pipe(
       gulpif(
         helpers.hasContent,
@@ -78,29 +80,28 @@ gulp.task('docs-render-component-demos', () =>
       )
     )
     .pipe(ext('.demo.html'))
-    .pipe(gulp.dest(config.docs.dist.components))
-)
+    .pipe(dest(config.docs.dist.components))
+}
 
 /**
  * Task: Docs Compile
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
  */
-gulp.task('docs', cb =>
-  runSequence(
-    [
-      'docs-copy-statics',
-      'docs-render-index',
-      'docs-render-components',
-      'docs-render-component-demos'
-    ],
-    cb
-  )
-)
+export function docs(cb) {
+  return series(
+    docsCopyStatics,
+    docsRenderIndex,
+    docsRenderComponents,
+    docsRenderComponentDemos
+  )(cb)
+}
 
 /**
  * Task: Docs Watch
  */
-gulp.task('docs-watch', cb => {
-  const watching = [
+export function docsWatch() {
+  const paths = [
     config.docs.src.index,
     config.docs.src.componentsAll,
     config.docs.src.componentsData,
@@ -108,5 +109,6 @@ gulp.task('docs-watch', cb => {
     config.html.src.layout,
     config.html.src.components
   ]
-  watch(watching, () => gulp.start(['docs'], cb))
-})
+
+  watch(paths, series(docs))
+}

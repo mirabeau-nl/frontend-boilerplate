@@ -1,5 +1,5 @@
 import config from '../config'
-import gulp from 'gulp'
+import { src, dest, series } from 'gulp'
 import eslint from 'gulp-eslint'
 import mocha from 'gulp-mocha'
 import gulpif from 'gulp-if'
@@ -15,48 +15,6 @@ import { reload } from 'browser-sync'
 const task = process.argv[process.argv.length - 1]
 const isFixed = file => file.eslint && file.eslint.fixed
 
-/**
- * Task: JS Lint
- */
-gulp.task('js-lint', () => {
-  const src = [
-    './gulpfile.babel.js',
-    './config.js',
-    './tasks/**/*.js',
-    config.js.src.all,
-    config.js.src.components,
-    `!${config.js.src.vendor}`
-  ]
-
-  return gulp
-    .src(src)
-    .pipe(
-      eslint({
-        fix: config.js.eslintAutofix,
-        ignorePath: config.codestyle.ignorefile
-      })
-    )
-    .pipe(eslint.format())
-    .pipe(gulpif(isFixed, gulp.dest(file => file.base)))
-    .pipe(eslint.failAfterError())
-})
-
-/**
- * Task: JS Compile
- */
-gulp.task('js', ['js-browserify'])
-
-/**
- * Task: JS unit tests
- */
-gulp.task('js-test', () => {
-  return gulp.src([config.js.src.tests]).pipe(
-    mocha({
-      compilers: ['js:@babel/register']
-    })
-  )
-})
-
 const bundleFile = (file, opts) => {
   const bundler = browserify(file, opts)
 
@@ -69,7 +27,7 @@ const bundleFile = (file, opts) => {
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(uglify())
       .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(config.js.dist.base))
+      .pipe(dest(config.js.dist.base))
       .pipe(reload({ stream: true }))
 
   bundler.on('update', bundle)
@@ -77,10 +35,7 @@ const bundleFile = (file, opts) => {
   return bundle()
 }
 
-/**
- * Task: JS Browserify
- */
-gulp.task('js-browserify', done => {
+const jsBrowserify = done => {
   const opts = config.js.browserify
 
   if (task === 'dev') {
@@ -88,7 +43,9 @@ gulp.task('js-browserify', done => {
   }
 
   glob(config.js.src.bundles, (err, files) => {
-    if (err) done(err)
+    if (err) {
+      done(err)
+    }
 
     const tasks = files
       .map(file => bundleFile(file, opts))
@@ -98,4 +55,51 @@ gulp.task('js-browserify', done => {
       .then(() => done())
       .catch(done)
   })
-})
+}
+
+/**
+ * Task: JS Compile
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
+ */
+export function js(cb) {
+  return series(jsBrowserify)(cb)
+}
+
+/**
+ * Task: JS Lint
+ * @returns {stream}
+ */
+export function jsLint() {
+  const paths = [
+    './gulpfile.babel.js',
+    './config.js',
+    './tasks/**/*.js',
+    config.js.src.all,
+    config.js.src.components,
+    `!${config.js.src.vendor}`
+  ]
+
+  return src(paths)
+    .pipe(
+      eslint({
+        fix: config.js.eslintAutofix,
+        ignorePath: config.codestyle.ignorefile
+      })
+    )
+    .pipe(eslint.format())
+    .pipe(gulpif(isFixed, dest(file => file.base)))
+    .pipe(eslint.failAfterError())
+}
+
+/**
+ * Task: JS unit tests
+ * @returns {NodeJS.WritableStream}
+ */
+export function jsTest() {
+  return src([config.js.src.tests]).pipe(
+    mocha({
+      compilers: ['js:@babel/register']
+    })
+  )
+}
