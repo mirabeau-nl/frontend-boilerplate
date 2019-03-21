@@ -1,45 +1,60 @@
 /* eslint-disable sort-imports */
 
-import gulp from 'gulp'
-import runSequence from 'run-sequence'
+import { series, parallel } from 'gulp'
 
 // Load tasks
-import './tasks/clean'
-import './tasks/codestyle'
-import './tasks/browsersync'
-import './tasks/html'
-import './tasks/img'
-import './tasks/css'
-import './tasks/docs'
-import './tasks/fonts'
-import './tasks/js'
-import './tasks/upload'
-import './tasks/githooks'
-import './tasks/zip'
+import { clean } from './tasks/clean'
+import { codestyle, codestyleIsValid } from './tasks/codestyle'
+import { browserSync } from './tasks/browsersync'
+import { html, htmlWatch } from './tasks/html'
+import { img, imgWatch } from './tasks/img'
+import { css, cssWatch, cssLint } from './tasks/css'
+import { docs, docsWatch } from './tasks/docs'
+import { fonts, fontsWatch } from './tasks/fonts'
+import { js, jsLint, jsTest } from './tasks/js'
+import { fileUpload } from './tasks/upload'
+import { githooks } from './tasks/githooks'
+import { zip } from './tasks/zip'
 
-gulp.task('dev', cb => {
-  return runSequence(
-    'clean',
-    ['docs', 'html', 'img', 'css', 'fonts'],
-    [
-      'js',
-      'browsersync',
-      'docs-watch',
-      'html-watch',
-      'img-watch',
-      'css-watch',
-      'fonts-watch'
-    ],
-    cb
-  )
-})
+function dev(cb) {
+  return series(
+    clean,
+    parallel(docs, html, img, css, fonts),
+    parallel(
+      js,
+      browserSync,
+      docsWatch,
+      htmlWatch,
+      imgWatch,
+      cssWatch,
+      fontsWatch
+    )
+  )(cb)
+}
 
-gulp.task('dist', cb =>
-  runSequence('clean', ['docs', 'html', 'img', 'css', 'fonts', 'js'], 'zip', cb)
-)
+function dist(cb) {
+  return series(clean, parallel(docs, html, img, css, fonts, js), zip)(cb)
+}
 
-gulp.task('codequality', ['css-lint', 'js-lint'])
+function codequality(cb) {
+  return parallel(cssLint, jsLint)(cb)
+}
 
-gulp.task('test', ['js-test'])
+function test(cb) {
+  return series(jsTest)(cb)
+}
 
-gulp.task('upload', cb => runSequence('dist', 'file-upload', cb))
+function upload(cb) {
+  return series(dist, fileUpload)(cb)
+}
+
+export {
+  githooks,
+  codestyle,
+  codestyleIsValid,
+  dev,
+  dist,
+  codequality,
+  test,
+  upload
+}

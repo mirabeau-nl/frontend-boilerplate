@@ -1,6 +1,5 @@
 import { codestyle as config } from '../config'
 import fs from 'fs'
-import gulp from 'gulp'
 import ignore from 'ignore'
 import Observable from 'zen-observable'
 import path from 'path'
@@ -51,20 +50,26 @@ function reduceResult(prev, curr) {
   }
 }
 
-function printResult(result) {
+function printResult(result, cb) {
   if (result.hasFormatted) {
     console.warn(
       `\nCode style: Prettier formatted ${result.hasFormatted} files.\n`
     )
   }
+
   if (result.isInvalid) {
     console.error(
       `\nCode style: Prettier found ${
         result.isInvalid
       } incorrectly formatted files.\n`
     )
+
     process.exit(1)
+
+    return cb()
   }
+
+  return cb()
 }
 
 /**
@@ -72,16 +77,18 @@ function printResult(result) {
  *  Formats all code according to style throughout the app
  *  Corresponds to:
  *   $ prettier --write --ignore-path .lintignore "**\/*.{md,css,scss,js,json}"
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
  */
-gulp.task('codestyle', () => {
-  Observable.from(globVinyl(config.glob))
+export function codestyle(cb) {
+  return Observable.from(globVinyl(config.glob))
     .filter(makeFilter(config.ignorefile))
     .map(readVinyl)
     .map(prettierFormat)
     .map(writeVinyl)
     .reduce(reduceResult)
-    .subscribe(printResult)
-})
+    .subscribe(result => printResult(result, cb))
+}
 
 /**
  * Task: Is Valid Codestyle?
@@ -89,12 +96,14 @@ gulp.task('codestyle', () => {
  *   exits with non-zero if the codestyle does not pass.
  *  Corresponds to:
  *   $ prettier --list-different --ignore-path .lintignore "**\/*.{md,css,scss,js,json}"
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
  */
-gulp.task('codestyle-is-valid', () => {
-  Observable.from(globVinyl(config.glob))
+export function codestyleIsValid(cb) {
+  return Observable.from(globVinyl(config.glob))
     .filter(makeFilter(config.ignorefile))
     .map(readVinyl)
     .map(prettierCheck)
     .reduce(reduceResult)
-    .subscribe(printResult)
-})
+    .subscribe(result => printResult(result, cb))
+}

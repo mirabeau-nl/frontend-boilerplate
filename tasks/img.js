@@ -1,23 +1,22 @@
 import changed from 'gulp-changed'
 import { img as config } from '../config'
-import gulp from 'gulp'
+import { src, dest, watch, series } from 'gulp'
 import imagemin from 'gulp-imagemin'
-import watch from 'gulp-watch'
 
 /**
  * Task: Image optimizer
+ * @returns {NodeJS.WritableStream}
  */
-gulp.task('img', () => {
-  return gulp
-    .src(config.src.all)
+export function img() {
+  return src(config.src.all)
     .pipe(changed(config.dist.base))
     .pipe(imagemin())
-    .pipe(gulp.dest(config.dist.base))
-})
+    .pipe(dest(config.dist.base))
+}
 
 /**
  * Task: Image Watch
  */
-gulp.task('img-watch', cb => {
-  watch([config.src.all], () => gulp.start(['img'], cb))
-})
+export function imgWatch() {
+  watch(config.src.all, series(img))
+}

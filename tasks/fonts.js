@@ -1,21 +1,20 @@
 import { fonts as config } from '../config'
-import gulp from 'gulp'
+import { src, dest, watch, series } from 'gulp'
 import { reload } from 'browser-sync'
-import watch from 'gulp-watch'
 
 /**
  * Task: Copy fonts
+ * @returns {NodeJS.WritableStream}
  */
-gulp.task('fonts', () => {
-  return gulp
-    .src(config.src.fonts)
-    .pipe(gulp.dest(config.dist.fonts))
+export function fonts() {
+  return src(config.src.fonts)
+    .pipe(dest(config.dist.fonts))
     .pipe(reload({ stream: true }))
-})
+}
 
 /**
  * Task: Fonts watch
  */
-gulp.task('fonts-watch', cb => {
-  watch(config.src.fonts, () => gulp.start(['fonts'], cb))
-})
+export function fontsWatch() {
+  watch(config.src.fonts, series(fonts))
+}

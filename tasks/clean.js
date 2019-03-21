@@ -1,10 +1,18 @@
 import { clean as config } from '../config'
 import del from 'del'
-import gulp from 'gulp'
+import { series } from 'gulp'
 
 /**
- * Task: Clean dist/ folder
+ * Sub-task: Delete dist folder
+ * @returns {Object}
  */
-gulp.task('clean', () => {
-  del.sync(config.dist.base)
-})
+function cleanDist() {
+  return del(config.dist.base)
+}
+
+/**
+ * Task: Clean "dist/" folder
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
+ */
+export const clean = cb => series(cleanDist)(cb)

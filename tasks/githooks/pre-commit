@@ -7,10 +7,10 @@ echo "$CHANGED_FILES" | grep -E '\.(md|css|scss|js|json)$' >/dev/null 2>&1
 if [[ $? == 0 ]]; then
 
     echo ""
-    echo "githook: pre-commit: Running 'npm run codestyle-is-valid' because a *.{md,css,scss,js,json} file has changed"
+    echo "githook: pre-commit: Running 'npm run codestyleIsValid' because a *.{md,css,scss,js,json} file has changed"
     echo ""
 
-    npm run codestyle-is-valid >/dev/null 2>&1
+    npm run codestyleIsValid >/dev/null 2>&1
 
     if [[ $? == 1 ]]; then
 

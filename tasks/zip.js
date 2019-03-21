@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs'
 import config from '../config'
-import gulp from 'gulp'
-import zip from 'gulp-zip'
+import { src, dest } from 'gulp'
+import gulpZip from 'gulp-zip'
 
 /**
  * Write a-href to zip file to index.html
@@ -20,11 +20,11 @@ const updateIndex = () => {
 
 /**
  * Task: Add content to zip archive
+ * @returns {NodeJS.WritableStream}
  */
-gulp.task('zip', () => {
-  return gulp
-    .src([config.zip.src.all])
-    .pipe(zip(config.zip.filename))
-    .pipe(gulp.dest(config.zip.dist.base))
+export function zip() {
+  return src([config.zip.src.all])
+    .pipe(gulpZip(config.zip.filename))
+    .pipe(dest(config.zip.dist.base))
     .on('end', updateIndex)
-})
+}
