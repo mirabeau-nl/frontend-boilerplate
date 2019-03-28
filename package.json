@@ -31,13 +31,13 @@
     "Sanjay Twisk <stwisk@mirabeau.nl> (http://twisk-interactive.nl/)",
     "Peeke Kuepers <pkuepers@mirabeau.nl> (https://peeke.nl/)",
     "Bram Swier <bswier@mirabeau.nl> (https://www.mirabeau.nl/)",
-    "Marius de Corte <mdecorte@mirabeau.nl> (http://mariusdecorte.nl/)",
+    "Marius de Corte <mdecorte@gmail.nl> (https://marius.observer/)",
     "Cosmin Epureanu <cosmin.epureanu@gmail.com> (http://cosminepureanu.com/)",
     "Colin Aarts <hello@colinaarts.com> (https://colinaarts.com)",
     "Razvan Negrea <howl@wolfpilot.co> (http://www.wolfpilot.co/)",
     "Dave Bitter <dbitter@mirabeau.nl> (https://davebitter.com)"
   ],
-  "readmeFilename": "readme.md",
+  "readmeFilename": "README.md",
   "license": "BSD-3-Clause",
   "prettier": {
     "semi": false,
