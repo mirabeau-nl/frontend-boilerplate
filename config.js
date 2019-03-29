@@ -85,6 +85,15 @@ module.exports = {
     }
   },
 
+  mock: {
+    src: {
+      mock: `${base.src}/mock/**/*`
+    },
+    dist: {
+      mock: `${base.dist}/mock`
+    }
+  },
+
   githooks: {
     src: {
       all: './tasks/githooks/*'
