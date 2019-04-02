@@ -72,7 +72,7 @@ module.exports = {
   },
 
   codestyle: {
-    glob: '**/*.{md,css,scss,js,json}',
+    glob: '**/*.{md,css,scss,js,json,yml}',
     ignorefile: '.lintignore'
   },
 
