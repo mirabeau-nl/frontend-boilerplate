@@ -4,7 +4,6 @@
 <div class="wrapper">
   {% component 'nav' %}
   <main>
-    <img src="/mock/example.svg" alt="">
     <h1>{{ title }}</h1>
     <p>{{ body }}</p>
 
@@ -14,6 +13,7 @@
     <h2>List component with alternate data source path</h2>
     <p>Some types of waffles:</p>
     {% component 'list', 'list-waffles.json' %}
+    <img src="/mock/example-waffles.jpg" width="240" alt="Belgian waffle with chocolate sauce">
 
     <h2>List component with data provided by template data</h2>
     <p>Some types of pies:</p>
