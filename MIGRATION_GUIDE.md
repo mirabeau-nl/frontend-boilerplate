@@ -4,8 +4,8 @@
 
 This new version introduces a couple of breaking changes. When not to update:
 
-* If you rely on RequireJS: module loading through RequireJS has been deprecated in favour of Browserify
-* If you rely on stage-0 JavaScript, `.babelrc` has been updated to use `stage-2` to prevent breaking changes due to changes in ES.
+- If you rely on RequireJS: module loading through RequireJS has been deprecated in favour of Browserify
+- If you rely on stage-0 JavaScript, `.babelrc` has been updated to use `stage-2` to prevent breaking changes due to changes in ES.
 
 ## ConditionerJS users
 
@@ -16,17 +16,17 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
 1. Make a back-up of your project
 2. Overwrite or add the following files and folders
 
-* /tasks
-* .babelrc
-* config.js
-* package.json
-* /src/static/js/main.js
-* /src/static/js/polyfill.js
-* /src/components/index.js
+- /tasks
+- .babelrc
+- config.js
+- package.json
+- /src/static/js/main.js
+- /src/static/js/polyfill.js
+- /src/components/index.js
 
 3. Update your code to handle new options syntax:
 
-* Options are given through seperate data attributes:
+- Options are given through seperate data attributes:
 
   ```
   <div data-triggers="id1" data-foo="bar">
@@ -38,7 +38,7 @@ If you rely on ConditionerJS API or monitors, check the readme file to see how t
   <div data-options='{"triggers":"id1", "foo":"bar"}>
   ```
 
-* Options are always passed as string, instead of being parsed by JSON.parse:
+- Options are always passed as string, instead of being parsed by JSON.parse:
 
   ```
   <div data-options={"bool":true}>

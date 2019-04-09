@@ -2,12 +2,12 @@
 
 CHANGED_FILES="$(git diff --cached --name-only --diff-filter=ACM)"
 
-echo "$CHANGED_FILES" | grep -E '\.(md|css|scss|js|json)$' >/dev/null 2>&1
+echo "$CHANGED_FILES" | grep -E '\.(md|css|scss|js|json|yml)$' >/dev/null 2>&1
 
 if [[ $? == 0 ]]; then
 
     echo ""
-    echo "githook: pre-commit: Running 'npm run codestyleIsValid' because a *.{md,css,scss,js,json} file has changed"
+    echo "githook: pre-commit: Running 'npm run codestyleIsValid' because a *.{md,css,scss,js,json,yml} file has changed"
     echo ""
 
     npm run codestyleIsValid >/dev/null 2>&1
@@ -15,7 +15,7 @@ if [[ $? == 0 ]]; then
     if [[ $? == 1 ]]; then
 
         echo ""
-        echo "githook: pre-commit: Running 'npm run codestyle' because a *.{md,css,scss,js,json} file has changed"
+        echo "githook: pre-commit: Running 'npm run codestyle' because a *.{md,css,scss,js,json,yml} file has changed"
         echo ""
         npm run codestyle
 

@@ -8,32 +8,32 @@ This project is a highly opinionated boilerplate that can be used to quickly kic
 
 ## 📖 Table of contents
 
-* [📖 Table of contents](#%F0%9F%93%96-table-of-contents)
-* [💫 Features](#%F0%9F%92%AB-features)
-* [🚀 Quickstart](#%F0%9F%9A%80-quickstart)
-* [➡️ Getting started](#%E2%9E%A1%EF%B8%8F-getting-started)
-  * [Set up your development environment](#set-up-your-development-environment)
-  * [Creating new components](#creating-new-components)
-  * [Creating new templates](#creating-new-templates)
-  * [Linting and testing](#linting-and-testing)
-  * [Building and uploading](#building-and-uploading)
-* [🕹 Extending the boilerplate](#%F0%9F%95%B9-extending-the-boilerplate)
-  * [How to: Configure bundles](#how-to-configure-bundles)
-  * [How to: Including external dependencies](#how-to-including-external-dependencies)
-  * [How to: Run ConditionerJS💆‍♀️ instead of Vanilla](#how-to-run-conditionerjs%F0%9F%92%86%E2%80%8D%E2%99%80%EF%B8%8F-instead-of-vanilla)
-* [📚 Using the component library](#%F0%9F%93%9A-using-the-component-library)
-* [🏷 Using the custom Nunjucks component tag](#%F0%9F%8F%B7-using-the-custom-nunjucks-component-tag)
-  * [Templates](#templates)
-  * [includeData plugin](#includedata-plugin)
+- [📖 Table of contents](#%F0%9F%93%96-table-of-contents)
+- [💫 Features](#%F0%9F%92%AB-features)
+- [🚀 Quickstart](#%F0%9F%9A%80-quickstart)
+- [➡️ Getting started](#%E2%9E%A1%EF%B8%8F-getting-started)
+  - [Set up your development environment](#set-up-your-development-environment)
+  - [Creating new components](#creating-new-components)
+  - [Creating new templates](#creating-new-templates)
+  - [Linting and testing](#linting-and-testing)
+  - [Building and uploading](#building-and-uploading)
+- [🕹 Extending the boilerplate](#%F0%9F%95%B9-extending-the-boilerplate)
+  - [How to: Configure bundles](#how-to-configure-bundles)
+  - [How to: Including external dependencies](#how-to-including-external-dependencies)
+  - [How to: Run ConditionerJS💆‍♀️ instead of Vanilla](#how-to-run-conditionerjs%F0%9F%92%86%E2%80%8D%E2%99%80%EF%B8%8F-instead-of-vanilla)
+- [📚 Using the component library](#%F0%9F%93%9A-using-the-component-library)
+- [🏷 Using the custom Nunjucks component tag](#%F0%9F%8F%B7-using-the-custom-nunjucks-component-tag)
+  - [Templates](#templates)
+  - [includeData plugin](#includedata-plugin)
 
 ## 💫 Features
 
-* A live-reloading server with [Browsersync](https://browsersync.io/)
-* Automated build process that includes, but is not limited to: SCSS compilation, JavaScript transpiling, and image optimization
-* Create documentation easy and almost automatically by simply adding a `.yml` file to your component folders
-* Linting with [ESLint](https://eslint.org/) and [Stylelint](https://github.com/stylelint/stylelint)
-* Sourcemaps
-* Custom Nunjucks tags that allow external JSON loading into components, keeping your data and views clean and separate
+- A live-reloading server with [Browsersync](https://browsersync.io/)
+- Automated build process that includes, but is not limited to: SCSS compilation, JavaScript transpiling, and image optimization
+- Create documentation easy and almost automatically by simply adding a `.yml` file to your component folders
+- Linting with [ESLint](https://eslint.org/) and [Stylelint](https://github.com/stylelint/stylelint)
+- Sourcemaps
+- Custom Nunjucks tags that allow external JSON loading into components, keeping your data and views clean and separate
 
 ## 🚀 Quickstart
 
@@ -50,7 +50,7 @@ This boilerplate utilizes Gulp heavily to automate tasks and manage frontend dep
 ### Set up your development environment
 
 1. Make sure you have NodeJS installed in your machine. For detailed instructions, see:
-   * [Installing Node](https://nodejs.org/en/download/package-manager/)
+   - [Installing Node](https://nodejs.org/en/download/package-manager/)
 2. Clone the project to your computer using:
    ```
    git@github.com:mirabeau-nl/frontend-boilerplate.git
