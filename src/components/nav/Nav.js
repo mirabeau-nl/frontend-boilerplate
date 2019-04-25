@@ -28,8 +28,12 @@ class Nav {
     fetch(this._options.url, this._options.fetch)
       .then(response => response.json())
       .then(obj => {
-        this._element.innerHTML += obj.data.map(v => v.toUpperCase())
+        this._placeData(obj.data)
       })
+  }
+
+  _placeData(data) {
+    this._element.innerHTML += data.map(v => v.toUpperCase())
   }
 }
 
