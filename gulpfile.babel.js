@@ -12,6 +12,7 @@ import { css, cssWatch, cssLint } from './tasks/css'
 import { docs, docsWatch } from './tasks/docs'
 import { fonts, fontsWatch } from './tasks/fonts'
 import { js, jsLint, jsTest } from './tasks/js'
+import { mock, mockWatch } from './tasks/mock'
 import { fileUpload } from './tasks/upload'
 import { githooks } from './tasks/githooks'
 import { zip } from './tasks/zip'
@@ -19,7 +20,7 @@ import { zip } from './tasks/zip'
 function dev(cb) {
   return series(
     clean,
-    parallel(docs, html, img, css, fonts),
+    parallel(docs, html, img, css, fonts, mock),
     parallel(
       js,
       browserSync,
@@ -27,13 +28,14 @@ function dev(cb) {
       htmlWatch,
       imgWatch,
       cssWatch,
-      fontsWatch
+      fontsWatch,
+      mockWatch
     )
   )(cb)
 }
 
 function dist(cb) {
-  return series(clean, parallel(docs, html, img, css, fonts, js), zip)(cb)
+  return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
 }
 
 function codequality(cb) {

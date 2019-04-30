@@ -8,20 +8,32 @@ class Nav {
    */
   constructor(element, options) {
     this._element = element
-    this._options = options
+    this._options = Object.assign(Nav.options, options)
     this.load()
   }
 
   /**
    * Base options
    */
-  static options = {}
+  static options = {
+    fetch: {
+      method: 'get'
+    }
+  }
 
   /**
    * Construct module
    */
   load() {
-    this._element.innerHTML += ['a', 'b', 'c', 'd'].map(v => v.toUpperCase())
+    fetch(this._options.url, this._options.fetch)
+      .then(response => response.json())
+      .then(obj => {
+        this._placeData(obj.data)
+      })
+  }
+
+  _placeData(data) {
+    this._element.innerHTML += data.map(v => v.toUpperCase())
   }
 }
 

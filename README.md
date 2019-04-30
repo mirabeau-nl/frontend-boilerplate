@@ -79,6 +79,10 @@ The best way to get acquinted with the boilerplate is playing around with it! Tr
 
 Frontend Boilerplate uses Nunjucks as a templating language. Elements that should return on every page, such as `<title>` and `<meta>`, can be found in `src/layout/default.njk`. Other templates will extend from this default template.
 
+### Mock data
+
+All assets that don't belong directly to the interface but are used for mocking content can be placed in the `src/mock` folder. Some examples are audio, video, images and json data for network requests. The mock folder is watched when running `npm run dev` and it's content is copied to the `dist/mock` folder when added or changed.
+
 ### Linting and testing
 
 The codestyle task supports `*.{md,css,scss,js,json}` files and automatically formats the code. The codequality task supports `*.{scss,js}` files. You can update the codestyle with `npm run codequality` or use the build-in functionality of your IDE which auto formats your code on save.
