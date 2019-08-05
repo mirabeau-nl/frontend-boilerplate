@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import pkg from './package.json'
 
-dotenv.load({ silent: true })
+dotenv.config({ silent: true })
 
 const { argv, env } = process
 
