@@ -59,9 +59,7 @@ function printResult(result, cb) {
 
   if (result.isInvalid) {
     console.error(
-      `\nCode style: Prettier found ${
-        result.isInvalid
-      } incorrectly formatted files.\n`
+      `\nCode style: Prettier found ${result.isInvalid} incorrectly formatted files.\n`
     )
 
     process.exit(1)
