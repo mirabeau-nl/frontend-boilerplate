@@ -84,7 +84,7 @@
     "gulp-util": "^3.0.8",
     "gulp-zip": "^5.0.0",
     "highlight.js": "^9.15.8",
-    "ignore": "^5.1.2",
+    "ignore": "^4.0.6",
     "js-beautify": "^1.10.0",
     "js-yaml": "^3.13.1",
     "marked": "^0.7.0",
