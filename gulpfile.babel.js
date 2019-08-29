@@ -13,6 +13,7 @@ import { docs, docsWatch } from './tasks/docs'
 import { fonts, fontsWatch } from './tasks/fonts'
 import { js, jsLint, jsTest } from './tasks/js'
 import { mock, mockWatch } from './tasks/mock'
+import { templates } from './tasks/templates'
 import { fileUpload } from './tasks/upload'
 import { githooks } from './tasks/githooks'
 import { zip } from './tasks/zip'
@@ -38,6 +39,10 @@ function dist(cb) {
   return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
 }
 
+function website(cb) {
+  return series(clean, parallel(html, img, css, fonts, js), templates)(cb)
+}
+
 function codequality(cb) {
   return parallel(cssLint, jsLint)(cb)
 }
@@ -56,6 +61,7 @@ export {
   codestyleIsValid,
   dev,
   dist,
+  website,
   codequality,
   test,
   upload

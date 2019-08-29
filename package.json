@@ -12,6 +12,7 @@
     "start": "gulp dev",
     "dev": "gulp dev",
     "dist": "gulp dist",
+    "website": "gulp website",
     "test": "gulp test",
     "codequality": "gulp codequality",
     "codestyle": "gulp codestyle",

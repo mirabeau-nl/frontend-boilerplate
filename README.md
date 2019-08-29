@@ -103,6 +103,10 @@ UPLOAD_USER=username
 UPLOAD_PASSWORD=password
 ```
 
+### Building as a static website
+
+Running `npm run website` will compile and build in your `src` folder and pipe it to the `dist` folder. This command is a little bit different of `dist`, `website` will get all your templates and move to the root of the `dist` folder, so you can run a server directly in `dist` or upload for a static hosting like `Netlify` or `Amazon S3`. Make sure that you have a `index` file in the root of `templates` folder.
+
 ## 🕹 Extending the boilerplate
 
 ### How to: Configure bundles
