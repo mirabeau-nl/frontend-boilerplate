@@ -1,10 +1,11 @@
-import { html as config } from '../config'
+import { base, html as config } from '../config'
 import { reload } from 'browser-sync'
 import { src, dest, series, watch } from 'gulp'
 import render from 'gulp-nunjucks-render'
 import envManager from './util/envManager'
 import data from 'gulp-data'
 import fs from 'fs'
+import del from 'del'
 
 /**
  * If a template has a .json file with the same name in the same location, load it as a data source
@@ -17,6 +18,23 @@ const getDataForFile = file => {
   } catch (error) {
     return {}
   }
+}
+
+/**
+ * Sub-task: Copy templates to root of dist folder
+ * @returns {NodeJS.WritableStream}
+ */
+function copyTemplates() {
+  return src([`${config.dist.base}/**/*`])
+    .pipe(dest(base.dist))
+}
+
+/**
+ * Sub-task: Delete "dist/templates/" folder
+ * @returns {Object}
+ */
+function delTemplatesFolder() {
+  return del(config.dist.base)
 }
 
 /**
@@ -57,3 +75,10 @@ export function htmlWatch() {
     series(html)
   )
 }
+
+/**
+ * Task: Move files from "dist/templates" to "dist/" folder after the build
+ * @param {Object} cb - Gulp callback function
+ * @returns {Object}
+ */
+export const moveTemplatesToRoot = cb => series(copyTemplates, delTemplatesFolder)(cb)

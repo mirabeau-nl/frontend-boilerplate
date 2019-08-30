@@ -6,14 +6,13 @@ import { series, parallel } from 'gulp'
 import { clean } from './tasks/clean'
 import { codestyle, codestyleIsValid } from './tasks/codestyle'
 import { browserSync } from './tasks/browsersync'
-import { html, htmlWatch } from './tasks/html'
+import { html, htmlWatch, moveTemplatesToRoot } from './tasks/html'
 import { img, imgWatch } from './tasks/img'
 import { css, cssWatch, cssLint } from './tasks/css'
 import { docs, docsWatch } from './tasks/docs'
 import { fonts, fontsWatch } from './tasks/fonts'
 import { js, jsLint, jsTest } from './tasks/js'
 import { mock, mockWatch } from './tasks/mock'
-import { templates } from './tasks/templates'
 import { fileUpload } from './tasks/upload'
 import { githooks } from './tasks/githooks'
 import { zip } from './tasks/zip'
@@ -36,11 +35,13 @@ function dev(cb) {
 }
 
 function dist(cb) {
-  return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
-}
+  const { argv } = process
 
-function website(cb) {
-  return series(clean, parallel(html, img, css, fonts, js), templates)(cb)
+  if (argv.includes('--static')) {
+    return series(clean, parallel(html, img, css, fonts, js), moveTemplatesToRoot)(cb)
+  }
+
+  return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
 }
 
 function codequality(cb) {
@@ -61,7 +62,6 @@ export {
   codestyleIsValid,
   dev,
   dist,
-  website,
   codequality,
   test,
   upload
