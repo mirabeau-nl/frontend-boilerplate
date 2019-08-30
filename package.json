@@ -12,7 +12,6 @@
     "start": "gulp dev",
     "dev": "gulp dev",
     "dist": "gulp dist",
-    "build-static-site": "gulp dist --static",
     "test": "gulp test",
     "codequality": "gulp codequality",
     "codestyle": "gulp codestyle",
