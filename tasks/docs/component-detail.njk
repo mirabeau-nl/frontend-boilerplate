@@ -6,25 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Front-End Library</title>
-  <link rel="stylesheet" href="/docs/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs/static/css/style.css">
   <link rel="stylesheet" href="/docs/static/css/highlight.css">
-
-  <style>
-    body {
-      padding-bottom: 4em;
-    }
-
-    iframe {
-      width: 100%;
-      margin: 4em 0;
-    }
-
-    iframe.panel-default {
-      border: 0;
-      box-shadow: none;
-      border-radius: 0;
-    }
-  </style>
 </head>
 
 <body>
@@ -44,7 +27,7 @@
     </div>
 
     {% if demo %}
-    <h2 class="inline">Demo <a href="{{ demo }}">&#x2398;</a></h2>
+    <h2>Demo <a href="{{ demo }}">&#x2398;</a></h2>
     <iframe class="panel panel-default" name="demo" src="{{ demo }}" frameborder="0" data-resize-to-height></iframe>
     {% endif %}
 
