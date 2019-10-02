@@ -1,0 +1,24 @@
+<div class="carousel" data-module="carousel/Carousel">
+
+    <ul class="carousel__pages">
+        {% for page in pages %}
+            <li class="carousel__page" data-page>
+                <h3>{{ page.heading }}</h3>
+                <p>{{ page.copy }}</p>
+
+                <picture>
+                    {% for source in page.image.sources %}
+                        <source srcset="{{ source.src }}" media="{{ source.media }}" alt="{{ source.alt }}" />
+                    {% endfor %}
+                    <img src="{{ page.image.src }}" alt="{{ page.image.alt }}" />
+                </picture>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="carousel__actions">
+        <button class="carousel__action" data-button-prev>{{ actions.previous }}</button>
+        <button class="carousel__action" data-button-next>{{ actions.next }}</button>
+    </div>
+
+</div>

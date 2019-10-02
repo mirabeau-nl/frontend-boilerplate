@@ -1,0 +1,133 @@
+{
+  "pages": [
+    {
+      "heading": "Page one",
+      "copy": "This is the first carousel page",
+      "image": {
+        "src": "/mock/500x300.png",
+        "alt": "This is a placeholder image for demo purposes",
+        "sources": [
+          {
+            "src": "/mock/250x150.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px)"
+          },
+          {
+            "src": "/mock/500x300.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px) and (max-width: 1000px)"
+          },
+          {
+            "src": "/mock/1000x600.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(min-width: 1000px)"
+          }
+        ]
+      }
+    },
+    {
+      "heading": "Page two",
+      "copy": "This is the second carousel page",
+      "image": {
+        "src": "/mock/500x300.png",
+        "alt": "This is a placeholder image for demo purposes",
+        "sources": [
+          {
+            "src": "/mock/250x150.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px)"
+          },
+          {
+            "src": "/mock/500x300.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px) and (max-width: 1000px)"
+          },
+          {
+            "src": "/mock/1000x600.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(min-width: 1000px)"
+          }
+        ]
+      }
+    },
+    {
+      "heading": "Page three",
+      "copy": "This is the third carousel page",
+      "image": {
+        "src": "/mock/500x300.png",
+        "alt": "This is a placeholder image for demo purposes",
+        "sources": [
+          {
+            "src": "/mock/250x150.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px)"
+          },
+          {
+            "src": "/mock/500x300.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px) and (max-width: 1000px)"
+          },
+          {
+            "src": "/mock/1000x600.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(min-width: 1000px)"
+          }
+        ]
+      }
+    },
+    {
+      "heading": "Page four",
+      "copy": "This is the fourth carousel page",
+      "image": {
+        "src": "/mock/500x300.png",
+        "alt": "This is a placeholder image for demo purposes",
+        "sources": [
+          {
+            "src": "/mock/250x150.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px)"
+          },
+          {
+            "src": "/mock/500x300.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px) and (max-width: 1000px)"
+          },
+          {
+            "src": "/mock/1000x600.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(min-width: 1000px)"
+          }
+        ]
+      }
+    },
+    {
+      "heading": "Page five",
+      "copy": "This is the fifth carousel page",
+      "image": {
+        "src": "/mock/500x300.png",
+        "alt": "This is a placeholder image for demo purposes",
+        "sources": [
+          {
+            "src": "/mock/250x150.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px)"
+          },
+          {
+            "src": "/mock/500x300.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(max-width: 500px) and (max-width: 1000px)"
+          },
+          {
+            "src": "/mock/1000x600.png",
+            "alt": "This is a placeholder image for demo purposes",
+            "media": "(min-width: 1000px)"
+          }
+        ]
+      }
+    }
+  ],
+  "actions": {
+    "previous": "previous",
+    "next": "next"
+  }
+}
