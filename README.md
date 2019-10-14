@@ -103,6 +103,8 @@ UPLOAD_USER=username
 UPLOAD_PASSWORD=password
 ```
 
+If you want to generate a static website instead of a component library you can run `npm run dist -- --static`. This command will get all your templates and move them to the root of the `dist` folder, so you can run a server directly in `dist` or upload to a static hosting like `Netlify` or `Amazon S3`. Make sure that you have an `index` file in the root of `templates` folder.
+
 ## 🕹 Extending the boilerplate
 
 ### How to: Configure bundles

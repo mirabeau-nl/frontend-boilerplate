@@ -6,7 +6,7 @@ import { series, parallel } from 'gulp'
 import { clean } from './tasks/clean'
 import { codestyle, codestyleIsValid } from './tasks/codestyle'
 import { browserSync } from './tasks/browsersync'
-import { html, htmlWatch } from './tasks/html'
+import { html, htmlWatch, moveTemplatesToRoot } from './tasks/html'
 import { img, imgWatch } from './tasks/img'
 import { css, cssWatch, cssLint } from './tasks/css'
 import { docs, docsWatch } from './tasks/docs'
@@ -35,6 +35,12 @@ function dev(cb) {
 }
 
 function dist(cb) {
+  const { argv } = process
+
+  if (argv.includes('--static')) {
+    return series(clean, parallel(html, img, css, fonts, js), moveTemplatesToRoot)(cb)
+  }
+
   return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
 }
 
