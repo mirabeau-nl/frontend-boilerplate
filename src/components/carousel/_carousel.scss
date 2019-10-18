@@ -1,0 +1,45 @@
+.carousel {
+  .has-js & {
+    max-width: 25em;
+  }
+
+  &__pages {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__page {
+    &[aria-hidden='true'] {
+      display: none;
+    }
+
+    .has-js & {
+      width: 100%;
+    }
+
+    picture {
+      display: block;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &__actions {
+    display: none;
+    justify-content: space-between;
+
+    .has-js & {
+      display: flex;
+    }
+  }
+
+  &__action {
+    min-width: 7.5rem;
+    border: 1px solid $black;
+    background-color: $white;
+  }
+}
