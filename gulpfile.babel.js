@@ -14,6 +14,7 @@ import { fonts, fontsWatch } from './tasks/fonts'
 import { js, jsLint, jsTest } from './tasks/js'
 import { mock, mockWatch } from './tasks/mock'
 import { fileUpload } from './tasks/upload'
+import { publicFiles, publicFilesWatch } from './tasks/publicFiles'
 import { githooks } from './tasks/githooks'
 import { zip } from './tasks/zip'
 
@@ -29,6 +30,7 @@ function dev(cb) {
       imgWatch,
       cssWatch,
       fontsWatch,
+      publicFilesWatch,
       mockWatch
     )
   )(cb)
@@ -38,10 +40,18 @@ function dist(cb) {
   const { argv } = process
 
   if (argv.includes('--static')) {
-    return series(clean, parallel(html, img, css, fonts, js), moveTemplatesToRoot)(cb)
+    return series(
+      clean,
+      parallel(html, img, css, fonts, publicFiles, js),
+      moveTemplatesToRoot
+    )(cb)
   }
 
-  return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
+  return series(
+    clean,
+    parallel(docs, html, img, css, fonts, publicFiles, mock, js),
+    zip
+  )(cb)
 }
 
 function codequality(cb) {
@@ -64,5 +74,6 @@ export {
   dist,
   codequality,
   test,
+  publicFiles,
   upload
 }

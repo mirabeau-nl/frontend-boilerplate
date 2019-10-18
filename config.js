@@ -152,6 +152,11 @@ module.exports = {
     eslintAutofix: false
   },
 
+  public: {
+    src: `${base.src}/public/**/*`,
+    dist: `${base.dist}`
+  },
+
   upload: {
     src: {
       all: `${base.dist}/**`

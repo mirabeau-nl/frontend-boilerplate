@@ -25,8 +25,7 @@ const getDataForFile = file => {
  * @returns {NodeJS.WritableStream}
  */
 function copyTemplates() {
-  return src([`${config.dist.base}/**/*`])
-    .pipe(dest(base.dist))
+  return src([`${config.dist.base}/**/*`]).pipe(dest(base.dist))
 }
 
 /**
@@ -81,4 +80,5 @@ export function htmlWatch() {
  * @param {Object} cb - Gulp callback function
  * @returns {Object}
  */
-export const moveTemplatesToRoot = cb => series(copyTemplates, delTemplatesFolder)(cb)
+export const moveTemplatesToRoot = cb =>
+  series(copyTemplates, delTemplatesFolder)(cb)
