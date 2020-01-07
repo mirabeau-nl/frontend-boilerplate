@@ -1,6 +1,9 @@
 ![Logo](frontend-boilerplate.svg)
 
 [![Build Status](https://travis-ci.org/mirabeau-nl/frontend-boilerplate.svg?branch=master)](https://travis-ci.org/mirabeau-nl/frontend-boilerplate)
+[![Coverage Status](https://coveralls.io/repos/github/mirabeau-nl/frontend-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/mirabeau-nl/frontend-boilerplate?branch=master)
+[![David](https://img.shields.io/david/mirabeau-nl/frontend-boilerplate.svg?maxAge=2592000)](https://github.com/mirabeau-nl/frontend-boilerplate)
+[![Known Vulnerabilities](https://snyk.io/test/github/mirabeau-nl/frontend-boilerplate/badge.svg)](https://snyk.io/test/github/mirabeau-nl/frontend-boilerplate)
 
 [We're hiring!](https://www.werkenbijmirabeau.nl/en) ✨
 
