@@ -38,7 +38,11 @@ function dist(cb) {
   const { argv } = process
 
   if (argv.includes('--static')) {
-    return series(clean, parallel(html, img, css, fonts, js), moveTemplatesToRoot)(cb)
+    return series(
+      clean,
+      parallel(html, img, css, fonts, js),
+      moveTemplatesToRoot
+    )(cb)
   }
 
   return series(clean, parallel(docs, html, img, css, fonts, mock, js), zip)(cb)
