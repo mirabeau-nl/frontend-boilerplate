@@ -96,7 +96,7 @@ Unit tests are done with MochaJS. JavaScript files in the component folder endin
 
 ### Building and uploading
 
-Running `npm run dist` will compile and build in your `src` folder and pipe it to the `dist` folder. This folder can then be uploaded to your sever by running `npm run upload`.
+Running `npm run dist` will compile and build in your `src` folder and pipe it to the `dist` folder. This folder can then be uploaded to your server by running `npm run upload`.
 
 In order to upload, you'll need to add an `.env` file to your project root with your FTP credentials:
 
