@@ -81,7 +81,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-stylelint": "^9.0.0",
     "gulp-transform": "^3.0.5",
-    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^2.0.0",
     "gulp-util": "^3.0.8",
     "gulp-zip": "^5.0.0",
     "highlight.js": "^9.15.8",
