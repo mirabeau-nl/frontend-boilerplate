@@ -1,6 +1,6 @@
 import { codestyle as config } from '../config'
 import fs from 'fs'
-import ignore from 'ignore'
+import ignore from 'ignore' // introduced in 5.0.0
 import Observable from 'zen-observable'
 import path from 'path'
 import prettier from 'prettier'
@@ -8,7 +8,7 @@ import pkg from '../package.json'
 import { sync as glob } from 'glob'
 
 function globVinyl(pattern) {
-  return glob(pattern).map(file => ({ path: path.resolve(file) }))
+  return glob(pattern).map(file => ({ path: file }))
 }
 
 function readVinyl(vinyl) {
