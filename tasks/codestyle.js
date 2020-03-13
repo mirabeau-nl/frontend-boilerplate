@@ -1,6 +1,6 @@
 import { codestyle as config } from '../config'
 import fs from 'fs'
-import ignore from 'ignore' // introduced in 5.0.0
+import ignore from 'ignore'
 import Observable from 'zen-observable'
 import path from 'path'
 import prettier from 'prettier'
