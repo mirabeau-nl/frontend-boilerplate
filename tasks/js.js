@@ -99,7 +99,7 @@ export function jsLint() {
 export function jsTest() {
   return src([config.js.src.tests]).pipe(
     mocha({
-      compilers: ['js:@babel/register']
+      require: ['@babel/register']
     })
   )
 }
