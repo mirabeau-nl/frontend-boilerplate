@@ -4,7 +4,7 @@ import eslint from 'gulp-eslint'
 import mocha from 'gulp-mocha'
 import gulpif from 'gulp-if'
 import rename from 'gulp-rename'
-import uglify from 'gulp-uglify'
+import uglify from 'gulp-uglify-es'
 import sourcemaps from 'gulp-sourcemaps'
 import glob from 'glob'
 import source from 'vinyl-source-stream'
@@ -99,7 +99,7 @@ export function jsLint() {
 export function jsTest() {
   return src([config.js.src.tests]).pipe(
     mocha({
-      compilers: ['js:@babel/register']
+      require: ['@babel/register']
     })
   )
 }
