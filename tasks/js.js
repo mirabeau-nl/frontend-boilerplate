@@ -88,7 +88,12 @@ export function jsLint() {
       })
     )
     .pipe(eslint.format())
-    .pipe(gulpif(isFixed, dest(file => file.base)))
+    .pipe(
+      gulpif(
+        isFixed,
+        dest(file => file.base)
+      )
+    )
     .pipe(eslint.failAfterError())
 }
 
