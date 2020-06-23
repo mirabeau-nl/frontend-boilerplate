@@ -93,7 +93,7 @@ export const ComponentTag = function(env) {
     return new nodes.CallExtension(this, 'run', args)
   }
 
-  this.run = (context, componentIdentifier, dataPathOrData, data) => {
+  this.run = (context, componentIdentifier, dataPathOrData, dataOverride) => {
     const component = getComponentParts(componentIdentifier)
     const dataPath = getDataPath(dataPathOrData, component)
     const componentStem = `${component.base ? `${component.base}/` : ''}${
@@ -110,7 +110,9 @@ export const ComponentTag = function(env) {
     }
 
     const inlineData =
-      typeof dataPathOrData === 'string' ? data : dataPathOrData
+      typeof dataPathOrData === 'string'
+        ? dataOverride
+        : { ...dataPathOrData, ...dataOverride }
 
     return new nunjucks.runtime.SafeString(
       env.render(`${componentStem}.njk`, { ...json, ...inlineData })
