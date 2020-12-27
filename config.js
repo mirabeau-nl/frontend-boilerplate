@@ -68,6 +68,15 @@ module.exports = {
     codeBeautifier: {
       'indent-size': 2,
       'max-preserve-newlines': 0
+    },
+    date: {
+      locale: 'en-GB',
+      options: {
+        dateStyle: 'long',
+        timeStyle: 'long',
+        timeZone: 'Europe/Amsterdam',
+        timeZoneName: 'short'
+      }
     }
   },
 
