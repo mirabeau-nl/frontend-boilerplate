@@ -23,16 +23,17 @@ function docsRenderIndex() {
   // Grab list of templates
   const templates = helpers.getTemplateTree(config.docs.src.templates)
   const components = helpers.getComponentTree(config.docs.src.components)
+  const lastUpdated = new Date()
 
   // Data
   const data = {
     templates,
     components,
-    lastUpdated: new Date().toISOString(),
+    lastUpdated: lastUpdated.toISOString(),
     lastUpdatedText: new Intl.DateTimeFormat(
       config.docs.date.locale,
       config.docs.date.options
-    ).format(new Date())
+    ).format(lastUpdated)
   }
 
   const paths = [
