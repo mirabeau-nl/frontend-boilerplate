@@ -50,7 +50,7 @@ rules:
     - ignore:
         - blockless-at-rules
   no-unknown-animations: true
-  declaration-property-value-whitelist:
+  declaration-property-value-allowed-list:
     "/color$/": ["/^\\$|initial|inherit|transparent|currentColor|darken|lighten|rgba/"]
     "fill": ["/^\\$|initial|inherit|transparent|currentColor|darken|lighten|rgba/"]
     "stroke": ["/^\\$|initial|inherit|transparent|currentColor|darken|lighten|rgba/"]
@@ -61,4 +61,3 @@ rules:
   scss/at-rule-no-unknown: true
   scss/media-feature-value-dollar-variable: always
   scss/selector-no-redundant-nesting-selector: true
-
