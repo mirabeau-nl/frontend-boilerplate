@@ -11,21 +11,21 @@ This project is a highly opinionated boilerplate that can be used to quickly kic
 
 ## 📖 Table of contents
 
-- [📖 Table of contents](#%F0%9F%93%96-table-of-contents)
-- [💫 Features](#%F0%9F%92%AB-features)
-- [🚀 Quickstart](#%F0%9F%9A%80-quickstart)
-- [➡️ Getting started](#%E2%9E%A1%EF%B8%8F-getting-started)
+- [📖 Table of contents](#-table-of-contents)
+- [💫 Features](#-features)
+- [🚀 Kick-start](#-kick-start)
+- [➡️ Getting started](#%EF%B8%8F-getting-started)
   - [Set up your development environment](#set-up-your-development-environment)
   - [Creating new components](#creating-new-components)
   - [Creating new templates](#creating-new-templates)
   - [Linting and testing](#linting-and-testing)
   - [Building and uploading](#building-and-uploading)
-- [🕹 Extending the boilerplate](#%F0%9F%95%B9-extending-the-boilerplate)
+- [🕹 Extending the boilerplate](#-extending-the-boilerplate)
   - [How to: Configure bundles](#how-to-configure-bundles)
   - [How to: Including external dependencies](#how-to-including-external-dependencies)
-  - [How to: Run ConditionerJS💆‍♀️ instead of Vanilla](#how-to-run-conditionerjs%F0%9F%92%86%E2%80%8D%E2%99%80%EF%B8%8F-instead-of-vanilla)
-- [📚 Using the component library](#%F0%9F%93%9A-using-the-component-library)
-- [🏷 Using the custom Nunjucks component tag](#%F0%9F%8F%B7-using-the-custom-nunjucks-component-tag)
+  - [How to: Run ConditionerJS💆‍♀️ instead of Vanilla](#how-to-run-conditionerjs%EF%B8%8F-instead-of-vanilla)
+- [📚 Using the component library](#-using-the-component-library)
+- [🏷 Using the custom Nunjucks component tag](#-using-the-custom-nunjucks-component-tag)
   - [Templates](#templates)
   - [includeData plugin](#includedata-plugin)
 
@@ -38,7 +38,7 @@ This project is a highly opinionated boilerplate that can be used to quickly kic
 - Sourcemaps
 - Custom Nunjucks tags that allow external JSON loading into components, keeping your data and views clean and separate
 
-## 🚀 Quickstart
+## 🚀 Kick-start
 
 1. Clone this repo
 2. Run `npm run dev` and point your browser to `localhost:3000`
@@ -76,7 +76,7 @@ Components are located in the `src/components` folder. As you can see, we've inc
 
 If your component utilizes JavaScript, you can load it using HTML data-attributes. For example, `<div class="foo" data-module="folder/ModuleName">` will initialize `/src/folder/ModuleName.js` on your `foo` div.
 
-The best way to get acquinted with the boilerplate is playing around with it! Try adding new components and changing old ones.
+The best way to get acquainted with the boilerplate is playing around with it! Try adding new components and changing old ones.
 
 ### Creating new templates
 
