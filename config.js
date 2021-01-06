@@ -68,6 +68,22 @@ module.exports = {
     codeBeautifier: {
       'indent-size': 2,
       'max-preserve-newlines': 0
+    },
+    date: {
+      locale: 'en-GB',
+      options: {
+        // individual date components are fallback for Node < 13
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        dateStyle: 'long',
+        timeStyle: 'long',
+        timeZone: 'Europe/Amsterdam',
+        timeZoneName: 'short'
+      }
     }
   },
 

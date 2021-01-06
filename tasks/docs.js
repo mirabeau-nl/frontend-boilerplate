@@ -1,7 +1,6 @@
 import config from '../config'
 import { src, dest, series, watch } from 'gulp'
 import render from 'gulp-nunjucks-render'
-import moment from 'moment-timezone'
 import transform from 'gulp-transform'
 import ext from 'gulp-ext-replace'
 import gulpif from 'gulp-if'
@@ -24,14 +23,17 @@ function docsRenderIndex() {
   // Grab list of templates
   const templates = helpers.getTemplateTree(config.docs.src.templates)
   const components = helpers.getComponentTree(config.docs.src.components)
+  const lastUpdated = new Date()
 
   // Data
   const data = {
     templates,
     components,
-    lastUpdated: moment()
-      .tz('Europe/Amsterdam')
-      .format('DD-MM-YYYY HH:mm:ss z')
+    lastUpdated: lastUpdated.toISOString(),
+    lastUpdatedText: new Intl.DateTimeFormat(
+      config.docs.date.locale,
+      config.docs.date.options
+    ).format(lastUpdated)
   }
 
   const paths = [
