@@ -5,9 +5,12 @@ import filter from 'gulp-filter'
 import { src, dest, watch, series } from 'gulp'
 import postcss from 'gulp-postcss'
 import { reload } from 'browser-sync'
-import sass from 'gulp-sass'
+import dartSass from 'sass'
+import gulpSass from 'gulp-sass'
 import sourcemaps from 'gulp-sourcemaps'
 import stylelint from 'gulp-stylelint'
+
+const sass = gulpSass(dartSass)
 
 /**
  * Task: CSS Compile
