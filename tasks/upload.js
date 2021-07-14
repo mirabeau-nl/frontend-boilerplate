@@ -1,16 +1,32 @@
 import { upload as config } from '../config'
-import ftp from 'vinyl-ftp'
-import { src } from 'gulp'
-import { log } from 'gulp-util'
+import SftpUpload from 'sftp-upload'
 
 /**
  * Task: Upload via FTP
- * @returns {NodeJS.ReadWriteStream}
+ * @returns {NodeJS.Promise<String>}
  */
 export function fileUpload() {
-  config.options.log = log
+  return new Promise((resolve, reject) => {
+    // Get private key from BASE64 environment variable =
+    const buff = new Buffer.from(config.options.privateKey, 'base64')
 
-  return src([config.src.all], { base: config.dist.base, buffer: false }).pipe(
-    ftp.create(config.options).dest(config.dist.target)
-  )
+    // Set the readable private key
+    config.options.privateKey = buff
+
+    // Prepare FTP upload
+    const sftp = new SftpUpload(config.options)
+
+    sftp
+      .on('error', err => {
+        return reject(err)
+      })
+      .on('uploading', progress => {
+        // eslint-disable-next-line no-console
+        console.log(`'Uploading' ${progress.file} - ${progress.percent}% completed`)
+      })
+      .on('completed', () => {
+        return resolve('Upload complete')
+      })
+      .upload()
+  })
 }
