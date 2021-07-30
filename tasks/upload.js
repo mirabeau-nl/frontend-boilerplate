@@ -23,7 +23,7 @@ export function fileUpload() {
       .on('uploading', progress => {
         // eslint-disable-next-line no-console
         console.info(
-          `Uploading [${progress.percent}]% completed – [${progress.file}]`
+          `Uploading ${progress.percent}% completed – ${progress.file}`
         )
       })
       .on('completed', () => {

@@ -109,7 +109,8 @@ UPLOAD_PATH=/example/path
 
 If you want to generate a static website instead of a component library you can run `npm run dist -- --static`. This command will get all your templates and move them to the root of the `dist` folder, so you can run a server directly in `dist` or upload to a static hosting like `Netlify` or `Amazon S3`. Make sure that you have an `index` file in the root of `templates` folder.
 
-## Automated deployment using pipelines
+### Automated deployment using pipelines
+
 In this example we use Bitbucket pipelines. It's very simple to enable automatic deployments using the SFTP connection in pipelines.
 
 - Put the environment variables in the Bitbucket repository settings under `Repository variables`
