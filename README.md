@@ -44,7 +44,7 @@ This project is a highly opinionated boilerplate that can be used to quickly kic
 2. Run `npm run dev` and point your browser to `localhost:3000`
 3. Lint and test by running `npm run codequality` and `npm run test`
 4. Build by running `npm run dist`
-5. Upload by adding a `.env` file to your project root with your FTP credentials, and run `npm run upload`
+5. Upload by adding a `.env` file to your project root with your SFTP credentials, and run `npm run upload`
 
 ## ➡️ Getting started
 
@@ -98,15 +98,40 @@ Unit tests are done with MochaJS. JavaScript files in the component folder endin
 
 Running `npm run dist` will compile and build in your `src` folder and pipe it to the `dist` folder. This folder can then be uploaded to your server by running `npm run upload`.
 
-In order to upload, you'll need to add an `.env` file to your project root with your FTP credentials:
+In order to upload, you'll need to add an `.env` file to your project root with your SFTP credentials:
 
 ```
 UPLOAD_HOST=ftp.example.org
 UPLOAD_USER=username
-UPLOAD_PASSWORD=password
+UPLOAD_PRIVATE_KEY=key
+UPLOAD_PATH=/example/path
 ```
 
 If you want to generate a static website instead of a component library you can run `npm run dist -- --static`. This command will get all your templates and move them to the root of the `dist` folder, so you can run a server directly in `dist` or upload to a static hosting like `Netlify` or `Amazon S3`. Make sure that you have an `index` file in the root of `templates` folder.
+
+## Automated deployment using pipelines
+In this example we use Bitbucket pipelines. It's very simple to enable automatic deployments using the SFTP connection in pipelines.
+
+- Put the environment variables in the Bitbucket repository settings under `Repository variables`
+- Create a `bitbucket-pipelines.yml` with the following content. In this case we will start a deployment whenever changes are pushed to develop. You can change the branch when necessary.
+
+```
+image: node:10.15.3
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: Deploy develop branch to the test environment
+          script:
+            - npm install
+            - npm run codequality
+            - npm run codestyleIsValid
+            - npm run dist:production
+            - UPLOAD_HOST=$BITBUCKET_VARIABLE_HOST UPLOAD_PATH=$BITBUCKET_VARIABLE_PATH UPLOAD_USER=$BITBUCKET_VARIABLE_USER
+            UPLOAD_PRIVATE_KEY=$BITBUCKET_VARIABLE_KEY npm run upload
+```
+
+- Push some changes to develop and you're done!
 
 ## 🕹 Extending the boilerplate
 
