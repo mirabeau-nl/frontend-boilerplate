@@ -161,18 +161,13 @@ module.exports = {
   },
 
   upload: {
-    src: {
-      all: `${base.dist}/**`
-    },
-    dist: {
-      target: '/test',
-      base: base.dist
-    },
     options: {
       // Defined in .env file
       host: env.UPLOAD_HOST,
       user: env.UPLOAD_USER,
-      password: env.UPLOAD_PASSWORD
+      path: `${base.dist}/`,
+      remoteDir: env.UPLOAD_PATH,
+      privateKey: env.UPLOAD_PRIVATE_KEY
     }
   },
 
