@@ -5,7 +5,7 @@ os:
   - osx
 
 node_js:
-  - lts/*
+  - node
 
 script:
   - npm run codequality
