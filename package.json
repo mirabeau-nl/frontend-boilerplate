@@ -12,6 +12,7 @@
     "start": "gulp dev",
     "dev": "gulp dev",
     "dist": "gulp dist",
+    "dist:static": "npm run dist -- --static",
     "test": "gulp test",
     "codequality": "gulp codequality",
     "codestyle": "gulp codestyle",

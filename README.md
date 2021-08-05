@@ -117,7 +117,7 @@ In this example we use Bitbucket pipelines. It's very simple to enable automatic
 - Create a `bitbucket-pipelines.yml` with the following content. In this case we will start a deployment whenever changes are pushed to develop. You can change the branch when necessary.
 
 ```
-image: node:10.15.3
+image: node:14.17.4
 pipelines:
   branches:
     develop:
@@ -127,7 +127,6 @@ pipelines:
             - npm install
             - npm run codequality
             - npm run codestyleIsValid
-            - npm run dist:production
             - UPLOAD_HOST=$BITBUCKET_VARIABLE_HOST UPLOAD_PATH=$BITBUCKET_VARIABLE_PATH UPLOAD_USER=$BITBUCKET_VARIABLE_USER
             UPLOAD_PRIVATE_KEY=$BITBUCKET_VARIABLE_KEY npm run upload
 ```
