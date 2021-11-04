@@ -79,6 +79,7 @@ pre {
   display: block;
   padding: 1em;
   margin: 1em 0;
+  overflow: auto;
   word-break: break-all;
   word-wrap: break-word;
   border: 1px solid #ccc;

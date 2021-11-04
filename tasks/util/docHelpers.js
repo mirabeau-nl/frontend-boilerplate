@@ -71,7 +71,7 @@ class docsHelpers {
         }),
         config.docs.codeBeautifier
       )
-      sample = hljs.highlight('html', sample).value
+      sample = hljs.highlight(sample, { language: 'html' }).value
     } catch (error) {
       global.console.log(error)
     }
